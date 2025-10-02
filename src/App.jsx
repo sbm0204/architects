@@ -1,12 +1,16 @@
-import './App.css'
+import './App.css';
+import Header from './components/common/Header.jsx';
+import Main from './components/Main.jsx';
 
 function App() {
 
   return (
     <>
-      <h1>확인용</h1>
+      <Header></Header>
+
+      <Main></Main>
     </>
   )
 }
 
-export default App
+export default App;
