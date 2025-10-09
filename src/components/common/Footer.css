@@ -1,0 +1,92 @@
+.footer-box {
+    width: 100vw;
+    height: 150px;
+}
+
+.footer-box-contents {
+    width: 100%;
+    height: 150px; 
+    /* margin-top: 800px; */
+    position: relative;
+
+
+    /* background: linear-gradient(to bottom, white, #D0B2F9, #C866EE);
+    opacity: 90%; */
+
+
+    background: linear-gradient(to top,
+    rgba(200, 102, 238, 1) 41%,
+    rgba(208, 178, 249, 1) 81%,
+    rgba(255, 255, 255, 1) 100%);
+
+    
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.footer-box-contents-bgimg {
+    width: 100%;
+    height: 150px;
+    /* margin-top: 800px; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0;
+    opacity: 65%;
+}
+
+.footer-box-contents-box {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    position: relative;
+}
+
+.footer-box-contents-box > img {
+    width: 110px;
+    height: 110px;
+}
+
+.footer-box-contents-box > p {
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* 기본 (PC) 스타일은 그대로 유지 (위) */
+
+
+/* ----- 모바일 반응형 미디어 쿼리(아래) ----- */
+
+@media screen and (max-width: 768px) {
+    .footer-box {
+        height: 75px;
+    }
+
+    .footer-box-contents {
+        height: 75px;
+    }
+    
+    .footer-box-contents-bgimg {
+        height: 75px;
+    }
+
+    .footer-box-contents-box {
+        height: 75px;
+        justify-content: center;
+    }
+
+    .footer-box-contents-box > img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .footer-box-contents-box > p {
+        display: none; /* 모바일에서 문구 숨김 */
+    }
+    
+}
