@@ -1,9 +1,28 @@
 .contents-size {
   width: 1400px;
   margin: 20px auto;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */ /* 배경색은 임시로 주석 처리 */
 }
 
 .main-contents {
   text-align: center;
+}
+
+/* 오늘의 대기질 섹션 */
+.air-quality-section {
+  margin-top: 40px;
+}
+
+.air-quality-title {
+  font-size: 25px; /* 요청된 폰트 사이즈 */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* 카드가 넘칠 경우 다음 줄로 */
+  justify-content: center; /* 카드들을 중앙에 정렬 */
+  gap: 20px; /* 카드 사이의 간격 */
 }
