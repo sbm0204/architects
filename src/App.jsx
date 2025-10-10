@@ -1,14 +1,14 @@
 import './App.css';
+import AlertStatusCards from './components/AlertStatusCards.jsx';
 import Header from './components/common/Header.jsx';
-import Main from './components/Main.jsx';
 
 function App() {
 
   return (
     <>
       <Header></Header>
-
-      <Main></Main>
+      
+      <AlertStatusCards></AlertStatusCards>
     </>
   )
 }
