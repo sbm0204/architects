@@ -11,7 +11,6 @@ function AirQualityCard(props) {
       <div className="card-subtitle">{subtitle}</div>
       
       <div className="card-image-container">
-        {/* 이미지 로직을 완전히 제거하고 항상 placeholder만 표시합니다. */}
         <div className="card-image-placeholder"></div>
       </div>
       

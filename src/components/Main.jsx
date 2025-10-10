@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Main.css';
 import MainDropDown from './MainDropDown.jsx';
 import AirQualityCard from './AirQualityCard.jsx';
+import AirLineChart from './AirLineChart.jsx';
 
 const locationData = {
   '서울': ['강남구', '강동구', '서초구'],
@@ -38,35 +39,41 @@ function Main() {
 
   return (
       <div className='contents-size'>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <MainDropDown 
-            title={selectedRegion || "지역선택"}
-            options={regions} 
-            onOptionSelect={handleRegionSelect} 
-          />
-          <MainDropDown 
-            title={selectedDistrict || "지역구"}
-            options={districts} 
-            onOptionSelect={handleDistrictSelect} 
-          />
-        </div>
+        <div className='main-container'>
+          <div className='main-head-container'>
+            <div className='dropdown-btn'>
+              <MainDropDown 
+                title={selectedRegion || "지역선택"}
+                options={regions} 
+                onOptionSelect={handleRegionSelect} 
+                />
+              <MainDropDown 
+                title={selectedDistrict || "지역구"}
+                options={districts} 
+                onOptionSelect={handleDistrictSelect} 
+                />
+            </div>
 
-        {/* 오늘의 대기질 섹션 */}
-        <div className="air-quality-section">
-          <h2 className="air-quality-title">오늘의 대기질</h2>
-          <div className="card-container">
-            {airQualityData.map((data, index) => (
-              <AirQualityCard 
-                key={index}
-                title={data.title}
-                subtitle={data.subtitle}
-                value={data.value}
-                unit={data.unit}
-              />
-            ))}
+            {/* 오늘의 대기질 섹션 */}
+            <div className="air-quality-section">
+              <h2 className="air-quality-title">오늘의 대기질</h2>
+            </div>
+              <div className="card-container">
+                {airQualityData.map((data, index) => (
+                  <AirQualityCard 
+                  key={index}
+                  title={data.title}
+                  subtitle={data.subtitle}
+                  value={data.value}
+                  unit={data.unit}
+                  />
+                ))}
+                </div>
+          </div>
+          <div>
+            <AirLineChart />
           </div>
         </div>
-        
       </div>
   )
 }
