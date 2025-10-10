@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/common/Header.jsx';
-import Main from './components/Main.jsx';
+import GuideLine from './components/GuideLine.jsx';
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
     <>
       <Header></Header>
 
-      <Main></Main>
+      <GuideLine></GuideLine>
     </>
   )
 }
