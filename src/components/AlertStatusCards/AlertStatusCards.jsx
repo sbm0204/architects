@@ -7,7 +7,6 @@ function AlertStatusCards() {
       <div className='alert-status-cards-contents'>
         <h1 className='title'>미세먼지 경보 현황</h1>
         <div className='alert-status-cards-container'>
-            
             <div className='alert-status-card'>
                 <div className='alert-status-card-districtName'>서울</div>
                 <div className='alert-status-card-contents'>
