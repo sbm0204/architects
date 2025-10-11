@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Main.css';
+import './MainChart.css';
 import MainDropDown from './MainDropDown.jsx';
 import AirQualityCard from './AirQualityCard.jsx';
 import AirLineChart from './AirLineChart.jsx';
@@ -12,7 +12,7 @@ const locationData = {
 
 const regions = Object.keys(locationData);
 
-function Main() {
+function MainChart() {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [districts, setDistricts] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
@@ -70,7 +70,7 @@ function Main() {
                 ))}
                 </div>
           </div>
-          <div>
+          <div className='chart-padding'>
             <AirLineChart />
           </div>
         </div>
@@ -78,4 +78,4 @@ function Main() {
   )
 }
 
-export default Main;
+export default MainChart;

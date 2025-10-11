@@ -2,11 +2,10 @@
   max-width: 1400px;
   width: 100%;
   margin: 20px auto;
-  /* background-color: aquamarine; */ /* 배경색은 임시로 주석 처리 */
 }
 
 .main-container {
-  max-width: 760px;
+  max-width: 800px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -15,10 +14,6 @@
 .main-head-container {
   max-width: 530px;
   width: 100%;
-}
-
-.main-contents {
-  text-align: center;
 }
 
 .dropdown-btn {
@@ -44,4 +39,10 @@
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   justify-content: center; /* 카드들을 중앙에 정렬 */
   gap: 20px; /* 카드 사이의 간격 */
+}
+
+.chart-padding {
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: auto;
 }

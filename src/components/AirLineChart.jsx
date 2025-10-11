@@ -21,7 +21,7 @@ ChartJS.register(
 );
 
 function AirLineChart() { 
-  const labels = ["25-10-04", "25-10-05", "25-10-06", "25-10-07", "25-10-08", "25-10-09", "25-10-10" ];
+  const labels = ["10-04", "10-05", "10-06", "10-07", "10-08", "10-09", "10-10" ];
 
   const options = { 
     responsive: true, 
@@ -71,13 +71,13 @@ function AirLineChart() {
     <div>
       <div>
         <h1>미세먼지</h1>
-          <div style={{ width: 250, height: 250 }}>
+          <div style={{ width: 250, height: 125 }}>
             <Line options={options} data={pm10Data} />
           </div>
       </div>
       <div>
         <h1>초미세먼지</h1>
-          <div style={{ width: 250, height: 250 }}>
+          <div style={{ width: 250, height: 125 }}>
             <Line options={options} data={pm25Data}></Line>
           </div>
       </div>
