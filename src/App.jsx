@@ -1,17 +1,21 @@
 import './App.css';
-import AlertStatusCards from './components/AlertStatusCards/AlertStatusCards.jsx';
 import Header from './components/common/Header.jsx';
-import GuideLine from './components/GuideLine.jsx';
 import Footer from './components/common/Footer.jsx';
+import { Outlet } from 'react-router-dom';
+import Service from './components/service/Service.jsx';
+import AirQualityCard from './components/mainChart/AirQualityCard.jsx';
+import Main from './components/Main.jsx';
 
 function App() {
 
   return (
     <>
+      {/* <main>
+        <Outlet />
+        </main> */}
       <Header></Header>
 
-      <GuideLine></GuideLine>
-      <AlertStatusCards></AlertStatusCards>
+      <Main />
 
       <Footer></Footer>
     </>

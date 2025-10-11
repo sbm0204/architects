@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './GuideLine.css';
-import guideData from '../configs/guide-data.js';
+import guideData from '../../configs/guide-data.js';
 
 function GuideLine() {
   const [dustJson, setDustJson] = useState(null);

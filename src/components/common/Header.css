@@ -9,12 +9,12 @@
   position: relative;
   /* background: linear-gradient(to bottom, white, #D0B2F9, #C866EE);
   opacity: 90%; */
-      
-      
+
+
   background: linear-gradient(to bottom,
-  rgba(200, 102, 238, 1) 41%,
-  rgba(208, 178, 249, 1) 81%,
-  rgba(255, 255, 255, 1) 100%);
+      rgba(200, 102, 238, 1) 41%,
+      rgba(208, 178, 249, 1) 81%,
+      rgba(255, 255, 255, 1) 100%);
 
 
   display: flex;
@@ -44,7 +44,8 @@
   position: relative;
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
   display: flex;
   gap: 50px;
   list-style: none;
@@ -52,27 +53,33 @@
   padding: 0;
 }
 
-.nav-left li, .nav-right li {
+.nav-left li,
+.nav-right li {
   font-size: 2.0rem;
   font-weight: 700;
   color: white;
   cursor: pointer;
   position: relative;
-  display: flex; /* 플랙스를 줌으로 해서, 글자와 이미지 높낮이 정렬 */
+  display: flex;
+  /* 플랙스를 줌으로 해서, 글자와 이미지 높낮이 정렬 */
   align-items: center;
-  padding: 0 140px; /* 구분선과 글자 사이 간격 */
+  padding: 0 140px;
+  /* 구분선과 글자 사이 간격 */
 }
 
 /* 각 li 사이에 세로줄(구분선) 넣기 */
-.nav-left li:not(:last-child)::after, .nav-right li:not(:last-child)::after {
+.nav-left li:not(:last-child)::after,
+.nav-right li:not(:last-child)::after {
   content: "";
   position: absolute;
-  right: -30px; /* 글자와 줄 사이 간격 */
+  right: -30px;
+  /* 글자와 줄 사이 간격 */
   top: 50%;
   transform: translateY(-50%);
   width: 3px;
   height: 50px;
-  background-color: rgba(255, 255, 255, 0.8); /* 흰색 구분선 */
+  background-color: rgba(255, 255, 255, 0.8);
+  /* 흰색 구분선 */
 }
 
 .nav-logo {
@@ -84,3 +91,96 @@
 .nav-logo img {
   height: 150px;
 }
+
+
+/* --- 모바일 반응형 css --- */
+
+.header-mobile {
+  height: 75px;
+  width: 100vw;
+}
+
+.header-mobile-box {
+   width: 100vw;
+   height: 75px;
+ }
+
+.header-mobile-box-contents {
+   width: 100%;
+   height: 75px;
+   position: relative;
+   background: linear-gradient(to bottom,
+    rgba(200, 102, 238, 1) 41%,
+    rgba(208, 178, 249, 1) 81%,
+    rgba(255, 255, 255, 1) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+.header-mobile-box-contents-bgimg {
+   width: 100%;
+   height: 75px;
+   background-size: cover;
+   background-repeat: no-repeat;
+   position: absolute;
+   top: 0;
+   left: 0;
+   opacity: 65%;
+   z-index: 0;
+ }
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75px;
+  width: auto;
+  padding: 0 30px;
+  z-index: 1;
+}
+
+.header-left img {
+  width: 55px;
+  height: 55px;
+}
+
+.header-right .hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.header-right .hamburger span {
+  display: block;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+
+/* --- 반응형 미디어 쿼리 --- */
+
+.header-pc {
+  display: block;
+}
+
+.header-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header-pc
+  {
+    display: none;
+  }
+
+  .header-mobile {
+    display: flex;
+  }
+}
+

@@ -1,7 +1,7 @@
 .contents-size {
-  width: 1400px;
+  max-width: 1400px;
+  width: 100%;
   margin: 20px auto;
-  background-color: aquamarine;
 }
 
 .main-contents {

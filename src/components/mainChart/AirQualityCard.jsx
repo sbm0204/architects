@@ -1,4 +1,3 @@
-import React from 'react';
 import './AirQualityCard.css';
 
 function AirQualityCard(props) {

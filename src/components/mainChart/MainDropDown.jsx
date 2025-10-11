@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './MainDropDown.css';
 
 function MainDropDown({ title, options, onOptionSelect }) {

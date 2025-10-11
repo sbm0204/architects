@@ -1,8 +1,8 @@
 import './Service.css';
-import icon1 from '../assets/Home-logo.png';
-import icon2 from '../assets/Caution.png';
-import icon3 from '../assets/People.png';
-import icon4 from '../assets/Lung.png';
+import icon1 from '../../assets/Home-logo.png';
+import icon2 from '../../assets/Caution.png';
+import icon3 from '../../assets/People.png';
+import icon4 from '../../assets/Lung.png';
 
 function Service() {
   return (

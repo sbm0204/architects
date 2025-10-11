@@ -8,6 +8,9 @@ function Header() {
 
  return (
     <>
+
+   {/* PC 헤더 */}
+    <div className='header-pc'>
       <div className='header-box'>
         <div className='header-box-contents'>          
           <div className='header-box-contents-bgimg' style={{backgroundImage: `url(${bgImage})`}}></div>
@@ -31,8 +34,32 @@ function Header() {
           </nav>
         </div>
       </div>
-    </>
+   </div>
+  {/* ----- 모바일 헤더 -----  */}
+
+      <div className='header-mobile'>
+
+        <div className='header-mobile-box'>
+          <div className='header-mobile-box-contents'>
+            <div className='header-mobile-box-contents-bgimg' style={{backgroundImage: `url(${bgImage})`}}></div> 
+            <div className='header-left'>
+              <img src={logonew} alt="모바일 로고" />
+            </div>
+            <div className='header-right'>
+              <div className='hamburger'>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+       </div>
+      </div>
+    </> 
   );
 }
+
+
+
 
 export default Header;
