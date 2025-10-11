@@ -1,6 +1,7 @@
 import './App.css';
 import AlertStatusCards from './components/AlertStatusCards/AlertStatusCards.jsx';
 import Header from './components/common/Header.jsx';
+import Footer from './components/common/Footer.jsx';
 
 function App() {
 
@@ -9,6 +10,8 @@ function App() {
       <Header></Header>
 
       <AlertStatusCards></AlertStatusCards>
+
+      <Footer></Footer>
     </>
   )
 }
