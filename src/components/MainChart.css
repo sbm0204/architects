@@ -1,0 +1,48 @@
+.contents-size {
+  max-width: 1400px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.main-container {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.main-head-container {
+  max-width: 530px;
+  width: 100%;
+}
+
+.dropdown-btn {
+  display: flex;
+  gap: 10px;
+}
+
+/* 오늘의 대기질 섹션 */
+.air-quality-section {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.air-quality-title {
+  font-size: 25px; /* 요청된 폰트 사이즈 */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  justify-content: center; /* 카드들을 중앙에 정렬 */
+  gap: 20px; /* 카드 사이의 간격 */
+}
+
+.chart-padding {
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: auto;
+}
