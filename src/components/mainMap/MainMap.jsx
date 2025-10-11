@@ -8,7 +8,7 @@ import { Map, useKakaoLoader } from 'react-kakao-maps-sdk';
 function MainMap() {
 
   useKakaoLoader({
-    appkey: '',
+    appkey: '6dc95f71071f60705fb358e778a523b2',
     libraries: ['services'],
   });
 
@@ -97,7 +97,7 @@ function MainMap() {
   }, [map, geoJsonData]);
 
   return (
-      <div className='contents-size'>
+      <div className='contents-size-main-right'>
         <div><h1>전국 미세먼지 농도</h1></div>
         <div className='position'>
           <Map

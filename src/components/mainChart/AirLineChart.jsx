@@ -71,13 +71,13 @@ function AirLineChart() {
     <div>
       <div>
         <h1>미세먼지</h1>
-          <div style={{ width: 250, height: 125 }}>
+          <div style={{ width: 250, height: 150 }}>
             <Line options={options} data={pm10Data} />
           </div>
       </div>
       <div>
         <h1>초미세먼지</h1>
-          <div style={{ width: 250, height: 125 }}>
+          <div style={{ width: 250, height: 150 }}>
             <Line options={options} data={pm25Data}></Line>
           </div>
       </div>

@@ -38,7 +38,7 @@ function MainChart() {
   };
 
   return (
-      <div className='contents-size'>
+      <div className='contents-size-main-left'>
         <div className='main-container'>
           <div className='main-head-container'>
             <div className='dropdown-btn'>

@@ -5,10 +5,8 @@ function Main() {
 
   return (
     <>
-      <div className="display-flex">
-        <MainChart />
-        <MainMap />
-      </div>
+      <MainChart />
+      <MainMap />
 
     </>
   )
