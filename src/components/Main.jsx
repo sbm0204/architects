@@ -5,8 +5,10 @@ function Main() {
 
   return (
     <>
+      <div style={{display: 'flex'}}>
       <MainChart />
       <MainMap />
+      </div>
 
     </>
   )

@@ -1,10 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AlertStatus from "../components/AlertStatus/AlertStatus.jsx";
 import GuideLine from "../components/guideLine/GuideLine.jsx";
 import Service from "../components/service/Service.jsx";
 import Main from "../components/Main.jsx";
 import App from "../App.jsx";
-
+import AlertStatus from "../components/AlertStatus/AlertStatus.jsx";
 
 const router = createBrowserRouter([
   {
