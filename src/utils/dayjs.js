@@ -14,8 +14,6 @@ export function getRecentThreeDaysData(allData) {
   const twoDaysAgo = today.subtract(2, 'day'); 
 
   const filteredData = allData.filter(item => {
-    // issueDate가 '그제'와 같거나 그 이후인지 (isSameOrAfter) 확인합니다.
-    // 'day' 단위를 사용하여 시간은 무시하고 날짜만 비교합니다.
     return dayjs(item.issueDate).isSameOrAfter(twoDaysAgo, 'day');
   });
 

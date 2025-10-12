@@ -4,7 +4,7 @@ import Footer from './components/common/Footer.jsx';
 import { Outlet } from 'react-router-dom';
 import Service from './components/service/Service.jsx';
 import Main from './components/Main.jsx';
-import AlertStatusCards from './components/AlertStatusCards/AlertStatusCards.jsx';
+import AlertStatus from './components/AlertStatus/AlertStatus.jsx';
 import GuideLine from './components/guideLine/GuideLine.jsx';
 
 function App() {
@@ -15,12 +15,13 @@ function App() {
         <Outlet />
         </main> */}
       <Header></Header>
-
-      <Main />
+      <main>
+        <Outlet></Outlet>
+      </main>
+      {/* <Main /> */}
       {/* <GuideLine /> */}
-      {/* <AlertStatusCards /> */}
+      {/* <AlertStatus /> */}
       {/* <Service /> */}
-
       <Footer></Footer>
     </>
   )

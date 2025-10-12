@@ -1,15 +1,3 @@
-.alert-status-cards-contents {
-  max-width: 1400px;
-  margin: 20px auto;
-}
-
-.title {
-  font-size: 40px;
-  font-weight: bold;
-  margin: 30px;
-  text-align: left;
-}
-
 .alert-status-cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -29,13 +17,12 @@
 }
 
 .alert-status-card-districtName {
-  background-color: #F8F5DC;
   color: black;
-  border-radius: 20px;
   font-size: 30px;
   font-weight: bold;
   text-align: center;
   padding: 10px;
+  border-bottom: solid 1px #c9c9c9;
 }
 
 .alert-status-card-contents {
@@ -56,8 +43,8 @@
 }
 
 .alert-status-card-issueGbn {
-  background-color: #F8EC92;
-  color: #ED850E;
+  display: block;
+  width: 100%;
   border-radius: 20px;
   text-align: center;
   padding: 15px;
@@ -65,17 +52,19 @@
   font-weight: bold;
 }
 
-.btnformoredata {
-  display: block;
-  margin: 0 auto 50px auto;
-  padding: 15px 185px;
-  font-size: 25px;
-  background-color: #E9D6E7;
-  color: #9B71AC;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
+.badge-warning {
+  background-color: #facc15; 
+  color: black; 
+}
+
+.badge-danger {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+.badge-default {
+  background-color: #6b7280; 
+  color: #fff;
 }
 
 
