@@ -1,67 +1,88 @@
-.contents-size {
-  max-width: 1400px;
-  width: 100%;
-  margin: 20px auto;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.service-container {
-  text-align: left;
-  margin: 100px auto;
-  font-size: 40px;
-}
-
-.service-cardGrid {
+/* 전체 컨테이너 중앙 정렬 */
+.container {
+  max-width: 1400px;   /* 프로젝트 규칙 유지 */
+  margin: 0 auto;      /* 브라우저 기준 중앙 정렬 */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  justify-content: center; /* 중앙 정렬 핵심 */
-  justify-items: center; /* 각 카드도 가운데 */
+  align-items: center;
+  padding: 0 130px;
 }
 
-.card {
+/* 제목 */
+.title {
   text-align: left;
-  border: 1px solid #000;
-  border-radius: 20px;
-  width: 280px;
-  height: 420px;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 30px 0;
 }
 
-.card > h2 {
-  font-size: 30px;
-  right: -20px;
-  top: 100px;
-  padding-bottom: 40px;
-  /* box-shadow: inset 10px -10px 0 #bfffa1; */
+/* 첫 번째 섹션 (팀 소개) */
+.team-info {
+  margin-top: 55px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, auto));
+  justify-content: space-around;
+  gap: 60px;             /* 이미지와 텍스트 간 간격 */
+  width: 100%;
 }
 
-.card > p {
-  padding: 0 20px;
-  font-size: 15px;
-}
-.card-icon-box {
-  text-align: right;
-  padding: 30px 30px 0 0;
+.team-info > img {
+  width: 515px;
+  height: 345px;
 }
 
-.card-icon {
-  width: 50px;
-  height: 50px;
-  font-size: 15px;
+.team-info .info-text .underline {
+  width: 100px;
+  height: 2px;
+  border: 1px solid #7F7D7D;
+  margin: 40px 0;
 }
 
-.card-title-box {
-  padding: 50px 20px;
+.team-info .info-text {
+  margin-left: 30px;
+
 }
 
-.card-title {
-  display: inline-block;
-  font-size: 30px;
+/* 두 번째 섹션 (미세먼지) */
+.misemeonji {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, auto));
+  justify-content: space-around;
+  gap: 60px;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 85px;
 }
 
-.underline-medium-purple {
-  background: linear-gradient(to bottom, #fff 50%, rgb(136, 96, 217, 50%) 50% 100%);
+/* 이미지 크기 */
+.misemeonji > img {
+  width: 515px;
+  height: 345px;
 }
 
-.main-contents {
-  text-align: center;
+/* 텍스트 영역 */
+.misemeonji .info-text {
+ 
+}
+
+.misemeonji .info-text > h2 {
+  font-size: 25px;
+}
+
+.misemeonji .info-text .underline {
+  width: 100px;
+  height: 2px;
+  border: 1px solid #7F7D7D;
+  margin: 40px 0;
+}
+
+
+/* 반응형 대응 */
+@media screen and (max-width: 768px) {
+
 }
