@@ -19,9 +19,11 @@ function MainDropDown({ title, options, onOptionSelect }) {
 
   return(
     <div className='dropdown'>
-      <button className="dropdown-button" onClick={toggleDropdown}>
-       {title}
-      </button>
+      <span className="dropdown-title">{title}</span>
+       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAk0lEQVR4AexRgQmAMAwbXuIpeol6iaeol+gpnmIyHAzpuiEoDCqNSJOmJTbuw8fMxXAtlvpiacWT76b2Qzm4Q9cBUpFfQKR4p5mfGJyAGXgaBOMN3AGIpZlzQFoQG68UpZAz51y8YESDUfBi1Rg6NRbyAWHBgEaRMXTF5tRyQY+P7MXQ+CqJxQvfvMxcTM1i+T+WCwAA//+da/46AAAABklEQVQDANDhEy/yKBSrAAAAAElFTkSuQmCC" 
+        alt="toggle-dropdown" 
+        onClick={toggleDropdown}
+        className='dropdown-icon'/>
      {isOpen && (
        <div className="dropdown-content">
         {options.map((option, index) => (
@@ -29,7 +31,7 @@ function MainDropDown({ title, options, onOptionSelect }) {
         ))}
       </div>
      )}
-     </div>    
+    </div>    
   ); 
 }
 

@@ -7,7 +7,21 @@ import AirLineChart from './AirLineChart.jsx';
 const locationData = {
   '서울': ['강남구', '강동구', '서초구'],
   '부산': ['해운대구', '수영구', '동래구'],
-  '대구': ['수성구', '달서구', '중구']
+  '대구': ['수성구', '달서구', '중구'], 
+  '인천': [],
+  '광주': [],
+  '대전': [],
+  '울산': [],
+  '세종': [],
+  '경기': [],
+  '충북': [],
+  '충남': [],
+  '전남': [],
+  '경북': [],
+  '경남': [],
+  '강원' : [],
+  '전북': [],
+  '제주': []
 };
 
 const regions = Object.keys(locationData);
@@ -43,12 +57,12 @@ function MainChart() {
           <div className='main-head-container'>
             <div className='dropdown-btn'>
               <MainDropDown 
-                title={selectedRegion || "지역선택"}
+                title={selectedRegion || "지역"}
                 options={regions} 
                 onOptionSelect={handleRegionSelect} 
                 />
               <MainDropDown 
-                title={selectedDistrict || "지역구"}
+                title={selectedDistrict || "상세지역"}
                 options={districts} 
                 onOptionSelect={handleDistrictSelect} 
                 />

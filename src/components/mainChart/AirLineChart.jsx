@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,7 +25,8 @@ function AirLineChart() {
   const labels = ["10-04", "10-05", "10-06", "10-07", "10-08", "10-09", "10-10" ];
 
   const options = { 
-    responsive: true, 
+    responsive: true,
+    maintainAspectRatio: false,
     interaction: { 
       intersect: false,
     },
@@ -70,16 +72,20 @@ function AirLineChart() {
   return(
     <div>
       <div>
-        <h1>미세먼지</h1>
-          <div style={{ width: 250, height: 150 }}>
+        <p style={{fontsize:'25px', fontWeight:'600'}}>미세먼지</p>
+        <div style={{display:'flex'}}>
+          <div style={{ position:'relative', width: '14vw', height: '20vh' }}>
             <Line options={options} data={pm10Data} />
           </div>
+        </div>
       </div>
       <div>
-        <h1>초미세먼지</h1>
-          <div style={{ width: 250, height: 150 }}>
+        <p style={{fontsize: '25px', fontWeight:'600'}}>초미세먼지</p>
+        <div style={{display:'flex'}}>
+          <div style={{ position:'relative', width: '14vw', height: '20vh' }}>
             <Line options={options} data={pm25Data}></Line>
           </div>
+        </div>
       </div>
     </div>
   );
