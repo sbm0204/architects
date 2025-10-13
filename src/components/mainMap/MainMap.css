@@ -9,8 +9,8 @@
 }
 
 .position {
-  width: 500px;
-  height: 600px;
+  width: 100%;
+  height: 30rem;
   position: relative;
 }
 
@@ -65,4 +65,10 @@
   height: 10px;
   background-color: #E53022;
   border-radius: 50px;
+}
+
+@media (max-width : 500px) {
+  .contents-size-main-right {
+    display: none;
+  }
 }
