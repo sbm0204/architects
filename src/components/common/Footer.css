@@ -1,58 +1,31 @@
-.footer-box {
+.footer{
     width: 100vw;
     height: 150px;
 }
 
-.footer-box-contents {
+.footer-contents {
     width: 100%;
     height: 150px; 
-    /* margin-top: 800px; */
-    position: relative;
-
-
-    /* background: linear-gradient(to bottom, white, #D0B2F9, #C866EE);
-    opacity: 90%; */
-
-
-    background: linear-gradient(to top,
-    rgba(200, 102, 238, 1) 41%,
-    rgba(208, 178, 249, 1) 81%,
-    rgba(255, 255, 255, 1) 100%);
-
-    
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
 }
 
-.footer-box-contents-bgimg {
-    width: 100%;
-    height: 150px;
-    /* margin-top: 800px; */
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: absolute;
-    left: 0;
-    opacity: 65%;
-}
-
-.footer-box-contents-box {
+.footer-contents-box {
     width: 100%;
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 50px;
-    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.footer-box-contents-box > img {
+.footer-contents-box > img {
     width: 110px;
     height: 110px;
+    margin-right: 40px;
 }
 
-.footer-box-contents-box > p {
-    color: #000;
+.footer-contents-box > p {
+    color: #fff;
     font-size: 20px;
     font-weight: 500;
 }
@@ -62,31 +35,26 @@
 
 /* ----- 모바일 반응형 미디어 쿼리(아래) ----- */
 
-@media screen and (max-width: 768px) {
-    .footer-box {
+@media screen and (max-width: 1010px) {
+    .footer {
         height: 75px;
     }
 
-    .footer-box-contents {
+    .footer-contents {
         height: 75px;
-    }
-    
-    .footer-box-contents-bgimg {
-        height: 75px;
-    }
+     }
 
-    .footer-box-contents-box {
+    .footer-contents-box {
         height: 75px;
         justify-content: center;
     }
 
-    .footer-box-contents-box > img {
+    .footer-contents-box > img {
         width: 42px;
         height: 42px;
     }
 
-    .footer-box-contents-box > p {
+    .footer-contents-box > p {
         display: none; /* 모바일에서 문구 숨김 */
     }
-    
 }
