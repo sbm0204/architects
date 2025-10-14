@@ -10,7 +10,7 @@ function AirQualityCard(props) {
       <div className="card-subtitle">{subtitle}</div>
       
       <div className="card-image-container">
-        <div className="card-image-placeholder"></div>
+        <div className="card-image-placeholder-good"></div>
       </div>
       
       <div className="card-value">{value}</div>

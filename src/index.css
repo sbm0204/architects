@@ -26,7 +26,8 @@
   /* 주 사용 색상 (미세먼지 등급 컬러외 버튼, 언더바 컬러) */
   --clr-wh: #ffffff;  
   --clr-bk: #000000; 
-  --clr-bl: #B3F0FF;
+  --clr-bl: #B3F0FF; 
+  --clr-db: #66c6ff; 
   --clr-gn: #92FF92;
   --clr-y: #FFED69;
   --clr-r: #FE4132;

@@ -1,55 +1,53 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './MainChart.css';
 import MainDropDown from './MainDropDown.jsx';
 import AirQualityCard from './AirQualityCard.jsx';
 import AirLineChart from './AirLineChart.jsx';
+import { getMapList } from '../../store/thunks/mapAxioThunk.js';
 
-const locationData = {
-  '서울': ['강남구', '강동구', '서초구'],
-  '부산': ['해운대구', '수영구', '동래구'],
-  '대구': ['수성구', '달서구', '중구'], 
-  '인천': [],
-  '광주': [],
-  '대전': [],
-  '울산': [],
-  '세종': [],
-  '경기': [],
-  '충북': [],
-  '충남': [],
-  '전남': [],
-  '경북': [],
-  '경남': [],
-  '강원' : [],
-  '전북': [],
-  '제주': []
-};
-
-const regions = Object.keys(locationData);
 
 function MainChart() {
-  const [selectedRegion, setSelectedRegion] = useState(null);
-  const [districts, setDistricts] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const dispatch = useDispatch();
 
-  // airQualityData를 Main 함수 안으로 이동
-  const airQualityData = [
-    { title: '초미세먼지', subtitle: '(PM-2.5)', value: '10', unit: 'µg/m³', status: '좋음' },
-    { title: '미세먼지', subtitle: '(PM-10)', value: '25', unit: 'µg/m³', status: '보통' },
-    { title: '오존', subtitle: '(O₃)', value: '0.03', unit: 'ppm', status: '좋음' },
-    { title: '이산화질소', subtitle: '(NO₂)', value: '0.02', unit: 'ppm', status: '좋음' },
-    { title: '일산화탄소', subtitle: '(CO)', value: '0.5', unit: 'ppm', status: '보통' },
-    { title: '아황산가스', subtitle: '(SO₂)', value: '0.002', unit: 'ppm', status: '나쁨' },
-  ];
+  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [selectedStationData, setSelectedStationData] = useState(null);
+
+  const mapList = useSelector(state => state.mapAxio.mapList);
+  const sidoRegions = mapList?.items ? [...new Set(mapList.items.map(item => item.sidoName))] : [];
+  const selectedItems = mapList?.items?.filter(val => val.sidoName === selectedRegion);
+  const selectedStations = selectedItems?.map(item => item.stationName);
+  const sortStations = selectedStations?.sort((a, b) => a > b ? 1 : -1);
 
   const handleRegionSelect = (region) => {
     setSelectedRegion(region);
-    setDistricts(locationData[region]);
-    setSelectedDistrict(null); // 지역이 바뀌면 지역구 선택은 리셋
+    setSelectedDistrict(null); 
+    setSelectedStationData(null);
+    dispatch(getMapList(region));
   };
 
   const handleDistrictSelect = (district) => {
     setSelectedDistrict(district);
+    const stationData = selectedItems.find(item => item.stationName === district);
+    setSelectedStationData(stationData);
   };
+  
+  const airQualityData = selectedStationData ? [
+    { title: '미세먼지', subtitle: '(PM-10)', value: selectedStationData.pm10Value, unit: 'µg/m³' },
+    { title: '초미세먼지', subtitle: '(PM-2.5)', value: selectedStationData.pm25Value, unit: 'µg/m³' },
+    { title: '오존', subtitle: '(O₃)', value: selectedStationData.o3Value, unit: 'ppm' },
+    { title: '이산화질소', subtitle: '(NO₂)', value: selectedStationData.no2Value, unit: 'ppm' },
+    { title: '일산화탄소', subtitle: '(CO)', value: selectedStationData.coValue, unit: 'ppm' },
+    { title: '아황산가스', subtitle: '(SO₂)', value: selectedStationData.so2Value, unit: 'ppm' },
+  ] : [
+    { title: '초미세먼지', subtitle: '(PM-2.5)', value: '-', unit: 'µg/m³' },
+    { title: '미세먼지', subtitle: '(PM-10)', value: '-', unit: 'µg/m³' },
+    { title: '오존', subtitle: '(O₃)', value: '-', unit: 'ppm' },
+    { title: '이산화질소', subtitle: '(NO₂)', value: '-', unit: 'ppm' },
+    { title: '일산화탄소', subtitle: '(CO)', value: '-', unit: 'ppm' },
+    { title: '아황산가스', subtitle: '(SO₂)', value: '-', unit: 'ppm' },
+  ];
 
   return (
       <div className='contents-size-main-left'>
@@ -58,17 +56,16 @@ function MainChart() {
             <div className='dropdown-btn'>
               <MainDropDown 
                 title={selectedRegion || "지역"}
-                options={regions} 
+                options={sidoRegions} 
                 onOptionSelect={handleRegionSelect} 
                 />
               <MainDropDown 
                 title={selectedDistrict || "상세지역"}
-                options={districts} 
-                onOptionSelect={handleDistrictSelect} 
+                options={sortStations} 
+                onOptionSelect={handleDistrictSelect}
                 />
             </div>
 
-            {/* 오늘의 대기질 섹션 */}
             <div className="air-quality-section">
               <h2 className="air-quality-title">오늘의 대기질</h2>
             </div>

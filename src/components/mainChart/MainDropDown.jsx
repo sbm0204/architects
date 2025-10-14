@@ -10,6 +10,7 @@ function MainDropDown({ title, options, onOptionSelect }) {
     setIsOpen(prevState => !prevState); // 상태 반전  
   };
 
+  
   const handleOptionClick = (option) => {
     if (onOptionSelect) {
       onOptionSelect(option);
