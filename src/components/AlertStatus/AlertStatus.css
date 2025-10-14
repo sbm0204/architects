@@ -5,7 +5,7 @@
     margin-right: auto;
 }
 
-/* -------------로딩 상태 스타일------------- */
+/* -------------1. 로딩 상태 스타일------------- */
 .loading-state-container {
     text-align: center;
     padding: 30px;
@@ -15,8 +15,8 @@
     width: 30px;
     height: 30px;
     margin: 0 auto;
-    border: 4px solid #f3f3f3; /* TODO: 사이트 전체 색깔과 맞추기 */
-    border-top: 4px solid #3498db; /* TODO: 사이트 전체 색깔과 맞추기 */
+    border: 4px solid var(--clr-gy); /* TODO: 사이트 전체 색깔과 맞추기 */
+    border-top: 4px solid var(--clr-bl); /* TODO: 사이트 전체 색깔과 맞추기 */
     border-radius: 20px;
     animation: spin 1s linear infinite;
 }
@@ -28,32 +28,81 @@
 
 .loading-text {
     font-size: 20px;
-    color: #000000; /* TODO: 사이트 전체 색깔과 맞추기 */
+    color: var(--clr-dg); /* TODO: 사이트 전체 색깔과 맞추기 */
     margin-top: 10px;
 }
 
+/* -------------1-1. API 오류 메세지 스타일------------- */
+.error-message-box {
+    padding: 30px;
+    border: 1px solid var(--clr-r);
+    border-radius: 20px;
+    text-align: center;
+    background-color: var(--clr-wh);
+    margin: 100px auto; 
+    max-width: 600px;
+}
 
-/* -------------불러올 데이터가 없을 때 메세지 스타일------------- */
+.error-message-title {
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--clr-r);
+    margin-bottom: 15px;
+}
+
+.error-message-text {
+    color: var(--clr-bk);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.error-message-detail {
+    color: var(--clr-bk);
+    font-size: 10px;
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: var(--clr-gy);
+    border-radius: 20px;
+}
+
+.retry-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: var(--clr-r); 
+    color: var(--clr-wh);
+    font-weight: 900;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.retry-button:hover {
+    background-color: var(--clr-dr); 
+}
+
+/* -------------2. 불러올 데이터가 없을 때 메세지 스타일------------- */
 .empty-message-box {
     padding: 30px;
-    border: 1px solid #d1d5db; 
+    border: 1px solid var(--clr-gy); 
     border-radius: 20px; 
     text-align: center;
-    background-color: #f9fafb; 
+    background-color: var(--clr-wh); 
     margin: 250px auto;
     max-width: 500px;
 }
 
 .empty-message-text {
-    color: #000000; 
+    color: var(--clr-bk); 
     line-height: 1.5;
 }
 
-
-/* -------------카드 목록 및 더 보기 버튼 스타일------------- */
+/* -------------3. 정상적으로 받아온 데이터로 만든 카드 스타일------------- */
 .title {
-  font-size: 40px;
-  font-weight: bold;
+  font-size: var(--fs-sub);
+  font-weight: var(--fw-bold);
   margin: 30px;
   text-align: left;
 }
@@ -89,28 +138,26 @@
     margin-top: 40px; 
 }
 
-.load-more-button {
+/* -------------4. 더 보기 / 끝 메세지 스타일------------- */
+.load-more-btn {
     display: block;
     margin: 0 auto 50px auto;
     padding: 15px 185px;
-    background-color: #ffffff; 
-    color: rgb(0, 0, 0);
+    background-color: var(--clr-wh); 
+    color: var(--clr-bk);
     font-weight: bold;
-    border: 1px solid black; 
+    border: 1px solid var(--clr-bk); 
     border-radius:20px;
-    font-size: 25px;
+    font-size: var(--fs-cnt-sub);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .load-more-button:hover {
-    background-color: #e7e7e7; 
+    background-color: var(--clr-gy); 
 }
-
-
-/* -------------완료 메세지 스타일------------- */
 .end-message {
-    color: #000000;
+    color: var(--clr-bk);
     font-size: 20px;
     padding: 10px;
     text-align: center;

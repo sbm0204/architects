@@ -3,18 +3,18 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background-color: #fff;
-  border: 1px solid black;
+  background-color: var(--clr-wh);
+  border: 1px solid var(--clr-bk);
   padding: 20px;
 }
 
 .alert-status-card-districtName {
-  color: black;
-  font-size: 30px;
-  font-weight: bold;
+  color: var(--clr-bk);
+  font-size: var(--fs-cnt-title);
+  font-weight: var(--fw-bold);
   text-align: center;
   padding: 10px;
-  border-bottom: solid 1px #c9c9c9;
+  border-bottom: solid 1px var(--clr-gy);
 }
 
 .alert-status-card-contents {
@@ -29,9 +29,9 @@
 }
 
 .alert-status-card-contents > div {
-  font-size: 15px;
+  font-size: var(--fs-cnt-body);
   text-align: left;
-  color: black;
+  color: var(--clr-bk);
 }
 
 .alert-status-card-issueGbn {
@@ -40,23 +40,23 @@
   border-radius: 20px;
   text-align: center;
   padding: 15px;
-  font-size: 25px;
-  font-weight: bold;
+  font-size: var(--fs-cnt-sub);
+  font-weight: var(--fw-bold);
 }
 
 .badge-warning {
-  background-color: #facc15; 
-  color: black; 
+  background-color: var(--clr-y); 
+  color: var(--clr-bk); 
 }
 
 .badge-danger {
-  background-color: #dc2626;
-  color: #fff;
+  background-color: var(--clr-r);
+  color: var(--clr-wh);
 }
 
 .badge-default {
-  background-color: #6b7280; 
-  color: #fff;
+  background-color: var(--clr-dg); 
+  color: var(--clr-wh);
 }
 
 

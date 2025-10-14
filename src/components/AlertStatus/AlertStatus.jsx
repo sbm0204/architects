@@ -13,7 +13,8 @@ const AlertStatus = () => {
         currentView: displayedAlerts, 
         loading: reduxLoading, 
         noMoreApiData, 
-        noMoreViewData 
+        noMoreViewData, 
+        error
     } = useSelector(state => state.alertStatus); 
 
     const isFinishedLoadingAllData = !reduxLoading && noMoreApiData && noMoreViewData;
@@ -39,14 +40,29 @@ const AlertStatus = () => {
     return (
         <div className="alerts-container">
             {reduxLoading && (
+// 1. 로딩 중 UI-----------------------------------------------------------------------------------------
                 <div className="loading-state-container">
                     <div className="loading-spinner"></div>
                     <p className="loading-text">데이터 로딩 중...</p>
                 </div>
             )}
 
+{/* 1-1. 로딩이 끝나고 오류가 생겼을 때 보여지는 UI----------------------------------------------------------- */}
+            {!reduxLoading && error && (
+              <div className="error-message-box">
+                <h1 className="error-message-tite">⚠️ 데이터 로드 실패</h1>
+                <p className="error-message-text">API 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해주 주세요. </p>
+                <p className="error-message-detail">오류 상세: {error}</p>
+                <botton 
+                    onClick={() => dispatch(alertStatusIndex())}
+                    className="retry-btn">다시 시도</botton>
+              </div>
+            )}
+            
+{/* 1-2. 로딩이 끝나고 정상 데이터를 렌더링하는 코드 시작------------------------------------------------------- */}
             {!reduxLoading && (
                 <>
+{/* 2. 데이터 없음 UI-------------------------------------------------------------------------------------- */}
                     {isListEmpty && (
                         <div className="empty-message-box">
                             <p className="empty-message-text">
@@ -55,6 +71,7 @@ const AlertStatus = () => {
                         </div>
                     )}
 
+{/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}                    
                     {!isListEmpty && <h1 className='title'>미세먼지 경보 현황</h1>}
                     
                     <div className="cards-wrapper">
@@ -63,11 +80,12 @@ const AlertStatus = () => {
                         ))}
                     </div>
 
+{/* 4. 더 보기 / 끝 메세지 UI------------------------------------------------------------------------------- */}
                     <div className="pagination-area">
                         {hasMoreDataToShow ? (
                             <button 
                                 onClick={handleLoadMore} 
-                                className="load-more-button"
+                                className="load-more-btn"
                                 disabled={reduxLoading}
                             >
                                 {reduxLoading ? '데이터 로딩 중...' : '더 보기'}
