@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 /* 전체 컨테이너 중앙 정렬 */
 .container {
   max-width: 1400px;   /* 프로젝트 규칙 유지 */
-  margin: 0 auto;      /* 브라우저 기준 중앙 정렬 */
+  margin: 0 auto;
   display: grid;
   align-items: center;
   padding: 0 130px;
@@ -27,13 +27,14 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(200px, auto));
   justify-content: space-around;
-  gap: 60px;             /* 이미지와 텍스트 간 간격 */
+  gap: 60px;
   width: 100%;
 }
 
-.team-info > img {
-  width: 515px;
-  height: 345px;
+.team-info > .info-img img {
+  width: 100%;
+  max-width: 515px;
+  height: auto;
 }
 
 .team-info .info-text .underline {
@@ -45,7 +46,6 @@
 
 .team-info .info-text {
   margin-left: 30px;
-
 }
 
 /* 두 번째 섹션 (미세먼지) */
@@ -59,15 +59,10 @@
   margin-bottom: 85px;
 }
 
-/* 이미지 크기 */
 .misemeonji > img {
-  width: 515px;
-  height: 345px;
-}
-
-/* 텍스트 영역 */
-.misemeonji .info-text {
- 
+  width: 100%;
+  max-width: 515px;
+  height: auto;
 }
 
 .misemeonji .info-text > h2 {
@@ -81,8 +76,60 @@
   margin: 40px 0;
 }
 
+/* 반응형 ① : 태블릿 구간 (1024px 이하에서 1열 전환) */
+@media screen and (max-width: 1024px) {
 
-/* 반응형 대응 */
+  .container {
+    padding: 0 80px; /* 좌우 여백 줄이기 */
+  }
+
+  .title {
+    font-size: 32px;
+    text-align: left;
+  }
+
+  .team-info,
+  .misemeonji {
+    grid-template-columns: 1fr; /* 2열 → 1열 */
+    gap: 40px;
+    text-align: left;
+  }
+
+  .team-info .info-text,
+  .misemeonji .info-text {
+    margin-left: 0;
+  }
+
+  .team-info > .info-img img,
+  .misemeonji > img {
+    order: -1;
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* 반응형 ② : 모바일 구간 (768px 이하에서 글자 크기 조정) */
 @media screen and (max-width: 768px) {
 
+  .container {
+    padding: 0 20px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .info-text h2 {
+    font-size: 20px;
+  }
+
+  .info-text p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .team-info,
+  .misemeonji {
+    gap: 30px;
+  }
 }
