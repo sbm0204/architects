@@ -43,7 +43,8 @@
   font-size: 40px;
   font-weight: 600;
   color: #fff;
-  cursor: pointer; 
+  cursor: pointer;
+  text-decoration: none; 
 }
 
 .nav-line {
@@ -92,9 +93,10 @@
   padding: 0 30px;
 }
 
-.header-mobile-contents > img {
-  width: 55px;
-  height: 55px;
+.header-mobile-logo {
+  max-width: 55px;
+  max-height: 55px;
+  margin-top: 2px;
 }
 
 .header-mobile-hamburger {
@@ -111,6 +113,108 @@
   height: 3px;
   background-color: white;
   border-radius: 2px;
+}
+
+
+/* --- 햄버거 버튼 클릭 시 모바일 메뉴 --- */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -80%;
+  width: 80%;
+  height: 80%;
+  background: linear-gradient(to top, #66c6ff, #2a91ff);
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+  transition: right 0.4s ease;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu-header {
+  width: 95%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  font-size: 40px;
+  margin-bottom: 8px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.mobile-menu-items {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-first-line {
+  width: 90%;
+  height: 2px;
+  background-color: #fff;
+  margin: 25px 0;
+}
+
+.itemhome {
+  height: 43px;
+  width: 90%;
+  text-align: right;
+  cursor: pointer;
+  padding: 0;
+}
+
+.itemhome > img {
+  width: 43px;
+  height: 43px;
+}
+
+.menu-item {
+  width: 90%;
+  padding-right: 15px;
+  padding-top : 4px; /* 글자 세로 중앙 정렬 위한 조처 */
+  padding-bottom: 8px;
+  background: #fff;
+  color: #1184ff;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: right;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  background: #1184ff;
+  color: #fff;
+}
+
+.menu-line {
+  width: 90%;
+  height: 2px;
+  background-color: #fff;
+  opacity: 35%;
+  margin: 4px 0;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 
 
@@ -134,4 +238,3 @@
     display: flex;
   }
 }
-

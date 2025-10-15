@@ -1,10 +1,16 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import logonew from '../../assets/logonew.png'; //로고 임포트
 import bgImage from '../../assets/background-photo-gradation.png'; //배경 이미지 임포트
-
+import homeIcon from '../../assets/iconhome.png'; // 홈 아이콘 임프트
 
 
 function Header() {
+ const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+ const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+ const closeMenu = () => setIsMenuOpen(false);
 
  return (
     <>
@@ -13,15 +19,20 @@ function Header() {
         <div className='header-box'>
           <div className='header-background' style={{backgroundImage: `url(${bgImage})`}}>
             <div className='header-contents'>
+              {/* 로고 클릭 시 홈으로 이동 */}
               <div className='header-logo'>
-                <img src={logonew} alt="헤더 로고" />
+                <Link to="/">
+                  <img src={logonew} alt="헤더 로고" />
+                </Link>  
               </div>
+
+              {/* 메뉴 링크 */}
               <div className='header-nav'>
-                <div className='header-nav-contents'>미세먼지 경보</div>
+                <Link to="/alertStatus" className='header-nav-contents'>미세먼지 경보</Link>
                 <div className="nav-line">|</div>
-                <div className='header-nav-contents'>행동요령</div>
+                <Link to="/guideLine" className='header-nav-contents'>행동요령</Link>
                 <div className="nav-line">|</div>
-                <div className='header-nav-contents'>서비스 소개</div>
+                <Link to="/service" className='header-nav-contents'>서비스 소개</Link>
               </div>
             </div>  
           </div>
@@ -33,8 +44,11 @@ function Header() {
         <div className='header-mobile-box'>
           <div className='header-mobile-background' style={{backgroundImage: `url(${bgImage})`}}>
             <div className='header-mobile-contents'>
-              <img src={logonew} alt="모바일 헤더 로고" />
-              <div className='header-mobile-hamburger'>
+              {/* 홈 아이콘 클릭 시 홈으로 이동 */}
+                <Link to="/">
+                  <img className='header-mobile-logo' src={logonew} alt="모바일 헤더 로고" />
+                </Link>
+              <div className='header-mobile-hamburger' onClick={toggleMenu}>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -43,6 +57,33 @@ function Header() {
           </div>
         </div> 
       </div>
+
+      {/* 슬라이드 메뉴 */}
+      <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+        <div className='mobile-menu-header'>
+          <button className='close-btn' onClick={closeMenu}>x</button>
+        </div>
+        <div className='mobile-menu-items'>
+          {/* 홈 아이콘 클릭 시 홈으로 이동 */}
+           <div className='itemhome'>
+            <Link to="/" onClick={closeMenu}>
+              <img src={homeIcon} alt="홈 아이콘" />
+            </Link>
+          </div>
+          <div className='menu-first-line'></div>
+
+          {/* 메뉴 링크 */}
+          <Link to="/alertStatus" className='menu-item' onClick={closeMenu}>미세먼지 경보</Link>
+          <div className='menu-line'></div>
+          <Link to="/guideLine" className='menu-item' onClick={closeMenu}>행동요령</Link>
+          <div className='menu-line'></div>
+          <Link to="/service" className='menu-item' onClick={closeMenu}>서비스 소개</Link>
+          <div className='menu-line'></div>
+        </div>
+      </div>
+
+      {/* 메뉴 오픈 시 배경 어둡게 */}
+      {isMenuOpen && <div className='menu-overlay' onClick={closeMenu}></div>}
     </> 
   );
 }

@@ -21,13 +21,13 @@
 .footer-contents-box > img {
     width: 110px;
     height: 110px;
-    margin-right: 40px;
 }
 
 .footer-contents-box > p {
     color: #fff;
     font-size: 20px;
     font-weight: 500;
+    margin-left: 40px;
 }
 
 /* 기본 (PC) 스타일은 그대로 유지 (위) */
