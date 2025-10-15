@@ -50,7 +50,7 @@ const AlertStatus = () => {
 {/* 1-1. 로딩이 끝나고 오류가 생겼을 때 보여지는 UI----------------------------------------------------------- */}
             {!reduxLoading && error && (
               <div className="error-message-box">
-                <h1 className="error-message-tite">⚠️ 데이터 로드 실패</h1>
+                <h1 className="error-message-title">⚠️ 데이터 로드 실패</h1>
                 <p className="error-message-text">API 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해주 주세요. </p>
                 <p className="error-message-detail">오류 상세: {error}</p>
                 <botton 

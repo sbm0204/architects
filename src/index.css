@@ -45,10 +45,11 @@
   --fs-cnt-title: 30px;    /* 콘텐츠 제목 */
   --fs-cnt-sub: 25px; /* 콘텐츠 부제목 (카드 내부) */
   --fs-cnt-body: 15px;     /* 콘텐츠 내용 */
+  --fs-msg-title: 25px;    /* 에러, 로딩, 엔드 메세지 제목 */
+  --fs-msg-body: 20px;     /* 에러, 로딩, 엔드 내용 */
 
   /* 텍스트 굵기 (Font Weight) - fw */
-  --fw-bold: bold;      /* 굵게 */
-  --fw-normal: normal;  /* 보통 */
+  --fw-bold: 900;      /* 굵게 */
 }
 
 /* 
