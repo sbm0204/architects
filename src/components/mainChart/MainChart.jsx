@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MainChart.css';
 import MainDropDown from './MainDropDown.jsx';
 import AirQualityCard from './AirQualityCard.jsx';
 import AirLineChart from './AirLineChart.jsx';
+import AirBarChart from './AirBarChart.jsx';
 import { getMapList } from '../../store/thunks/mapAxioThunk.js';
+import { getAirQuality } from '../../store/thunks/airQualityThunk.js';
 
 
 function MainChart() {
@@ -13,6 +15,18 @@ function MainChart() {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [selectedStationData, setSelectedStationData] = useState(null);
+
+  // 화면 크기에 따른 상태 추가 (800px 기준으로 변경)
+  const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 800px)').matches);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 800px)');
+    const handleResize = (e) => setIsMobile(e.matches);
+
+    mediaQuery.addEventListener('change', handleResize);
+
+    return () => mediaQuery.removeEventListener('change', handleResize);
+  }, []);
 
   const mapList = useSelector(state => state.mapAxio.mapList);
   const sidoRegions = mapList?.items ? [...new Set(mapList.items.map(item => item.sidoName))] : [];
@@ -31,15 +45,16 @@ function MainChart() {
     setSelectedDistrict(district);
     const stationData = selectedItems.find(item => item.stationName === district);
     setSelectedStationData(stationData);
+    dispatch(getAirQuality({ stationName: district }));
   };
   
   const airQualityData = selectedStationData ? [
-    { title: '미세먼지', subtitle: '(PM-10)', value: selectedStationData.pm10Value, unit: 'µg/m³' },
-    { title: '초미세먼지', subtitle: '(PM-2.5)', value: selectedStationData.pm25Value, unit: 'µg/m³' },
-    { title: '오존', subtitle: '(O₃)', value: selectedStationData.o3Value, unit: 'ppm' },
-    { title: '이산화질소', subtitle: '(NO₂)', value: selectedStationData.no2Value, unit: 'ppm' },
-    { title: '일산화탄소', subtitle: '(CO)', value: selectedStationData.coValue, unit: 'ppm' },
-    { title: '아황산가스', subtitle: '(SO₂)', value: selectedStationData.so2Value, unit: 'ppm' },
+    { title: '미세먼지', subtitle: '(PM-10)', value: selectedStationData.pm10Value || '장비점검', unit: 'µg/m³' },
+    { title: '초미세먼지', subtitle: '(PM-2.5)', value: selectedStationData.pm25Value || '장비점검', unit: 'µg/m³' },
+    { title: '오존', subtitle: '(O₃)', value: selectedStationData.o3Value || '장비점검', unit: 'ppm' },
+    { title: '이산화질소', subtitle: '(NO₂)', value: selectedStationData.no2Value || '장비점검', unit: 'ppm' },
+    { title: '일산화탄소', subtitle: '(CO)', value: selectedStationData.coValue || '장비점검', unit: 'ppm' },
+    { title: '아황산가스', subtitle: '(SO₂)', value: selectedStationData.so2Value || '장비점검', unit: 'ppm' },
   ] : [
     { title: '초미세먼지', subtitle: '(PM-2.5)', value: '-', unit: 'µg/m³' },
     { title: '미세먼지', subtitle: '(PM-10)', value: '-', unit: 'µg/m³' },
@@ -82,7 +97,7 @@ function MainChart() {
                 </div>
           </div>
           <div className='chart-padding'>
-            <AirLineChart />
+            {isMobile ? <AirBarChart /> : <AirLineChart />}
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -10,7 +11,6 @@ import {
   Legend,
 } from 'chart.js';
 
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,8 +21,8 @@ ChartJS.register(
   Legend
 );
 
-function AirLineChart() { 
-  const labels = ["10-04", "10-05", "10-06", "10-07", "10-08", "10-09", "10-10" ];
+function AirLineChart() {
+  const { airQuality, status } = useSelector(state => state.airQuality);
 
   const options = { 
     responsive: true,
@@ -39,19 +39,33 @@ function AirLineChart() {
     },
     plugins: {
       legend: {
-        position: "bottom", 
+        display: false, 
       },
     },
   };
 
+  // 로딩 및 에러, 초기 상태 처리
+  if (status === 'loading') {
+    return <div>차트 데이터 로딩 중...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>데이터를 불러오는데 실패했습니다.</div>;
+  }
   
+  if (!airQuality || airQuality.labels.length === 0) {
+    return <div>지역을 선택하면 시간별 농도 차트가 표시됩니다.</div>;
+  }
+
+  const labels = airQuality.labels;
+
   const pm10Data = { 
     labels, 
     datasets: [
       {
         label: "미세먼지",
-        data: [13, 12, 11, 12, 11, 10, 11],
-        pointBackgroundColor: "#0CDDFF",
+        data: airQuality.pm10,
+        pointBackgroundColor: "#66c6ff",
         borderColor: "#000",
       },
     ],
@@ -62,7 +76,7 @@ function AirLineChart() {
     datasets: [
       {
         label: "초미세먼지",
-        data: [10, 20, 25, 30, 50, 60, 22],
+        data: airQuality.pm25,
         backgroundColor: "#FF6384",
         borderColor: "#000",
       },
@@ -72,7 +86,7 @@ function AirLineChart() {
   return(
     <div>
       <div>
-        <p style={{fontsize:'25px', fontWeight:'600'}}>미세먼지</p>
+        <p style={{fontSize:'25px', fontWeight:'600'}}>미세먼지</p>
         <div style={{display:'flex'}}>
           <div style={{ position:'relative', width: '14vw', height: '20vh' }}>
             <Line options={options} data={pm10Data} />
@@ -80,7 +94,7 @@ function AirLineChart() {
         </div>
       </div>
       <div>
-        <p style={{fontsize: '25px', fontWeight:'600'}}>초미세먼지</p>
+        <p style={{fontSize: '25px', fontWeight:'600'}}>초미세먼지</p>
         <div style={{display:'flex'}}>
           <div style={{ position:'relative', width: '14vw', height: '20vh' }}>
             <Line options={options} data={pm25Data}></Line>
