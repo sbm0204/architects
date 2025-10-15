@@ -18,9 +18,9 @@ function Header() {
               </div>
               <div className='header-nav'>
                 <div className='header-nav-contents'>미세먼지 경보</div>
-                <div class="nav-line">|</div>
+                <div className="nav-line">|</div>
                 <div className='header-nav-contents'>행동요령</div>
-                <div class="nav-line">|</div>
+                <div className="nav-line">|</div>
                 <div className='header-nav-contents'>서비스 소개</div>
               </div>
             </div>  

@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react';
 import './GuideLine.css';
 import guideData from '../../configs/guide-data.js';
 
 function GuideLine() {
-  const [dustJson, setDustJson] = useState(null);
 
-  useEffect(() => {
-    if(dustJson) {
-      return
-    }
-    setDustJson(guideData);
-  }, []);
+    const dustJson = guideData;
 
   return (
     <div className='contents-size'>
       <h1 className="guide-header, content-title">미세먼지 등급 및 행동요령</h1>
-      <div className='img'></div>
 
       <div className="guide-line-container">
 
