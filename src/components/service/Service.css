@@ -1,135 +1,117 @@
-* {
-  margin: 0;
-  padding: 0;
+.service-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px;
   box-sizing: border-box;
 }
-
-/* 전체 컨테이너 중앙 정렬 */
-.container {
-  max-width: 1400px;   /* 프로젝트 규칙 유지 */
-  margin: 0 auto;
-  display: grid;
-  align-items: center;
-  padding: 0 130px;
-}
-
-/* 제목 */
-.title {
+.service-title {
+  font-size: var(--fs-sub);
+  font-weight: var(--fw-bold);
+  margin-bottom: 40px;
   text-align: left;
-  font-size: 40px;
-  font-weight: bold;
-  margin: 30px 0;
 }
-
-/* 첫 번째 섹션 (팀 소개) */
-.team-info {
-  margin-top: 55px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(200px, auto));
-  justify-content: space-around;
-  gap: 60px;
-  width: 100%;
+.service-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 100px;
+  gap: 90px;
 }
-
-.team-info > .info-img img {
-  width: 100%;
-  max-width: 515px;
-  height: auto;
+.service-block.reverse {
+  flex-direction: row-reverse;
 }
-
-.team-info .info-text .underline {
+.desktop-text-box {
+  flex: 1;
+  padding-bottom: 200px;
+}
+.underline {
   width: 100px;
   height: 2px;
-  border: 1px solid #7F7D7D;
+  border: 1px solid var(--clr-gy);
   margin: 40px 0;
 }
-
-.team-info .info-text {
-  margin-left: 30px;
+.mobile-text-box {
+  display: none;
 }
-
-/* 두 번째 섹션 (미세먼지) */
-.misemeonji {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(200px, auto));
-  justify-content: space-around;
-  gap: 60px;
-  width: 100%;
-  margin-top: 100px;
-  margin-bottom: 85px;
+.text-box h3 {
+  font-size: var(--fs-cnt-title);
+  margin-bottom: 16px;
 }
-
-.misemeonji > img {
+.text-box p {
+  line-height: 1.6;
+  color: var(--clr-bk);
+  margin: 6px 0;
+}
+.image-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.image-box img {
   width: 100%;
-  max-width: 515px;
+  max-width: 600px;
   height: auto;
+  object-fit: cover;
 }
-
-.misemeonji .info-text > h2 {
-  font-size: 25px;
-}
-
-.misemeonji .info-text .underline {
-  width: 100px;
-  height: 2px;
-  border: 1px solid #7F7D7D;
-  margin: 40px 0;
-}
-
-/* 반응형 ① : 태블릿 구간 (1024px 이하에서 1열 전환) */
-@media screen and (max-width: 1024px) {
-
-  .container {
-    padding: 0 80px; /* 좌우 여백 줄이기 */
+/* =========================================
+   :아이폰: 반응형 미디어 쿼리
+========================================= */
+/* 1200px 이하 (태블릿) */
+@media (max-width: 1200px) {
+  .service-block {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
   }
-
-  .title {
-    font-size: 32px;
-    text-align: left;
+  .service-block.reverse {
+    flex-direction: column;
   }
-
-  .team-info,
-  .misemeonji {
-    grid-template-columns: 1fr; /* 2열 → 1열 */
-    gap: 40px;
-    text-align: left;
-  }
-
-  .team-info .info-text,
-  .misemeonji .info-text {
-    margin-left: 0;
-  }
-
-  .team-info > .info-img img,
-  .misemeonji > img {
-    order: -1;
+  .text-box {
     width: 100%;
-    height: auto;
+    text-align: left; /* :흰색_확인_표시: 모바일에서는 텍스트 왼쪽 정렬 */
+    padding: 0 10px; /* 여백 살짝 줘서 답답하지 않게 */
+  }
+  .image-box img {
+    max-width: 500px;
   }
 }
-
-/* 반응형 ② : 모바일 구간 (768px 이하에서 글자 크기 조정) */
-@media screen and (max-width: 768px) {
-
-  .container {
-    padding: 0 20px;
+/* 700px 이하 (모바일) */
+@media (max-width: 700px) {
+  .service-container {
+    padding: 20px 10px;
   }
-
-  .title {
-    font-size: 28px;
+  .service-title {
+    padding: 0 40px;
   }
-
-  .info-text h2 {
-    font-size: 20px;
+  .desktop-text-box {
+    display: none;
   }
-
-  .info-text p {
-    font-size: 16px;
-    line-height: 1.5;
+  .underline {
+    display: none;
   }
-
-  .team-info,
-  .misemeonji {
-    gap: 30px;
+  .mobile-text-box {
+    display: block;
+    text-align: left;           /* :흰색_확인_표시: 왼쪽 정렬 유지 */
+    padding: 0 80px 0 0;            /* :흰색_확인_표시: 이미지 왼쪽 라인에 맞추기 위한 좌우 여백 */
+    /* box-sizing: border-box;     패딩 포함 계산 */
+  }
+  .mobile-text-box h3 {
+    padding-bottom: 10px;
+  }
+  .mobile-text-box p {
+    font-size: var(--fs-cnt-body);
+    line-height: 2;           /* :흰색_확인_표시: 모바일용 가독성 향상 */
+  }
+  .image-box {
+    justify-content: center;    /* :흰색_확인_표시: 이미지 중앙 */
+  }
+  .image-box img {
+    max-width: 90vw;
+  }
+  /* :전구: 모든 블록을 이미지 → 텍스트 순서로 통일 */
+  .service-block,
+  .service-block.reverse {
+    flex-direction: column;
   }
 }
