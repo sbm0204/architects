@@ -34,11 +34,11 @@
 .mobile-text-box {
   display: none;
 }
-.text-box h3 {
+.desktop-text-box h2 {
   font-size: var(--fs-cnt-title);
   margin-bottom: 16px;
 }
-.text-box p {
+.desktop-text-box p {
   line-height: 1.6;
   color: var(--clr-bk);
   margin: 6px 0;
@@ -96,7 +96,7 @@
     padding: 0 80px 0 0;            /* :흰색_확인_표시: 이미지 왼쪽 라인에 맞추기 위한 좌우 여백 */
     /* box-sizing: border-box;     패딩 포함 계산 */
   }
-  .mobile-text-box h3 {
+  .mobile-text-box h2 {
     padding-bottom: 10px;
   }
   .mobile-text-box p {
