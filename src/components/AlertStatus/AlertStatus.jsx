@@ -51,8 +51,8 @@ const AlertStatus = () => {
             {!reduxLoading && error && (
               <div className="error-message-box">
                 <h1 className="error-message-title">⚠️ 데이터 로드 실패</h1>
-                <p className="error-message-text">API 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해주 주세요. </p>
-                <p className="error-message-detail">오류 상세: {error}</p>
+                <p className="error-message-text">오류 발생. 다시 시도해 주세요. </p>
+                <p className="error-message-detail">오류 상태: {error}</p>
                 <botton 
                     onClick={() => dispatch(alertStatusIndex())}
                     className="retry-btn">다시 시도</botton>
@@ -66,14 +66,13 @@ const AlertStatus = () => {
                     {isListEmpty && (
                         <div className="empty-message-box">
                             <p className="empty-message-text">
-                                최근 한 달 이내 미세먼지 주의보/경보 발령 내역이 없습니다.
+                                최근 한 달간 미세먼지 발령 내역이 없습니다.
                             </p>
                         </div>
                     )}
 
 {/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}                    
-                    {!isListEmpty && <h1 className='title'>미세먼지 경보 현황</h1>}
-                    
+                    {!isListEmpty && <h1 className="title">미세먼지 경보 현황</h1>}
                     <div className="cards-wrapper">
                         {displayedAlerts.map((alert, index) => (
                             <AlertStatusCards key={index} item={alert} /> 
@@ -92,7 +91,9 @@ const AlertStatus = () => {
                             </button>
                         ) : (
                             isFinishedLoadingAllData  && displayedAlerts.length > 0 &&
-                               <p className="end-message">✅ 최근 미세먼지 발령 내역을 모두 불러왔습니다.</p>
+                               <p className="end-message">
+                                ✅ 최근 미세먼지 발령 내역 불러오기 완료
+                               </p>
                         )}
                     </div>
                 </>

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { getRecentOneMonthData } from './dayjs.js';
+import { getRecentOneMonthData } from './dateFilter.js';
 
 const ITEMS_PER_PAGE = 8;
 

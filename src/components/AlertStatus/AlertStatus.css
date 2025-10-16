@@ -110,18 +110,19 @@
 
 .cards-wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  margin: 55px 0;
-  gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+  width: 100%;
+  gap: 20px;
+  padding: 30px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .cards-wrapper {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
     .cards-wrapper {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -129,21 +130,21 @@
 
 @media (max-width: 700px) {
     .cards-wrapper {
-        grid-template-columns: repeat(1, 1fr);
-        margin: 80px;
-    }
+        justify-content: center;
+        grid-template-columns: repeat(1, 1fr);}
 }
 
 .pagination-area {
     text-align: center;
     margin-top: 40px; 
+    justify-items: center;
 }
 
 /* -----------------4. 더 보기 / 끝 메세지 스타일----------------- */
 .load-more-btn {
     display: block;
-    margin: 0 auto 50px auto;
-    padding: 15px 185px;
+    margin: 0 0 50px 0 ;
+    padding: 15px 110px;
     background-color: var(--clr-wh); 
     color: var(--clr-bk);
     font-weight: var(--fw-bold);
@@ -154,9 +155,10 @@
     transition: background-color 0.3s ease;
 }
 
-.load-more-button:hover {
+.load-more-btn:hover {
     background-color: var(--clr-gy); 
 }
+
 .end-message {
     color: var(--clr-bk);
     font-size: var(--fs-msg-body);

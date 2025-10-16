@@ -2,58 +2,68 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 20px;
-  box-sizing: border-box;
 }
+
 .service-title {
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
-  margin-bottom: 40px;
+  margin: 30px;
   text-align: left;
 }
+
 .service-block {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
   gap: 90px;
+  padding: 30px;
 }
+
 .service-block.reverse {
   flex-direction: row-reverse;
 }
+
 .desktop-text-box {
   flex: 1;
   padding-bottom: 200px;
 }
+
 .underline {
   width: 100px;
   height: 2px;
   border: 1px solid var(--clr-gy);
   margin: 40px 0;
 }
+
 .mobile-text-box {
   display: none;
 }
+
 .desktop-text-box h2 {
   font-size: var(--fs-cnt-title);
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 }
+
 .desktop-text-box p {
   line-height: 1.6;
   color: var(--clr-bk);
-  margin: 6px 0;
+  margin: 5px 0;
 }
+
 .image-box {
   flex: 1;
   display: flex;
   justify-content: center;
 }
+
 .image-box img {
   width: 100%;
   max-width: 600px;
   height: auto;
   object-fit: cover;
 }
+
 /* =========================================
    :아이폰: 반응형 미디어 쿼리
 ========================================= */
@@ -64,51 +74,56 @@
     text-align: center;
     gap: 20px;
   }
+
   .service-block.reverse {
     flex-direction: column;
   }
-  .text-box {
+
+  .desktop-text-box {
     width: 100%;
     text-align: left; /* :흰색_확인_표시: 모바일에서는 텍스트 왼쪽 정렬 */
     padding: 0 10px; /* 여백 살짝 줘서 답답하지 않게 */
   }
+
   .image-box img {
     max-width: 500px;
   }
 }
+
 /* 700px 이하 (모바일) */
 @media (max-width: 700px) {
-  .service-container {
-    padding: 20px 10px;
-  }
-  .service-title {
-    padding: 0 40px;
-  }
   .desktop-text-box {
     display: none;
   }
+
   .underline {
     display: none;
   }
+
   .mobile-text-box {
     display: block;
     text-align: left;           /* :흰색_확인_표시: 왼쪽 정렬 유지 */
-    padding: 0 80px 0 0;            /* :흰색_확인_표시: 이미지 왼쪽 라인에 맞추기 위한 좌우 여백 */
-    /* box-sizing: border-box;     패딩 포함 계산 */
+    width: 85vw;
   }
+
   .mobile-text-box h2 {
     padding-bottom: 10px;
+    font-weight: var(--fw-bold);
   }
+
   .mobile-text-box p {
     font-size: var(--fs-cnt-body);
     line-height: 2;           /* :흰색_확인_표시: 모바일용 가독성 향상 */
   }
+
   .image-box {
     justify-content: center;    /* :흰색_확인_표시: 이미지 중앙 */
   }
+
   .image-box img {
-    max-width: 90vw;
+    max-width: 85vw;
   }
+
   /* :전구: 모든 블록을 이미지 → 텍스트 순서로 통일 */
   .service-block,
   .service-block.reverse {
