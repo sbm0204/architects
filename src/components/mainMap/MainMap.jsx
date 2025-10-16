@@ -146,7 +146,6 @@ function MainMap() {
                   path={item.path}
                   strokeWeight={2} // 선의 두께입니다
                   strokeColor={"#f16a88ff"} // 선의 색깔입니다
-                  // strokeColor={"#a33f18ff"} // 선의 색깔입니다
                   strokeOpacity={0.8} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
                   strokeStyle={"solid"} // 선의 스타일입니다
                   fillColor={item.fillColor || '#FFFFFF'} // 채우기 색깔입니다
@@ -156,7 +155,7 @@ function MainMap() {
             }
             <div className='main-map-box'>
               <div className="main-map-box-content"><div className='main-map-box-content-circle-good'></div>0~30 좋음</div>
-              <div className="main-map-box-content"><div className='main-map-box-content-circle-normal'></div>31~81 보통</div>
+              <div className="main-map-box-content"><div className='main-map-box-content-circle-moderate'></div>31~81 보통</div>
               <div className="main-map-box-content"><div className='main-map-box-content-circle-bad'></div>81~150 나쁨</div>
               <div className="main-map-box-content"><div className='main-map-box-content-circle-very-bad'></div>150↑ 매우 나쁨</div>
             </div>

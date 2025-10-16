@@ -48,22 +48,22 @@
   background-color: #0ca6ffff;
   border-radius: 50px;
 }
-.main-map-box-content-circle-normal {
+.main-map-box-content-circle-moderate {
   width: 10px;
   height: 10px;
-  background-color: #5DAD69;
+  background-color: #92FF92;
   border-radius: 50px;
 }
 .main-map-box-content-circle-bad {
   width: 10px;
   height: 10px;
-  background-color: #FFD652;
+  background-color: #FFED69;
   border-radius: 50px;
 }
 .main-map-box-content-circle-very-bad {
   width: 10px;
   height: 10px;
-  background-color: #E53022;
+  background-color: #FE4132;
   border-radius: 50px;
 }
 
