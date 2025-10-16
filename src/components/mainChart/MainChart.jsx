@@ -59,12 +59,12 @@ function MainChart() {
   };
   
   const airQualityData = selectedStationData ? [
-    { title: '미세먼지', subtitle: '(PM-10)', value: selectedStationData.pm10Value || '장비점검', unit: 'µg/m³' },
-    { title: '초미세먼지', subtitle: '(PM-2.5)', value: selectedStationData.pm25Value || '장비점검', unit: 'µg/m³' },
-    { title: '오존', subtitle: '(O₃)', value: selectedStationData.o3Value || '장비점검', unit: 'ppm' },
-    { title: '이산화질소', subtitle: '(NO₂)', value: selectedStationData.no2Value || '장비점검', unit: 'ppm' },
-    { title: '일산화탄소', subtitle: '(CO)', value: selectedStationData.coValue || '장비점검', unit: 'ppm' },
-    { title: '아황산가스', subtitle: '(SO₂)', value: selectedStationData.so2Value || '장비점검', unit: 'ppm' },
+    { title: '미세먼지', subtitle: '(PM-10)', value: selectedStationData.pm10Value || '-', unit: 'µg/m³' },
+    { title: '초미세먼지', subtitle: '(PM-2.5)', value: selectedStationData.pm25Value || '-', unit: 'µg/m³' },
+    { title: '오존', subtitle: '(O₃)', value: selectedStationData.o3Value || '-', unit: 'ppm' },
+    { title: '이산화질소', subtitle: '(NO₂)', value: selectedStationData.no2Value || '-', unit: 'ppm' },
+    { title: '일산화탄소', subtitle: '(CO)', value: selectedStationData.coValue || '-', unit: 'ppm' },
+    { title: '아황산가스', subtitle: '(SO₂)', value: selectedStationData.so2Value || '-', unit: 'ppm' },
   ] : [
     { title: '초미세먼지', subtitle: '(PM-2.5)', value: '-', unit: 'µg/m³' },
     { title: '미세먼지', subtitle: '(PM-10)', value: '-', unit: 'µg/m³' },
