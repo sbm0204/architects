@@ -15,19 +15,20 @@
   height: 150px;
   display: grid;
   grid-template-columns: 240px 1fr;
-  align-items: center;
+  align-items: start;
   margin: 0 auto;
 }
 
 .header-logo {
   width: 135px;
   height: 150px;
+  padding-top: 7.5px;
 }
 
-.header-logo > img {
+.header-contents .header-logo > img {
   width: 135px;
   height: 135px;
-  margin-top: 8px;
+
 }
 
 .header-nav {
@@ -40,19 +41,18 @@
 }
 
 .header-nav-contents {
-  font-size: 40px;
+  font-size: var(--fs-sub);
   font-weight: 600;
-  color: #fff;
+  color: var(--clr-wh);
   cursor: pointer;
   text-decoration: none;
-
   margin-bottom: 3px;
   line-height: 1.1;           /* 나눔스퀘어 폰트 적용 시 행간을 조금 조여서 수직 중심 맞춤 */
   transform: translateY(2px); /* 폰트가 위로 들리는 특성 보정 */
 }
 
 .nav-line {
-  color: #fff;
+  color: var(--clr-wh);
   font-size: 60px;
   text-align: center;
   line-height: 1;
@@ -115,7 +115,7 @@
 .header-mobile-hamburger span {
   display: block;
   height: 3px;
-  background-color: white;
+  background-color: var(--clr-wh);
   border-radius: 2px;
 }
 
@@ -127,7 +127,7 @@
   right: -80%;
   width: 80%;
   height: 80%;
-  background: linear-gradient(to top, #66c6ff, #2a91ff);
+  background: linear-gradient(to top, var(--clr-db), var(--clr-md-db));
   box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
   transition: right 0.4s ease;
   z-index: 15;
@@ -147,11 +147,11 @@
 }
 
 .close-btn {
-  font-size: 40px;
+  font-size: var(--fs-sub);
   margin-bottom: 8px;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--clr-wh);
   cursor: pointer;
 }
 
@@ -166,7 +166,7 @@
 .menu-first-line {
   width: 90%;
   height: 2px;
-  background-color: #fff;
+  background-color: var(--clr-wh);
   margin: 25px 0;
 }
 
@@ -192,9 +192,9 @@
   padding-right: 15px;
   padding-top : 1px; /* 글자 세로 중앙 정렬 위한 조처 */
   padding-bottom: 1px; /* 글자 세로 중앙 정렬 위한 조처 */
-  background: #fff;
-  color: #1184ff;
-  font-size: 30px;
+  background: var(--clr-wh);
+  color: var(--clr-dp-db);
+  font-size: var(--fs-cnt-title);
   font-weight: 600;
   text-align: right;
   border-radius: 10px;
@@ -205,14 +205,14 @@
 }
 
 .menu-item:hover {
-  background: #1184ff;
-  color: #fff;
+  background: var(--clr-dp-db);
+  color: var(--clr-wh);
 }
 
 .menu-line {
   width: 90%;
   height: 2px;
-  background-color: #fff;
+  background-color: var(--clr-wh);
   opacity: 35%;
   margin: 4px 0;
 }

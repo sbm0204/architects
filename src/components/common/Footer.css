@@ -24,8 +24,8 @@
 }
 
 .footer-contents-box > p {
-    color: #fff;
-    font-size: 20px;
+    color: var(--clr-wh);
+    font-size: var(--fs-msg-body);
     font-weight: 500;
     margin-left: 40px;
 }
