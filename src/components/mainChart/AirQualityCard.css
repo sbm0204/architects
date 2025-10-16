@@ -20,55 +20,9 @@
   margin-bottom: 15px;
 }
 
-/* 이미지와 placeholder를 담는 컨테이너 */
-.card-image-container {
-  width: 100%;
-  height: 80px;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .card-image {
   max-width: 100%;
   max-height: 100%;
-}
-
-.card-image-placeholder-good {
-  width: 54px;
-  height: 65px;
-  background-image: url('../../assets/good.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-}
-
-.card-image-placeholder-moderate {
-  width: 54px;
-  height: 65px;
-  background-image: url('../../assets/moderate.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-}
-
-.card-image-placeholder-bad {
-  width: 54px;
-  height: 65px;
-  background-image: url('../../assets/bad.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-}
-
-.card-image-placeholder-very-bad {
-  width: 54px;
-  height: 65px;
-  background-image: url('../../assets/very-bad.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 8px;
 }
 
 .card-value {

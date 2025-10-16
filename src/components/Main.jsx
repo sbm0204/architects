@@ -13,8 +13,11 @@ function Main() {
   
   return (
     <>
-      <div style={{display: 'flex', maxWidth: '1400px', width: '100%'}}>
+      <div style={{display: 'grid', gridTemplateColumns: '9fr 5fr',maxWidth: '1400px' ,margin: '20px auto'}}>
+      {/* <div style={{display: 'flex', maxWidth: '1400px', width: '100%', margin: '20px'}}> */}
+        <div>
         <MainChart />
+        </div>
         <MainMap />
       </div>
     </>

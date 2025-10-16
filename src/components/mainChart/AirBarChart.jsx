@@ -27,12 +27,13 @@ function AirBarChart() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: false, // 라벨이 명확하므로 범례는 숨깁니다.
+        display: true,
+        position: 'bottom',
       },
     },
     scales: {
       y: {
-        beginAtZero: true, // y축을 0부터 시작
+        beginAtZero: true,
       },
     },
   };
@@ -47,27 +48,24 @@ function AirBarChart() {
   }
   
   if (!airQuality || airQuality.labels.length === 0) {
-    return <div>지역을 선택하면 현재 농도 차트가 표시됩니다.</div>;
+    return <div>지역을 선택하면 시간별 농도 차트가 표시됩니다.</div>;
   }
 
-  // 가장 마지막 데이터(현재)를 사용합니다.
-  const currentPm10 = airQuality.pm10[airQuality.pm10.length - 1];
-  const currentPm25 = airQuality.pm25[airQuality.pm25.length - 1];
-
   const data = {
-    labels: ['미세먼지 (PM10)', '초미세먼지 (PM2.5)'],
+    labels: airQuality.labels,
     datasets: [
       {
-        label: '농도 (µg/m³)',
-        data: [currentPm10, currentPm25],
-        backgroundColor: [
-          'rgba(54, 162, 235, 0.5)', // 미세먼지 색상
-          'rgba(255, 99, 132, 0.5)',  // 초미세먼지 색상
-        ],
-        borderColor: [
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)',
-        ],
+        label: '미세먼지 (PM10)',
+        data: airQuality.pm10,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: '#000',
+        borderWidth: 1,
+      },
+      {
+        label: '초미세먼지 (PM2.5)',
+        data: airQuality.pm25,
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: '#000',
         borderWidth: 1,
       },
     ],

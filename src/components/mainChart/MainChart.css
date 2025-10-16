@@ -1,7 +1,7 @@
 .contents-size-main-left {
   max-width: 800px;
   width: 100%;
-  margin: 20px auto;
+  margin: 0px auto;
 }
 
 .main-container {
@@ -38,11 +38,85 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   justify-content: center; /* 카드들을 중앙에 정렬 */
-  gap: 20px; /* 카드 사이의 간격 */
+  gap: 10px; /* 카드 사이의 간격 */
 }
 
 .chart-padding {
   padding-left: 20px;
   display: grid;
   grid-template-columns: auto;
+}
+
+/* 행동요령 */
+.main-guide-container {
+  margin: 20px;
+}
+
+.main-guide-tile {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.main-guide-card-continer {
+  max-width: 760px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  padding: 10px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main-guide-image {
+  padding-left: 30px;
+}
+
+.main-guide-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.main-guide-card-sub-title {
+  font-size: 15px;
+}
+
+.main-guide-sensitive-content, .main-guide-public-content {
+  font-size: 15px;
+  text-indent: 10px;
+  max-width: 300px;
+}
+
+.main-guide-button {
+  display: flex;
+  justify-content: end;
+}
+
+.main-button {
+  background-color: var(--clr-gy);
+  border-radius: 20px;
+  width: 150px;
+  text-align: center;
+}
+
+.main-button:hover {
+  cursor: pointer;
+}
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 800px) {
+
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* 모바일 화면에서 카드 간격 조정 */
+  }
+
+  .main-container {
+    flex-direction: column;
+  }
+
+  .chart-padding {
+    padding-left: 0;
+    padding-top: 20px;
+  }
 }
