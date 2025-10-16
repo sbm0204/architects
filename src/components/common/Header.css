@@ -44,7 +44,11 @@
   font-weight: 600;
   color: #fff;
   cursor: pointer;
-  text-decoration: none; 
+  text-decoration: none;
+
+  margin-bottom: 3px;
+  line-height: 1.1;           /* 나눔스퀘어 폰트 적용 시 행간을 조금 조여서 수직 중심 맞춤 */
+  transform: translateY(2px); /* 폰트가 위로 들리는 특성 보정 */
 }
 
 .nav-line {
@@ -56,7 +60,7 @@
   align-items: center; /* 세로 중앙 정렬 */
   justify-items: center; /* 가로 중앙 정렬 */
   height: 100%; /* 부모 높이와 동일하게 */
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   transform: translateY(2px); /* 시각적 보정 (글꼴별 미세 튀는 현상 방지) */
 }
 
@@ -180,10 +184,14 @@
 }
 
 .menu-item {
+  display: flex;              /* 글자 중앙정렬을 확실히 */
+  align-items: center;        /* 세로 중앙정렬 */
+  justify-content: flex-end;  /* 오른쪽 정렬 유지 */
+  height: 50px;
   width: 90%;
   padding-right: 15px;
-  padding-top : 4px; /* 글자 세로 중앙 정렬 위한 조처 */
-  padding-bottom: 8px;
+  padding-top : 1px; /* 글자 세로 중앙 정렬 위한 조처 */
+  padding-bottom: 1px; /* 글자 세로 중앙 정렬 위한 조처 */
   background: #fff;
   color: #1184ff;
   font-size: 30px;
@@ -192,6 +200,8 @@
   border-radius: 10px;
   cursor: pointer;
   text-decoration: none;
+  transform: translateY(2px); /* 나눔스퀘어의 위쪽 들림 보정 */
+  line-height: 1; /* 나눔스퀘어 글자 정렬 위한 line-height */
 }
 
 .menu-item:hover {
@@ -236,5 +246,29 @@
 
   .header-mobile {
     display: flex;
+  }
+}
+
+
+/* 세로 스크롤 발생 시, 네비게이션 메뉴 글자 가려짐 현상 해결(아래)*/
+
+/* 화면 폭 1200px 이하일 때 PC 헤더 네비게이션 간격 조정 */
+@media (max-width: 1200px) {
+  .header-nav {
+    gap: 25px; /* 기존 40px -> 25px로 줄임 */
+  }
+}
+
+/* 화면 폭 1100px 이하일 때 PC 헤더 네비게이션 간격 조정 */
+@media (max-width: 1100px) {
+  .header-nav {
+    gap: 15px; /* 기존 40px -> 15px로 줄임 */
+  }
+}
+
+/* 화면 폭 1050px 이하일 때 더 줄이는 것도 가능 */
+@media (max-width: 1050px) {
+  .header-nav {
+    gap: 8px; /* 기존 40px -> 8px로 줄임 */
   }
 }

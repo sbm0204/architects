@@ -1,0 +1,7 @@
+/* 나눔스퀘어 폰트 전체 자동 적용 */
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+/* 아래부터는 공통 스타일 */
+body {
+  font-family: 'NanumSquare', sans-serif;
+}
