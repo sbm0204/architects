@@ -5,7 +5,7 @@
     margin-right: auto;
 }
 
-/* -------------1. 로딩 상태 스타일------------- */
+/* -----------------1. 로딩 상태 스타일----------------- */
 .loading-state-container {
     text-align: center;
     padding: 30px;
@@ -32,7 +32,7 @@
     margin-top: 10px;
 }
 
-/* -------------1-1. API 오류 메세지 스타일------------- */
+/* -----------------1-1. API 오류 메세지 스타일----------------- */
 .error-message-box {
     padding: 30px;
     border: 1px solid var(--clr-r);
@@ -83,7 +83,7 @@
     background-color: var(--clr-dr); 
 }
 
-/* -------------2. 불러올 데이터가 없을 때 메세지 스타일------------- */
+/* -----------------2. 불러올 데이터가 없을 때 메세지 스타일----------------- */
 .empty-message-box {
     padding: 30px;
     border: 1px solid var(--clr-gy); 
@@ -100,7 +100,7 @@
     font-size: var(--fs-msg-body);
 }
 
-/* -------------3. 정상적으로 받아온 데이터로 만든 카드 스타일------------- */
+/* -----------------3. 정상적으로 받아온 데이터로 만든 카드 스타일----------------- */
 .title {
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
@@ -139,7 +139,7 @@
     margin-top: 40px; 
 }
 
-/* -------------4. 더 보기 / 끝 메세지 스타일------------- */
+/* -----------------4. 더 보기 / 끝 메세지 스타일----------------- */
 .load-more-btn {
     display: block;
     margin: 0 auto 50px auto;
