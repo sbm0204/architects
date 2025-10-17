@@ -4,7 +4,7 @@
   align-items: center;
   border: 1px solid #000;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 5px 0;
 }
 
 .card-title {
@@ -21,7 +21,7 @@
 
 .card-image {
   width: 54px;
-  height: 70px;
+  height: 65px;
 }
 
 .card-value {

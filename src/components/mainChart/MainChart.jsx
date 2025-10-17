@@ -22,9 +22,15 @@ function MainChart() {
   const moveGuide = () => {navigate('/guideLine')}
 
 
-  const [selectedRegion, setSelectedRegion] = useState(null);
-  const [selectedDistrict, setSelectedDistrict] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState('서울');
+  const [selectedDistrict, setSelectedDistrict] = useState('종로구');
   const [selectedStationData, setSelectedStationData] = useState(null);
+
+  // 기본값으로 서울, 종로구 데이터 불러오기
+  useEffect(() => {
+    dispatch(getMapList('서울'));
+    dispatch(getAirQuality({ stationName: '종로구' }));
+  }, []);
 
   // 화면 크기에 따른 상태 추가 (800px 기준으로 변경)
   const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 800px)').matches);
@@ -39,6 +45,17 @@ function MainChart() {
   }, []);
 
   const mapList = useSelector(state => state.mapAxio.mapList);
+
+  useEffect(() => {
+    if (mapList?.items && selectedRegion && selectedDistrict) {
+      const stationData = mapList.items.find(
+        (item) => item.sidoName === selectedRegion && item.stationName === selectedDistrict
+      );
+      if (stationData) {
+        setSelectedStationData(stationData);
+      }
+    }
+  }, [mapList, selectedRegion, selectedDistrict]);
   const sidoRegions = mapList?.items ? [...new Set(mapList.items.map(item => item.sidoName))] : [];
   const selectedItems = mapList?.items?.filter(val => val.sidoName === selectedRegion);
   const selectedStations = selectedItems?.map(item => item.stationName);
@@ -108,23 +125,23 @@ function MainChart() {
 
           {/* AirQuiltyCard && Chart 출력 */}
           <div className='main-container'>
-            <div className='main-head-container'>
-              <div className='dropdown-btn'>
-                <MainDropDown 
-                  title={selectedRegion || "지역"}
-                  options={sidoRegions} 
-                  onOptionSelect={handleRegionSelect} 
-                  />
-                <MainDropDown 
-                  title={selectedDistrict || "상세지역"}
-                  options={sortStations} 
-                  onOptionSelect={handleDistrictSelect}
-                  />
-              </div>
 
-              <div className="air-quality-section">
-                <h2 className="air-quality-title">오늘의 대기질</h2>
-              </div>
+              <div className='main-head-container'>
+                <div className="air-quality-section">
+                  <h2 className="air-quality-title">오늘의 대기질</h2>
+                </div>
+                <div className='dropdown-btn'>
+                  <MainDropDown 
+                    title={selectedRegion || "지역"}
+                    options={sidoRegions} 
+                    onOptionSelect={handleRegionSelect} 
+                    />
+                  <MainDropDown 
+                    title={selectedDistrict || "상세지역"}
+                    options={sortStations} 
+                    onOptionSelect={handleDistrictSelect}
+                    />
+                </div>
                 <div className="card-container">
                   {airQualityData.map((data, index) => (
                     <AirQualityCard 
@@ -135,14 +152,15 @@ function MainChart() {
                     unit={data.unit}
                     />
                   ))}
-                  </div>
-            </div>
+                </div>
+              </div>
             <div className='chart-padding'>
               {selectedStationData ? (
                 isMobile ? <AirBarChart /> : <AirLineChart />
               ) : (
-                <div className="chart-placeholder" style={{ textAlign: 'center', padding: '20px', color: '#888' }}>
-                  <p>상세지역을 선택하시면 시간대별 대기질 현황을 볼 수 있습니다.</p>
+                <div className="chart-placeholder">
+                  <p>✅ 상세지역 선택 시</p>
+                  <p>대기질 현황 확인</p>
                 </div>
               )}
             </div>
@@ -151,19 +169,21 @@ function MainChart() {
           {/* 행동요령 간단하게 출력 */}
           <div className='main-guide-container'>
             <h1 className='main-guide-tile'>행동 요령</h1>
-                  <div className='main-guide-card-continer'>
+                  <div className='main-guide-card-container'>
                     <div>
                         <img src={statusImage} alt="" className='main-guide-image' />
                     </div>
                     <div className='main-guide-card'>
                       <div className='main-guide-card-sensitive'>
                         <p className='main-guide-card-sub-title'>민감군</p>
-                        <p className='main-guide-sensitive-content'>
-                          {textJsondata && textJsondata.sensitive[0]}
-                        </p>
-                        <p className='main-guide-sensitive-content'>
-                          {textJsondata && textJsondata.sensitive[1]}
-                        </p>
+                        <div className='line-clamp-1'>
+                          <p className='main-guide-sensitive-content'>
+                            {textJsondata && textJsondata.sensitive[0]}
+                          </p>
+                          <p className='main-guide-sensitive-content'>
+                            {textJsondata && textJsondata.sensitive[1]}
+                          </p>
+                        </div>
                       </div>
                         <hr className='line'/>
                       <div>

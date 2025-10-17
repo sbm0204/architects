@@ -13,12 +13,16 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .main-head-container {
   max-width: 530px;
   width: 100%;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .dropdown-btn {
@@ -29,12 +33,11 @@
 /* 오늘의 대기질 섹션 */
 .air-quality-section {
   width: 100%;
-  margin-top: 5px;
 }
 
 .air-quality-title {
-  font-size: 25px; /* 요청된 폰트 사이즈 */
-  font-weight: bold;
+  font-size: 30px; /* 요청된 폰트 사이즈 */
+  font-weight: 900;
   margin-bottom: 20px;
 }
 
@@ -52,17 +55,24 @@
   grid-template-columns: auto;
 }
 
+.chart-placeholder {
+  padding: 180px 20px 20px 20px;
+  color: #888;
+}
+
 /* 행동요령 */
 .main-guide-container {
-  margin: 20px;
+  padding: 10px;
 }
 
 .main-guide-tile {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 900;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 
-.main-guide-card-continer {
+.main-guide-card-container {
   max-width: 760px;
   border: 1px solid #000;
   border-radius: 20px;
@@ -123,6 +133,7 @@
   }
   .card-container {
     grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
     gap: 10px; /* 모바일 화면에서 카드 간격 조정 */
   }
 
@@ -134,5 +145,9 @@
   .chart-padding {
     padding-left: 0;
     padding-top: 20px;
+  }
+  
+  .chart-placeholder {
+    padding: 20px;
   }
 }

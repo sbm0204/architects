@@ -4,6 +4,12 @@
   margin: 0px auto;
 }
 
+.main-map-title {
+  font-size: 30px;
+  font-weight: 900;
+  padding-bottom: 10px;
+}
+
 .main-contents {
   text-align: center;
 }
