@@ -15,9 +15,9 @@ function Main() {
   return (
     <>
       <div className="main-display">
-        <div>
+        
         <MainChart />
-        </div>
+        
         <MainMap />
       </div>
     </>

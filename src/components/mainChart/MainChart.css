@@ -18,6 +18,7 @@
 .main-head-container {
   max-width: 530px;
   width: 100%;
+  padding: 10px;
 }
 
 .dropdown-btn {
@@ -105,8 +106,10 @@
 .main-button {
   background-color: var(--clr-gy);
   border-radius: 20px;
-  width: 150px;
+  width: 100px;
   text-align: center;
+  font-size: 10px;
+  line-height: 20px;
 }
 
 .main-button:hover {
@@ -116,7 +119,7 @@
 /* 모바일 반응형 스타일 */
 @media (max-width: 800px) {
   .contents-size-main-left {
-    margin: 20px auto;
+    margin: 0;
   }
   .card-container {
     grid-template-columns: repeat(3, 1fr);
