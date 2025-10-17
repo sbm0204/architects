@@ -5,7 +5,7 @@ function GuideLine() {
 
   return (
     <div className='contents-size'>
-      <h1 className="guide-header sub-title">미세먼지 등급 및 행동요령</h1>
+      <h1 className="guide-header sub-title">행동요령</h1>
 
       <div className="guide-line-container">
 

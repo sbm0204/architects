@@ -2,7 +2,6 @@
   max-width: 800px;
   width: 100%;
   min-height: 720px;
-  margin: 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,7 +26,7 @@
 
 .dropdown-btn {
   display: flex;
-  gap: 10px;
+  gap: 90px;
 }
 
 /* 오늘의 대기질 섹션 */
@@ -38,6 +37,7 @@
 .air-quality-title {
   font-size: 30px; /* 요청된 폰트 사이즈 */
   font-weight: 900;
+  margin-top: 55px;
   margin-bottom: 20px;
 }
 
@@ -83,24 +83,36 @@
 }
 
 .main-guide-image {
-  padding-left: 30px;
+  padding-left: 15px;
 }
 
 .main-guide-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  /* flex-direction: row;
+  justify-content: space-around; */
+  grid-template-columns: 1fr 2px 1fr;
+  gap: 10px;
+}
+
+.main-guide-card-sensitive, .main-guide-card-public {
+  line-height: 30px;
+  padding: 20px;
 }
 
 .main-guide-card-sub-title {
   font-size: 15px;
+  font-weight: 900;
+}
+
+.main-guide-sensitive-content-box, .main-guide-public-content-box {
+  padding: 20px;
 }
 
 .main-guide-sensitive-content, .main-guide-public-content {
   font-size: 15px;
-  text-indent: 10px;
   max-width: 300px;
   overflow: hidden;
+  text-align: left;
 
   /* 1줄 이상 넘어가면 ...으로 처리 */
   display: -webkit-box;

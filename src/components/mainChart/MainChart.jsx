@@ -176,24 +176,26 @@ function MainChart() {
                     <div className='main-guide-card'>
                       <div className='main-guide-card-sensitive'>
                         <p className='main-guide-card-sub-title'>민감군</p>
-                        <div className='line-clamp-1'>
-                          <p className='main-guide-sensitive-content'>
+                        <div className='main-guide-sensitive-content-box'>
+                          <div className='main-guide-sensitive-content'>
                             {textJsondata && textJsondata.sensitive[0]}
-                          </p>
-                          <p className='main-guide-sensitive-content'>
+                          </div>
+                          <div className='main-guide-sensitive-content'>
                             {textJsondata && textJsondata.sensitive[1]}
-                          </p>
+                          </div>
                         </div>
                       </div>
-                        <hr className='line'/>
-                      <div>
+                      <hr className='line'/>
+                      <div className='main-guide-card-public'>
                         <p className='main-guide-card-sub-title'>일반군</p>
-                        <p className='main-guide-public-content'>
-                          {textJsondata && textJsondata.public[0]}
-                        </p>
-                        <p className='main-guide-public-content'>
-                          {textJsondata && textJsondata.public[1]}
-                        </p>
+                        <div className='main-guide-public-content-box'>
+                          <div className='main-guide-public-content'>
+                            {textJsondata && textJsondata.public[0]}
+                          </div>
+                          <div className='main-guide-public-content'>
+                            {textJsondata && textJsondata.public[1]}
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className='main-guide-button'>

@@ -1,13 +1,13 @@
 .service-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .service-title {
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
-  margin: 30px;
+  margin: 85px 20px 0;
   text-align: left;
 }
 
@@ -26,7 +26,7 @@
 
 .desktop-text-box {
   flex: 1;
-  padding-bottom: 200px;
+  padding-bottom: 150px;
 }
 
 .underline {
