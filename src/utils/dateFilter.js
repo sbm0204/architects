@@ -13,7 +13,7 @@ dayjs.extend(isSameOrBefore);
  */
 export function getRecentOneMonthData(allData) {
     const today = dayjs().startOf('day')
-    const oneMonthAgo = today.subtract(1, 'month').startOf('day');
+    const oneMonthAgo = today.subtract(2, 'month').startOf('day');
     
     const filteredData = allData.filter(item => {
         const itemDate = dayjs(item.issueDate).startOf('day');

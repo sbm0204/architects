@@ -40,13 +40,13 @@ const AlertStatusCards = ({ item }) => {
                 <div className="alert-status-card-districtName">{districtName}</div> 
                 <div className="alert-status-card-contents">
                     <div className="alert-status-card-label"> 
-                        <p>🚨발령: {issueVal}{unit} [{issueLevelInfo.label}]</p>
+                        <p>🚨 발령 : {issueVal}{unit} [{issueLevelInfo.label}]</p>
                         <p>{issueDateTime}</p>
                     </div>
                     
                     {hasClearInfo && (
                         <div className="alert-status-card-label"> 
-                            <p>✅해제: {clearVal}{unit} [{clearLevelInfo.label}]</p>
+                            <p>✅ 해제 : {clearVal}{unit} [{clearLevelInfo.label}]</p>
                             <p>{clearDateTimeFormatted}</p>
                         </div>
                     )}

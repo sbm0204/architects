@@ -72,7 +72,7 @@ const AlertStatus = () => {
                     )}
 
 {/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}                    
-                    {!isListEmpty && <h1 className="title">미세먼지 경보 현황</h1>}
+                    {!isListEmpty && <h1 className="title">미세먼지 경보</h1>}
                     <div className="cards-wrapper">
                         {displayedAlerts.map((alert, index) => (
                             <AlertStatusCards key={index} item={alert} /> 

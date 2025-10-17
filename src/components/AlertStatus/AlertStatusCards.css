@@ -21,7 +21,9 @@
   display: flex; 
   flex-direction: column;
   gap: 20px; 
-  }
+  line-height: 2;
+  letter-spacing: 0.5px;
+}
 
 .alert-status-card-contents p {
   margin: 0;
