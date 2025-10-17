@@ -1,7 +1,11 @@
 .contents-size-main-left {
   max-width: 800px;
   width: 100%;
-  margin: 0px auto;
+  min-height: 720px;
+  margin: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .main-container {
@@ -85,6 +89,12 @@
   font-size: 15px;
   text-indent: 10px;
   max-width: 300px;
+  overflow: hidden;
+
+  /* 1줄 이상 넘어가면 ...으로 처리 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .main-guide-button {
@@ -105,7 +115,9 @@
 
 /* 모바일 반응형 스타일 */
 @media (max-width: 800px) {
-
+  .contents-size-main-left {
+    margin: 20px auto;
+  }
   .card-container {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px; /* 모바일 화면에서 카드 간격 조정 */
@@ -113,6 +125,7 @@
 
   .main-container {
     flex-direction: column;
+    align-items: center;
   }
 
   .chart-padding {

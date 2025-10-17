@@ -1,4 +1,15 @@
 .main-display {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 9fr 5fr;
+  max-width: 1400px;
+  margin: 20px auto;
+  gap: 20px;
+}
+
+@media (max-width: 800px) {
+  .main-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

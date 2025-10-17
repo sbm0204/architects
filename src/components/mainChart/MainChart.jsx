@@ -85,7 +85,7 @@ function MainChart() {
 
   const airQualityDataPM10 = selectedStationData ? selectedStationData.pm10Value : null; 
   const levelLabel =  getDustLevel(airQualityDataPM10, 'PM10').label
-  const statusImage = statusImages[levelLabel] || caution; 
+  const statusImage = airQualityDataPM10 ? statusImages[levelLabel] : caution; 
   
   const textJson = (val) => {
   if (val === dustJson.good.status) {
@@ -100,13 +100,13 @@ function MainChart() {
     return dustJson.noneData
   }
 }
-  const textJsondata = textJson(levelLabel)
+  const textJsondata = airQualityDataPM10 ? textJson(levelLabel) : dustJson.noneData;
+
 
   return (
       <div className='contents-size-main-left'>
-        <div>
 
-
+          {/* AirQuiltyCard && Chart 출력 */}
           <div className='main-container'>
             <div className='main-head-container'>
               <div className='dropdown-btn'>
@@ -147,7 +147,8 @@ function MainChart() {
               )}
             </div>
           </div>
-
+          
+          {/* 행동요령 간단하게 출력 */}
           <div className='main-guide-container'>
             <h1 className='main-guide-tile'>행동 요령</h1>
                   <div className='main-guide-card-continer'>
@@ -181,7 +182,6 @@ function MainChart() {
                   </div>
           </div>
             
-        </div>
       </div>
   )
 }
