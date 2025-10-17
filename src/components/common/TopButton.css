@@ -1,0 +1,17 @@
+.top-btn {
+  background-image: url(../../assets/topbtn.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  width: 72px;
+  height: 72px;
+}
+
+@media (max-width: 800px) {
+  .top-btn {
+    width: 45px;
+    height: 45px;
+  }
+}
