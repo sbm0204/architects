@@ -1,21 +1,29 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react'; // useMemo를 사용하여 그룹화 로직 최적화
 import { alertStatusIndex } from '../../store/thunks/alertStatusThunk.js'; 
 import { loadMoreAlerts } from '../../store/slices/alertStatusSlice.js'; 
 import AlertStatusCards from './AlertStatusCards.jsx';
 import './AlertStatus.css';
+import { getTodayDate } from '../../utils/dateFilter.js';
+import { groupAlertsByDateAndDistrict } from '../../utils/dataGroupingLogic.js'; // ⬅️ 그룹화 함수 import 가정
 
 const AlertStatus = () => {
     const dispatch = useDispatch(); 
     
     const { 
         list, 
-        currentView: displayedAlerts, 
+        currentView: displayedAlerts, // 원본 API 응답의 개별 항목 리스트
         loading: reduxLoading, 
         noMoreApiData, 
         noMoreViewData, 
         error
     } = useSelector(state => state.alertStatus); 
+
+    // 💡 핵심 추가 로직: displayedAlerts(개별 항목)를 그룹화 (dataDate, districtName 기준)
+    const groupedAlerts = useMemo(() => {
+        // Redux 상태가 변경될 때만 그룹화 로직을 다시 실행하여 성능 최적화
+        return groupAlertsByDateAndDistrict(displayedAlerts);
+    }, [displayedAlerts]);
 
     const isFinishedLoadingAllData = !reduxLoading && noMoreApiData && noMoreViewData;
 
@@ -34,8 +42,11 @@ const AlertStatus = () => {
         }
     };
 
+    // 렌더링에 사용되는 데이터는 그룹화된 데이터 (groupedAlerts)
+    const isListEmpty = !reduxLoading && groupedAlerts.length === 0 && noMoreApiData; 
     const hasMoreDataToShow = !noMoreViewData || !noMoreApiData; 
-    const isListEmpty = !reduxLoading && displayedAlerts.length === 0 && noMoreApiData;
+
+    const today = getTodayDate();
 
     return (
         <div className="alerts-container">
@@ -71,11 +82,20 @@ const AlertStatus = () => {
                         </div>
                     )}
 
-{/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}                    
-                    {!isListEmpty && <h1 className="title">미세먼지 경보</h1>}
+{/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}
+                    {!isListEmpty && 
+                    <div className="title-area">
+                        <h1 className="title">미세먼지 경보</h1>
+                        <div className="title-detail">({today} 기준 최근 1개월 특보 현황)</div>
+                    </div>}
+                    
                     <div className="cards-wrapper">
-                        {displayedAlerts.map((alert, index) => (
-                            <AlertStatusCards key={index} item={alert} /> 
+                        {/* 💡 변경: 그룹화된 데이터를 순회하며, groupedAlert props로 전달 */}
+                        {groupedAlerts.map((group, index) => (
+                            <AlertStatusCards 
+                                key={`${group.dataDate}-${group.districtName}`} 
+                                groupedAlert={group} // ⬅️ 변경: group 객체를 전달
+                            /> 
                         ))}
                     </div>
 
@@ -90,7 +110,7 @@ const AlertStatus = () => {
                                 {reduxLoading ? '데이터 로딩 중...' : '더 보기'}
                             </button>
                         ) : (
-                            isFinishedLoadingAllData  && displayedAlerts.length > 0 &&
+                            isFinishedLoadingAllData  && groupedAlerts.length > 0 && // ⬅️ length 체크도 groupedAlerts로 변경
                                <p className="end-message">
                                 ✅ 최근 미세먼지 발령 내역 불러오기 완료
                                </p>

@@ -1,63 +1,141 @@
+/* ============================================================= */
+/* 1. 메인 카드 및 레이아웃 (높이 고정) */
+/* ============================================================= */
 .alert-status-card {
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  background-color: var(--clr-wh);
-  border: 1px solid var(--clr-bk);
-  padding: 20px;
+    /* 높이 고정 (필수) */
+    height: 300px; 
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr-wh);
+    border: 1px solid var(--clr-bk);
+    padding: 20px;
+    overflow: hidden; /* 내부 내용이 넘치더라도 카드 밖으로 나가지 않도록 설정 */
+}
+
+/* ============================================================= */
+/* 2. 카드 헤더 및 제목 영역 (스크롤되지 않는 상단) */
+/* ============================================================= */
+.alert-status-card-header {
+    /* 뱃지 위치를 위한 Flex 설정 */
+    display: flex;
+    justify-content: flex-end; /* 뱃지를 오른쪽 끝으로 */
+    align-items: center;
+    padding-bottom: 5px;
+    flex-shrink: 0; /* 스크롤 되지 않도록 고정 */
+}
+
+.alert-status-card-title-area {
+    /* 지역 이름과 날짜 영역 */
+    flex-shrink: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--clr-gy); /* 구분선 추가 */
 }
 
 .alert-status-card-districtName {
-  color: var(--clr-bk);
-  font-size: var(--fs-cnt-title);
-  font-weight: var(--fw-bold);
-  text-align: center;
-  padding: 10px;
-  border-bottom: solid 1px var(--clr-gy);
+    /* 인천, 서울 등 지역 이름 */
+    color: var(--clr-bk);
+    font-size: var(--fs-cnt-title); /* 크기 유지를 위해 변수 사용 */
+    font-weight: var(--fw-bold);
+    text-align: left; /* 왼쪽 정렬 */
+    margin: 0;
 }
 
-.alert-status-card-contents {
-  display: flex; 
-  flex-direction: column;
-  gap: 20px; 
-  line-height: 2;
-  letter-spacing: 0.5px;
+.alert-status-card-date {
+    /* 2025-01-05 등 날짜 */
+    color: var(--clr-dg);
+    font-size: 16px;
+    text-align: left;
+    margin: 5px 0 0 0;
 }
 
-.alert-status-card-contents p {
-  margin: 0;
+
+/* ============================================================= */
+/* 3. 스크롤 가능한 내용 영역 (핵심!) */
+/* ============================================================= */
+.alert-status-card-scroll-contents {
+    flex-grow: 1; /* 남은 세로 공간을 모두 차지 */
+    overflow-y: auto; /* 내용이 넘칠 때만 스크롤바 표시 */
+    padding-right: 15px; /* 스크롤바 때문에 내용이 가려지지 않도록 패딩 부여 */
+    /* 기존의 alert-status-card-contents 스타일을 이 곳으로 대체 */
+    display: flex; 
+    flex-direction: column;
+    gap: 15px; /* 각 그룹 아이템 사이의 간격 */
+    line-height: 1.5;
 }
 
-.alert-status-card-contents > div {
-  font-size: var(--fs-cnt-body);
-  text-align: left;
-  color: var(--clr-bk);
+/* ============================================================= */
+/* 4. 내부 상세 항목 (AlertDetailItem) */
+/* ============================================================= */
+.alert-detail-item {
+    padding: 5px 0;
+    font-size: var(--fs-cnt-body);
+    color: var(--clr-bk);
 }
 
+.alert-detail-moveName {
+    /* (영종·영흥권역) */
+    font-weight: var(--fw-bold);
+    font-size: 15px;
+    color: var(--clr-dg);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.alert-detail-info {
+    padding-left: 15px;
+    padding-bottom: 5px;
+}
+
+.alert-detail-value {
+    font-weight: var(--fw-bold);
+}
+
+.alert-detail-time {
+    font-size: 0.9em;
+    color: var(--clr-dg);
+}
+
+.level-tag {
+    /* 등급 (매우나쁨, 보통) 뱃지 스타일 */
+    font-size: 0.8em;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+    font-weight: var(--fw-bold);
+    display: inline-block;
+}
+
+/* ============================================================= */
+/* 5. 뱃지 및 색상 */
+/* ============================================================= */
 .alert-status-card-issueGbn {
-  display: block;
-  width: 100%;
-  border-radius: 20px;
-  text-align: center;
-  padding: 15px;
-  font-size: var(--fs-cnt-sub);
-  font-weight: var(--fw-bold);
+    /* 뱃지 (주의보/경보) */
+    display: block;
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 40px; /* 수직 중앙 정렬 */
+    font-size: 20px;
+    font-weight: var(--fw-bold);
+    flex-shrink: 0;
 }
 
 .badge-warning {
-  background-color: var(--clr-y); 
-  color: var(--clr-bk); 
+    background-color: var(--clr-y); 
+    color: var(--clr-bk); 
 }
 
 .badge-danger {
-  background-color: var(--clr-r);
-  color: var(--clr-wh);
+    background-color: var(--clr-r);
+    color: var(--clr-wh);
 }
 
 .badge-default {
-  background-color: var(--clr-dg); 
-  color: var(--clr-wh);
+    background-color: var(--clr-dg); 
+    color: var(--clr-wh);
 }
 
 
