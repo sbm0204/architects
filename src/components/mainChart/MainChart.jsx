@@ -13,18 +13,27 @@ import bad from '../../assets/bad.png';
 import veryBad from '../../assets/very-bad.png';
 import caution from '../../assets/Caution.png';
 import { getDustLevel } from '../../utils/getDustLevel.js';
+import { getTodayDate } from '../../utils/dateFilter.js';
 import dustJson from '../../configs/guide-data.js';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 function MainChart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const moveGuide = () => {navigate('/guideLine')}
 
+  const todayDate = getTodayDate();
+  const currentHour = dayjs().format('HH');
 
   const [selectedRegion, setSelectedRegion] = useState('서울');
   const [selectedDistrict, setSelectedDistrict] = useState('종로구');
   const [selectedStationData, setSelectedStationData] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState(null); // 'region', 'district', or null
+
+  const handleToggleDropdown = (dropdownName) => {
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
+  };
 
   // 기본값으로 서울, 종로구 데이터 불러오기
   useEffect(() => {
@@ -127,19 +136,26 @@ function MainChart() {
           <div className='main-container'>
 
               <div className='main-head-container'>
-                <div className="air-quality-section">
-                  <h2 className="air-quality-title">오늘의 대기질</h2>
+                <div className="air-quality-section" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <p style={{ fontSize: '30px', fontWeight: '900', flexShrink: 0 }}>오늘의 대기질</p>
+                  <span style={{ fontSize: '18px', fontWeight: 'bold', flexShrink: 0, marginTop: '5px' }}>{todayDate} {currentHour}시</span>
                 </div>
                 <div className='dropdown-btn'>
                   <MainDropDown 
                     title={selectedRegion || "지역"}
                     options={sidoRegions} 
                     onOptionSelect={handleRegionSelect} 
+                    variant="region"
+                    isOpen={openDropdown === 'region'}
+                    toggleDropdown={() => handleToggleDropdown('region')}
                     />
                   <MainDropDown 
                     title={selectedDistrict || "상세지역"}
                     options={sortStations} 
                     onOptionSelect={handleDistrictSelect}
+                    variant="district"
+                    isOpen={openDropdown === 'district'}
+                    toggleDropdown={() => handleToggleDropdown('district')}
                     />
                 </div>
                 <div className="card-container">

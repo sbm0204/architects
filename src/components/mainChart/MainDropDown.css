@@ -2,6 +2,7 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .dropdown-title {
@@ -26,8 +27,7 @@
 .dropdown-content {
   position: absolute;
   background-color: #66c6ff;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  min-width: 150px; /* 최소 너비 증가 */
   z-index: 1;
   display: block; /* 기본적으로 표시되도록 */
   max-height: 240px;
@@ -42,9 +42,28 @@
   text-align: center;
   display: block;
   transition: background-color 0.3s ease; /* 마우스 오버 시 색상 변경 효과 */
+  word-break: keep-all; /* 단어 중간 끊김 방지 */
 }
 
 /* 드롭다운 항목에 마우스를 올렸을 때 */
 .dropdown-content a:hover {
   background-color: #000; /* 배경 색상 변경 */
+}
+
+/* 지역 드롭다운 콘텐츠에 대한 추가 스타일 */
+.dropdown-region .dropdown-content {
+  width: 100%;
+  min-width: auto; /* 기본 min-width를 무시하고 너비를 버튼에 맞춤 */
+  box-sizing: border-box;
+}
+
+/* 상세지역 드롭다운에 대한 추가 스타일 */
+.dropdown-district {
+  width: 150px; /* 버튼 자체의 고정 너비 */
+}
+
+.dropdown-district .dropdown-content {
+  width: 100%; /* 버튼 너비에 맞춤 */
+  min-width: auto; /* 기본 min-width 무시 */
+  box-sizing: border-box;
 }

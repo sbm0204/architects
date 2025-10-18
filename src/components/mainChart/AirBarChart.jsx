@@ -31,11 +31,15 @@ function AirBarChart() {
         position: 'bottom',
       },
     },
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
+    layout: {
+      padding: {
+        top: 30
+      }
     },
+    scales: {
+            y: {
+              beginAtZero: true
+            },    },
   };
 
   // 로딩, 실패, 초기 상태 처리
@@ -73,6 +77,7 @@ function AirBarChart() {
 
   return (
     <div style={{ position: 'relative', width: '80vw', height: '25vh' }}>
+      <div style={{ position: 'absolute', top: '-5px', left: '0', fontSize: '12px', color: '#666' }}>µg/m³</div>
       <Bar options={options} data={data} />
     </div>
   );

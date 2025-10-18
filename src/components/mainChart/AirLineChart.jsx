@@ -36,12 +36,19 @@ function AirLineChart() {
           display: false,
         },
       },
-    },
+            y: {
+              
+            }    },
     plugins: {
       legend: {
         display: false, 
       },
     },
+    layout: {
+      padding: {
+        top: 30
+      }
+    }
   };
 
   // 로딩 및 에러, 초기 상태 처리
@@ -87,18 +94,16 @@ function AirLineChart() {
     <div>
       <div>
         <p style={{fontSize:'25px', fontWeight:'600'}}>미세먼지</p>
-        <div style={{display:'flex'}}>
-          <div style={{ position:'relative', width: '14vw', height: '20vh' }}>
-            <Line options={options} data={pm10Data} />
-          </div>
+        <div style={{position: 'relative', width: '14vw', height: '20vh', marginTop: '10px'}}>
+          <div style={{ position: 'absolute', top: '-5px', left: '0', fontSize: '12px', color: '#666' }}>µg/m³</div>
+          <Line options={options} data={pm10Data} />
         </div>
       </div>
       <div>
         <p style={{fontSize: '25px', fontWeight:'600'}}>초미세먼지</p>
-        <div style={{display:'flex'}}>
-          <div style={{ position:'relative', width: '14vw', height: '20vh' }}>
-            <Line options={options} data={pm25Data}></Line>
-          </div>
+        <div style={{position: 'relative', width: '14vw', height: '20vh', marginTop: '10px'}}>
+          <div style={{ position: 'absolute', top: '-5px', left: '0', fontSize: '12px', color: '#666' }}>µg/m³</div>
+          <Line options={options} data={pm25Data}></Line>
         </div>
       </div>
     </div>
