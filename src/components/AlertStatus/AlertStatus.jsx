@@ -62,16 +62,16 @@ const AlertStatus = () => {
             {!reduxLoading && error && (
               <div className="error-message-box">
                 <h1 className="error-message-title">⚠️ 데이터 로드 실패</h1>
-                <p className="error-message-text">오류 발생. 다시 시도해 주세요. </p>
+                <p className="error-message-text">오류 발생 - 다시 시도해 주세요. </p>
                 <p className="error-message-detail">오류 상태: {error}</p>
-                <botton 
+                <button 
                     onClick={() => dispatch(alertStatusIndex())}
-                    className="retry-btn">다시 시도</botton>
+                    className="retry-btn">다시 시도</button>
               </div>
             )}
             
 {/* 1-2. 로딩이 끝나고 정상 데이터를 렌더링하는 코드 시작------------------------------------------------------- */}
-            {!reduxLoading && (
+            {!reduxLoading && !error && (
                 <>
 {/* 2. 데이터 없음 UI-------------------------------------------------------------------------------------- */}
                     {isListEmpty && (
@@ -91,7 +91,7 @@ const AlertStatus = () => {
                     
                     <div className="cards-wrapper">
                         {/* 💡 변경: 그룹화된 데이터를 순회하며, groupedAlert props로 전달 */}
-                        {groupedAlerts.map((group, index) => (
+                        {groupedAlerts.map(( group ) => (
                             <AlertStatusCards 
                                 key={`${group.dataDate}-${group.districtName}`} 
                                 groupedAlert={group} // ⬅️ 변경: group 객체를 전달

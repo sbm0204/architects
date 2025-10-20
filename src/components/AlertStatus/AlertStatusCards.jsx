@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { getDustLevel, DUST_UNITS } from '../../utils/getDustLevel.js';
+import { DUST_UNITS } from '../../utils/getDustLevel.js';
 import './AlertStatusCards.css';
 
 dayjs.locale('ko');
@@ -9,15 +9,11 @@ dayjs.locale('ko');
 // ----------------------------------------------------------------------
 const AlertDetailItem = ({ alert }) => {
     const {
-        issueGbn,
         issueVal, clearVal,
         issueDate, issueTime, 
         clearDate, clearTime, 
         itemCode, moveName, // moveName을 그룹 내부에서 표시
     } = alert;
-
-    // const issueLevelInfo = getDustLevel(issueVal, itemCode);
-    // const clearLevelInfo = getDustLevel(clearVal, itemCode);
 
     // 날짜는 상위 카드에서 이미 표시되므로, 시간만 추출
     const issueTimeOnly = dayjs(`${issueDate} ${issueTime}`, 'YYYY-MM-DD HH:mm').format('A h시');
@@ -40,7 +36,6 @@ const AlertDetailItem = ({ alert }) => {
                 <p className="alert-detail-value">
                     <span className="icon-alert">🚨 발령</span>: 
                     <span className="value-text">{issueVal}{unit} </span> 
-                    {/* <span className={`level-tag level-${issueLevelInfo.color}`}>[{issueLevelInfo.label}]</span> */}
                 <span className="alert-detail-time">{issueTimeOnly}</span> 
                 </p>
             </div>
@@ -51,7 +46,6 @@ const AlertDetailItem = ({ alert }) => {
                     <p className="alert-detail-value">
                         <span className="icon-clear">✅ 해제</span>: 
                         <span className="value-text">{clearVal}{unit} </span>
-                        {/* <span className={`level-tag level-${clearLevelInfo.color}`}>[{clearLevelInfo.label}]</span> */}
                     <span className="alert-detail-time">{clearTimeOnly}</span>
                     </p>
                 </div>
@@ -70,6 +64,8 @@ const AlertDetailItem = ({ alert }) => {
 const AlertStatusCards = ({ groupedAlert }) => { 
     // groupedAlert는 { dataDate: '...', districtName: '...', alerts: [...] } 구조
     const { dataDate, districtName, alerts } = groupedAlert;
+
+    const formattedDate = dayjs(dataDate, 'YYYY-MM-DD').format('YYYY.MM.DD');
 
     // 카드의 대표 정보: 가장 최신 또는 중요한 항목의 issueGbn 사용 (경보 > 주의보 우선)
     const representativeAlert = alerts[0]; 
@@ -94,7 +90,7 @@ const AlertStatusCards = ({ groupedAlert }) => {
 
             <div className="alert-status-card-title-area">
                 <h2 className="alert-status-card-districtName">{districtName}</h2>
-                <p className="alert-status-card-date">{dataDate}</p>
+                <p className="alert-status-card-date">{formattedDate}</p>
             </div>
 
             {/* 2. 카드 내용: 스크롤 영역 (핵심) */}

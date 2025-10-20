@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { alertStatusIndex } from '../thunks/alertStatusThunk.js';
 import { processAlertData } from '../../utils/alertDataProcessor.js';
 
-const ITEMS_PER_PAGE = 8;
-const ITEMS_TO_LOAD = 4;
+const ITEMS_PER_PAGE = 10;
+const ITEMS_TO_LOAD = 10;
 
 const initialState = {
     list: [], 

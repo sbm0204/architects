@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { getRecentOneMonthData } from './dateFilter.js';
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 10;
 
 export function processAlertData(list) {
     // 1. 최근 1개월 데이터 필터링

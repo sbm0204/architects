@@ -3,7 +3,7 @@
 /* ============================================================= */
 .alert-status-card {
     /* 높이 고정 (필수) */
-    height: 300px; 
+    height: 280px; 
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,6 @@
 .alert-status-card-title-area {
     /* 지역 이름과 날짜 영역 */
     flex-shrink: 0;
-    margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--clr-gy); /* 구분선 추가 */
 }
@@ -63,13 +62,13 @@
     flex-direction: column;
     gap: 15px; /* 각 그룹 아이템 사이의 간격 */
     line-height: 1.5;
+    padding-top: 20px;
 }
 
 /* ============================================================= */
 /* 4. 내부 상세 항목 (AlertDetailItem) */
 /* ============================================================= */
 .alert-detail-item {
-    padding: 5px 0;
     font-size: var(--fs-cnt-body);
     color: var(--clr-bk);
 }
@@ -79,13 +78,13 @@
     font-weight: var(--fw-bold);
     font-size: 15px;
     color: var(--clr-dg);
-    margin-bottom: 5px;
+    padding-bottom: 10px;
     display: block;
 }
 
 .alert-detail-info {
     padding-left: 15px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .alert-detail-value {

@@ -52,11 +52,13 @@
 
 .error-message-detail {
     color: var(--clr-bk);
-    font-size: var(--fs-msg-body);
+    font-size: 15px;
+    width: 180px;
     margin-bottom: 25px;
     padding: 10px;
     background-color: var(--clr-gy);
     border-radius: 20px;
+    justify-self: center;
 }
 
 .retry-btn {
