@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './MainDropDown.css';
 
 function MainDropDown({ title, options, onOptionSelect, variant, isOpen, toggleDropdown }) {

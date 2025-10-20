@@ -1,6 +1,6 @@
 import './MainMap.css';
 import { useState } from 'react';
-import { Map, Polygon, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { Map, Polygon, useKakaoLoader, MapInfoWindow } from 'react-kakao-maps-sdk';
 import sido from '../../configs/sido.json';
 import proj4 from 'proj4';
 import { useSelector } from 'react-redux';
@@ -16,6 +16,8 @@ function MainMap() {
   });
 
   const [map, setMap] = useState(null); // 카카오 맵 인스턴스
+  const [mousePosition, setMousePosition] = useState({ lat: 0, lng: 0 }); // 마우스 위치
+  const [hoveredPolygon, setHoveredPolygon] = useState(null); // 호버된 폴리곤
   const geoJsonData = sido; // 불러온 GeoJSON 데이터 
   const [polygonList, setPolygonList] = useState([]); // 폴리곤 리스트
 
@@ -61,71 +63,69 @@ function MainMap() {
     // --- 지도에 다각형을 그리는 Effect ---
     // GeoJSON 데이터가 준비되면 다각형을 그립니다.
     if (map && geoJsonData && polygonList.length === 0 ) {
-      // 아래 부분에서 미세먼지 데이터와 geoJsonData를 조합하여 지역별 색상을 결정할 수 있다.
-  
-      let polygonListTmp = []; // 폴리곤 임시 저장 배열
+      let polygonListTmp = [];
       let opacity = 0.4;
-  
-      geoJsonData.features.forEach(features => {
-        // 나중에 여기서 feature.properties.name_eng (지역명)과 미세먼지 데이터를 비교하여 색상을 결정.
-        
-        const regionName = features.properties.CTP_KOR_NM;
-        
-        const idx = sidoList.indexOf(regionName);
-        const geometry = features.geometry;
-        if(regionName === '광주') {
-          return;
-        }
-        
-        // 다각형으로 테두리 그리는 함수
-        if (geometry.type === 'Polygon') {
-          geometry.coordinates.forEach(ring => {
-            const path = ring.map(coord => {
-              const [lon, lat] = proj4(utmk, wgs84, coord);
-              const latlng =  new window.kakao.maps.LatLng(lat, lon);
-              return {lat: latlng.Ma, lng: latlng.La};
-            });
-            // drawPolygon(path, fillColor);
-            const fillColor = gradeColor(averrage(empty[idx]));
-            polygonListTmp.push({path, fillColor, opacity});
-          });
-          
-        } else if (geometry.type === 'MultiPolygon') {
-          geometry.coordinates.forEach(polygon => {
-            polygon.forEach(ring => {
-              const path = ring.map(coord => {
-                const [lon, lat] = proj4(utmk, wgs84, coord);
-                const latlng =  new window.kakao.maps.LatLng(lat, lon);
-                return {lat: latlng.Ma, lng: latlng.La};
-              });
-              // drawPolygon(path, fillColor);
-              const fillColor = gradeColor(averrage(empty[idx]));
-              polygonListTmp.push({path, fillColor, opacity});
-            });
-          });
-        }
+
+      const gwangjuFeature = geoJsonData.features.find(p => p.properties.CTP_KOR_NM === '광주');
+      const gwangjuPath = gwangjuFeature.geometry.coordinates[0].map(coord => {
+          const [lon, lat] = proj4(utmk, wgs84, coord);
+          const latlng = new window.kakao.maps.LatLng(lat, lon);
+          return { lat: latlng.Ma, lng: latlng.La };
       });
 
-      // 광주는 따로처리
-      const gwangJu = geoJsonData.features.find(feature => feature.properties.CTP_KOR_NM === '광주');
-      if (gwangJu) {
-        const path = gwangJu.geometry.coordinates[0].map(coord => {
-          const [lon, lat] = proj4(utmk, wgs84, coord);
-          const latlng =  new window.kakao.maps.LatLng(lat, lon);
-          return {lat: latlng.Ma, lng: latlng.La};
-        });
-        const idx = sidoList.indexOf('광주');
-        const fillColor = gradeColor(averrage(empty[idx]));
+      geoJsonData.features.forEach(features => {
+          const regionName = features.properties.CTP_KOR_NM;
+          const idx = sidoList.indexOf(regionName);
+          const geometry = features.geometry;
 
-        // 전남과 광주가 겹치는부분 제거
-        const vsidx = sidoList.indexOf('전남');
-        if (gradeColor(averrage(empty[idx])) === gradeColor(averrage(empty[vsidx]))) {
-          opacity = 0;
-        }
-        polygonListTmp.push({path, fillColor, opacity});
-      }
+          const fillColor = gradeColor(averrage(empty[idx]));
 
-      setPolygonList(polygonListTmp); // PolygonList 스테이트 갱신
+          if (geometry.type === 'Polygon') {
+              geometry.coordinates.forEach(ring => {
+                  const path = ring.map(coord => {
+                      const [lon, lat] = proj4(utmk, wgs84, coord);
+                      const latlng = new window.kakao.maps.LatLng(lat, lon);
+                      return { lat: latlng.Ma, lng: latlng.La };
+                  });
+                  polygonListTmp.push({ path, fillColor, opacity, name: regionName });
+              });
+          } else if (geometry.type === 'MultiPolygon') {
+              if (regionName === '전남') {
+                  let mainlandPolygon = geometry.coordinates.reduce((a, b) => a[0].length > b[0].length ? a : b);
+                  let islandPolygons = geometry.coordinates.filter(p => p !== mainlandPolygon);
+
+                  const mainlandPath = mainlandPolygon[0].map(coord => {
+                      const [lon, lat] = proj4(utmk, wgs84, coord);
+                      const latlng = new window.kakao.maps.LatLng(lat, lon);
+                      return { lat: latlng.Ma, lng: latlng.La };
+                  });
+                  polygonListTmp.push({ path: [mainlandPath, gwangjuPath], fillColor, opacity, name: regionName });
+
+                  islandPolygons.forEach(island => {
+                      const islandPath = island[0].map(coord => {
+                          const [lon, lat] = proj4(utmk, wgs84, coord);
+                          const latlng = new window.kakao.maps.LatLng(lat, lon);
+                          return { lat: latlng.Ma, lng: latlng.La };
+                      });
+                      polygonListTmp.push({ path: islandPath, fillColor, opacity, name: regionName });
+                  });
+
+              } else {
+                  geometry.coordinates.forEach(polygon => {
+                      polygon.forEach(ring => {
+                          const path = ring.map(coord => {
+                              const [lon, lat] = proj4(utmk, wgs84, coord);
+                              const latlng = new window.kakao.maps.LatLng(lat, lon);
+                              return { lat: latlng.Ma, lng: latlng.La };
+                          });
+                          polygonListTmp.push({ path, fillColor, opacity, name: regionName });
+                      });
+                  });
+              }
+          }
+      });
+
+      setPolygonList(polygonListTmp);
     };
   }
 
@@ -138,6 +138,12 @@ function MainMap() {
             className='main-map-manifest'
             level={13}
             onCreate={setMap}
+            onMouseMove={(_map, mouseEvent) => {
+              setMousePosition({
+                lat: mouseEvent.latLng.getLat() + 0.03,
+                lng: mouseEvent.latLng.getLng(),
+              })
+            }}
           >
             {
               polygonList.map((item, idx) => {
@@ -150,9 +156,16 @@ function MainMap() {
                   strokeStyle={"solid"} // 선의 스타일입니다
                   fillColor={item.fillColor || '#FFFFFF'} // 채우기 색깔입니다
                   fillOpacity={item.opacity} // 채우기 불투명도 입니다
+                  onMouseover={() => setHoveredPolygon(item.name)}
+                  onMouseout={() => setHoveredPolygon(null)}
                 />
               })
             }
+            {hoveredPolygon && (
+              <MapInfoWindow position={mousePosition}>
+                <div style={{ padding: "5px", fontSize: "14px" }}>{hoveredPolygon}</div>
+              </MapInfoWindow>
+            )}
             <div className='main-map-box'>
               <div className="main-map-box-content"><div className='main-map-box-content-circle-good'></div>0~30 좋음</div>
               <div className="main-map-box-content"><div className='main-map-box-content-circle-moderate'></div>31~81 보통</div>

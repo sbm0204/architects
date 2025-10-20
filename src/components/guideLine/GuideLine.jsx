@@ -11,11 +11,11 @@ function GuideLine() {
 
         <div className="guide-line-box">
           <div className='guide-line-image-position'>
-            <div className="guide-line-status-good"></div>
+            <div className="guide-line-status-good guide-line-image-size"></div>
           </div>
           <div className='guide-line-contents'>
             <div className="sensitive">
-              <p>민감군</p>
+              <p className='contents-bold'>민감군</p>
               <p>
                 {dustJson && dustJson.good.sensitive[0]}
               </p>
@@ -25,7 +25,7 @@ function GuideLine() {
             </div>
             <hr className='middle-line' />
             <div className="public">
-              <p>일반인</p>
+              <p className='contents-bold'>일반인</p>
               <p>{dustJson && dustJson.good.public[0]}</p>
               <p>{dustJson && dustJson.good.public[1]}</p>
             </div>
@@ -33,11 +33,11 @@ function GuideLine() {
         </div>
         <div className="guide-line-box">
           <div className='guide-line-image-position'>
-            <div className="guide-line-status-moderate"></div>
+            <div className="guide-line-status-moderate guide-line-image-size"></div>
           </div>
           <div className='guide-line-contents'>
             <div className="sensitive">
-              <p>민감군</p>
+              <p className='contents-bold'>민감군</p>
               <p>
                 {dustJson && dustJson.moderate.sensitive[0]}
               </p>
@@ -47,7 +47,7 @@ function GuideLine() {
             </div>
             <hr className='middle-line' />
             <div className="public">
-              <p>일반인</p>
+              <p className='contents-bold'>일반인</p>
               <p>{dustJson && dustJson.moderate.public[0]}</p>
               <p>{dustJson && dustJson.moderate.public[1]}</p>
             </div>
@@ -55,11 +55,11 @@ function GuideLine() {
         </div>
         <div className="guide-line-box">
           <div className='guide-line-image-position'>
-            <div className="guide-line-status-bad"></div>
+            <div className="guide-line-status-bad guide-line-image-size"></div>
           </div>
           <div className='guide-line-contents'>
             <div className="sensitive">
-              <p>민감군</p>
+              <p className='contents-bold'>민감군</p>
               <p>
                 {dustJson && dustJson.bad.sensitive[0]}
               </p>
@@ -69,7 +69,7 @@ function GuideLine() {
             </div>
             <hr className='middle-line' />
             <div className="public">
-              <p>일반인</p>
+              <p className='contents-bold'>일반인</p>
               <p>{dustJson && dustJson.bad.public[0]}</p>
               <p>{dustJson && dustJson.bad.public[1]}</p>
             </div>
@@ -77,11 +77,11 @@ function GuideLine() {
         </div>
         <div className="guide-line-box">
           <div className='guide-line-image-position'>
-            <div className="guide-line-status-very-bad"></div>
+            <div className="guide-line-status-very-bad guide-line-image-size"></div>
           </div>
           <div className='guide-line-contents'>
             <div className="sensitive">
-              <p>민감군</p>
+              <p className='contents-bold'>민감군</p>
               <p>
                 {dustJson && dustJson.veryBad.sensitive[0]}
               </p>
@@ -91,7 +91,7 @@ function GuideLine() {
             </div>
             <hr className='middle-line' />
             <div className="public">
-              <p>일반인</p>
+              <p className='contents-bold'>일반인</p>
               <p>{dustJson && dustJson.veryBad.public[0]}</p>
               <p>{dustJson && dustJson.veryBad.public[1]}</p>
             </div>

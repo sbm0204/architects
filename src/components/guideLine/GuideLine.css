@@ -36,25 +36,23 @@
   justify-content: end;
   padding-right: 20px;
 }
-.guide-line-status-good {
+
+.guide-line-image-size {
   width: 54px;
   height: 65px;
+}
+
+.guide-line-status-good {
   background-image: url(../../assets/good.png);
 }
 
 .guide-line-status-moderate {
-  width: 54px;
-  height: 65px;
   background-image: url(../../assets/moderate.png);
 }
 .guide-line-status-bad {
-  width: 54px;
-  height: 65px;
   background-image: url(../../assets/bad.png);
 }
 .guide-line-status-very-bad {
-  width: 54px;
-  height: 65px;
   background-image: url(../../assets/very-bad.png);
 }
 
@@ -81,9 +79,15 @@
   line-height: 1.8em;
 }
 
+.contents-bold {
+  font-weight: 900;
+}
 .guide-line-contents {
-  line-height: 25px;
+  line-height: 2;
   font-size: 15px;
+}
+.sensitive, .public {
+  min-height: 110px;
 }
 
 .guide-line-container-img {

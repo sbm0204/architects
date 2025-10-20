@@ -27,6 +27,8 @@
 .dropdown-btn {
   display: flex;
   gap: 90px;
+  height: 52px;
+  align-items: center;
 }
 
 /* 오늘의 대기질 섹션 */
