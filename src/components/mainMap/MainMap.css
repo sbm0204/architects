@@ -5,9 +5,9 @@
 }
 
 .main-map-title {
+  width: 240px;
   font-size: 30px;
   font-weight: 900;
-  padding-bottom: 10px;
 }
 
 .main-contents {
@@ -15,6 +15,7 @@
 }
 
 .position {
+  padding-top: 20px;
   width: 100%;
   min-height: 680px;
   position: relative;

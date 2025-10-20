@@ -137,7 +137,7 @@ function MainChart() {
 
               <div className='main-head-container'>
                 <div className="air-quality-section" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <p style={{ fontSize: '30px', fontWeight: '900', flexShrink: 0 }}>오늘의 대기질</p>
+                  <p className='main-head-title'>오늘의 대기질</p>
                   <span style={{ fontSize: '18px', fontWeight: 'bold', flexShrink: 0, marginTop: '5px' }}>{todayDate} {currentHour}시</span>
                 </div>
                 <div className='dropdown-btn'>
@@ -184,7 +184,7 @@ function MainChart() {
           
           {/* 행동요령 간단하게 출력 */}
           <div className='main-guide-container'>
-            <h1 className='main-guide-tile'>행동 요령</h1>
+            <h1 className='main-guide-title main-head-title'>행동 요령</h1>
                   <div className='main-guide-card-container'>
                     <div>
                         <img src={statusImage} alt="" className='main-guide-image' />
@@ -196,6 +196,7 @@ function MainChart() {
                           <div className='main-guide-sensitive-content'>
                             {textJsondata && textJsondata.sensitive[0]}
                           </div>
+                          <br />
                           <div className='main-guide-sensitive-content'>
                             {textJsondata && textJsondata.sensitive[1]}
                           </div>
@@ -208,6 +209,7 @@ function MainChart() {
                           <div className='main-guide-public-content'>
                             {textJsondata && textJsondata.public[0]}
                           </div>
+                          <br />
                           <div className='main-guide-public-content'>
                             {textJsondata && textJsondata.public[1]}
                           </div>

@@ -4,7 +4,7 @@ import misemeonjiImageWeb from "/src/assets/misemeonjiimageweb.png";
 const Service = () => {
   return (
     <div className="container">
-      <h1 className="service-title">서비스 소개</h1>
+      <h1 className="service-title main-head-title">서비스 소개</h1>
       <div className="service-block">
         <div className="image-box">
           <img src={teamImageWeb} alt="팀 이미지" />

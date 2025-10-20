@@ -85,7 +85,7 @@ const AlertStatus = () => {
 {/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}
                     {!isListEmpty && 
                     <div className="title-area">
-                        <h1 className="title">미세먼지 경보</h1>
+                        <h1 className="title main-head-title">미세먼지 경보</h1>
                         <div className="title-detail">({today} 기준 최근 1개월 특보 현황)</div>
                     </div>}
                     

@@ -131,7 +131,7 @@ function MainMap() {
 
   return (
       <div className='contents-size-main-right'>
-        <div><h1 className='main-map-title'>전국 미세먼지 농도</h1></div>
+        <div><h1 className='main-map-title main-head-title'>전국 미세먼지 농도</h1></div>
         <div className='position'>
           <Map
             center={{ lat: 36.3, lng: 127.8 }}

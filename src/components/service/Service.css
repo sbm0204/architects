@@ -1,6 +1,7 @@
 
 
 .service-title {
+  width: 200px;
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
   margin: 85px 20px 22px;

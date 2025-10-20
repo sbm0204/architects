@@ -50,6 +50,11 @@
   background-color: #000; /* 배경 색상 변경 */
 }
 
+/* 지역 드롭다운에 대한 추가 스타일 */
+.dropdown-region {
+  width: 100px;
+}
+
 /* 지역 드롭다운 콘텐츠에 대한 추가 스타일 */
 .dropdown-region .dropdown-content {
   width: 100%;
@@ -59,11 +64,14 @@
 
 /* 상세지역 드롭다운에 대한 추가 스타일 */
 .dropdown-district {
-  width: 150px; /* 버튼 자체의 고정 너비 */
+  width: 230px; /* 버튼 자체의 고정 너비 */
+  position: relative;
 }
 
 .dropdown-district .dropdown-content {
-  width: 100%; /* 버튼 너비에 맞춤 */
+  position: absolute;
+  right: 42px;
+  width: 50%; /* 버튼 너비에 맞춤 */
   min-width: auto; /* 기본 min-width 무시 */
   box-sizing: border-box;
 }

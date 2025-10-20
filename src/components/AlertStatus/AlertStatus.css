@@ -102,6 +102,7 @@
 }
 
 .title {
+  width: 230px;
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
   text-align: left;

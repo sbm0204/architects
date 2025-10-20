@@ -25,10 +25,11 @@
 }
 
 .dropdown-btn {
+  width: 100%;
   display: flex;
-  gap: 90px;
   height: 52px;
-  align-items: center;
+  gap: 75px;
+  padding-left: 20px;
 }
 
 /* 오늘의 대기질 섹션 */
@@ -65,20 +66,20 @@
 /* 행동요령 */
 .main-guide-container {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.main-guide-tile {
-  font-size: 30px;
-  font-weight: 900;
-  padding-top: 30px;
-  padding-bottom: 20px;
+.main-guide-title {
+  width: 120px;
 }
 
 .main-guide-card-container {
   max-width: 760px;
   border: 1px solid #000;
   border-radius: 20px;
-  padding: 10px;
+  padding: 30px;
   display:flex;
   flex-direction: column;
   gap: 10px;
@@ -107,10 +108,12 @@
 }
 
 .main-guide-sensitive-content-box, .main-guide-public-content-box {
-  padding: 20px;
+  padding: 15px;
 }
 
 .main-guide-sensitive-content, .main-guide-public-content {
+  letter-spacing: -1px;
+  line-height: 15px;
   font-size: 15px;
   max-width: 300px;
   overflow: hidden;
@@ -150,6 +153,12 @@
     justify-content: center;
     gap: 10px; /* 모바일 화면에서 카드 간격 조정 */
   }
+
+  .dropdown-btn {
+  gap: 0px;
+  padding-left: 0px;
+  justify-content: space-between;
+}
 
   .main-container {
     flex-direction: column;
