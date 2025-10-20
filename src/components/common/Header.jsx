@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logonew from '../../assets/logonew.png'; //로고 임포트
-import bgImage from '../../assets/background-photo-gradation.png'; //배경 이미지 임포트
-import homeIcon from '../../assets/iconhome.png'; // 홈 아이콘 임프트
+import logomini from '../../assets/logonewmini.png'; //미니 로고 임포트
+import { getSeasonBackground } from '../../utils/getSeasonBackground'; //계절 js 임포트
 
 
 function Header() {
@@ -12,12 +12,13 @@ function Header() {
  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
  const closeMenu = () => setIsMenuOpen(false);
 
+ const seasonalBg = getSeasonBackground();
  return (
     <>
       {/* PC 헤더 */}
       <div className='header-pc'> 
         <div className='header-box'>
-          <div className='header-background' style={{backgroundImage: `url(${bgImage})`}}>
+          <div className='header-background' style={{backgroundImage: `url(${seasonalBg})`}}>
             <div className='header-contents'>
               {/* 로고 클릭 시 홈으로 이동 */}
               <div className='header-logo'>
@@ -42,7 +43,7 @@ function Header() {
       {/* Mobile 헤더 */}
       <div className='header-mobile'>
         <div className='header-mobile-box'>
-          <div className='header-mobile-background' style={{backgroundImage: `url(${bgImage})`}}>
+          <div className='header-mobile-background' style={{backgroundImage: `url(${seasonalBg})`}}>
             <div className='header-mobile-contents'>
               {/* 홈 아이콘 클릭 시 홈으로 이동 */}
                 <Link to="/">
@@ -67,7 +68,7 @@ function Header() {
           {/* 홈 아이콘 클릭 시 홈으로 이동 */}
            <div className='itemhome'>
             <Link to="/" onClick={closeMenu}>
-              <img src={homeIcon} alt="홈 아이콘" />
+              <img className='mini-homeicon' src={logomini} alt="로고 미니 아이콘" />
             </Link>
           </div>
           <div className='menu-first-line'></div>

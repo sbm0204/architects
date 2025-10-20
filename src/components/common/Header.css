@@ -124,16 +124,16 @@
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: -80%;
-  width: 80%;
-  height: 80%;
+  right: -75%;
+  width: 75%;
+  height: 80vh;
   background: linear-gradient(to top, var(--clr-db), var(--clr-md-db));
   box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
   transition: right 0.4s ease;
   z-index: 15;
   display: flex;
   flex-direction: column;
-  padding: 5%;
+  padding: 6%;
 }
 
 .mobile-menu.open {
@@ -156,45 +156,45 @@
 }
 
 .mobile-menu-items {
-  margin-top: 25px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
   gap: 20px;
 }
 
 .menu-first-line {
-  width: 90%;
+  width: 75%;
   height: 2px;
   background-color: var(--clr-wh);
-  margin: 25px 0;
+  margin: 10px 0;
 }
 
 .itemhome {
-  height: 43px;
+  height: 70px;
   width: 90%;
   text-align: right;
   cursor: pointer;
   padding: 0;
 }
 
-.itemhome > img {
-  width: 43px;
-  height: 43px;
+.mini-homeicon {
+  width: 70px;
+  height: 70px;
 }
 
 .menu-item {
   display: flex;              /* 글자 중앙정렬을 확실히 */
   align-items: center;        /* 세로 중앙정렬 */
   justify-content: flex-end;  /* 오른쪽 정렬 유지 */
-  height: 50px;
-  width: 90%;
+  height: 40px;
+  width: 75%;
   padding-right: 15px;
   padding-top : 1px; /* 글자 세로 중앙 정렬 위한 조처 */
   padding-bottom: 1px; /* 글자 세로 중앙 정렬 위한 조처 */
   background: var(--clr-wh);
   color: var(--clr-dp-db);
-  font-size: var(--fs-cnt-title);
+  font-size: var(--fs-cnt-sub);
   font-weight: 600;
   text-align: right;
   border-radius: 10px;
@@ -210,11 +210,11 @@
 }
 
 .menu-line {
-  width: 90%;
+  width: 75%;
   height: 2px;
   background-color: var(--clr-wh);
   opacity: 35%;
-  margin: 4px 0;
+  margin: 0.1px 0;
 }
 
 .menu-overlay {
@@ -270,5 +270,56 @@
 @media (max-width: 1050px) {
   .header-nav {
     gap: 8px; /* 기존 40px -> 8px로 줄임 */
+  }
+}
+
+/* iPhome 14 proMax 가로 430px, 세로 932px*/
+@media (max-width: 430px) {
+  .mobile-menu {
+    height: 72vh;
+    padding: 7%;
+  }
+}
+
+/* iPhone SE 가로: 375px, 세로: 667px */
+@media (max-width: 375px) {
+  .mobile-menu {
+    height: 90vh;  
+    padding: 7%;
+  }
+  .menu-item {
+    font-size: var(--fs-msg-body);
+    height: 34px;
+    width: 77%;
+    border-radius: 8px;
+  }
+  .menu-first-line {
+    margin: 0.5px 0;
+  }
+  .menu-line {
+    margin: 0.1px 0;
+  }
+}
+
+/* Samsung Galaxy S8+ 가로 360px, 세로 740px*/
+@media (max-width: 360px) {
+  .mobile-menu {
+    height: 80vh;
+    right: -77.5%;
+    width: 77.5%;
+  }
+
+  .menu-item {
+    font-size: var(--fs-msg-body);
+    height: 34px;
+    width: 77%;
+  }
+
+  .menu-first-line {
+    margin: 0.5px 0;
+  }
+
+  .menu-line {
+    margin: 0.1px 0;
   }
 }
