@@ -4,7 +4,7 @@ import dustJson from '../../configs/guide-data.js';
 function GuideLine() {
 
   return (
-    <div className='contents-size'>
+    <div className='container'>
       <h1 className="guide-header sub-title">행동요령</h1>
 
       <div className="guide-line-container">

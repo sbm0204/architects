@@ -1,8 +1,4 @@
-.contents-size {
-  max-width: 1440px;
-  width: 100%;
-  margin: 20px auto;
-}
+
 
 .main-contents {
   text-align: center;
@@ -10,7 +6,7 @@
 
 .guide-header {
   height: 58px;
-  margin: 85px 20px 0;
+  margin: 85px 20px 22px;
 }
 
 .guide-line-container {

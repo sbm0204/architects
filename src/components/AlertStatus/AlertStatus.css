@@ -1,9 +1,3 @@
-.alerts-container {
-    width: 100%;  
-    max-width: 1440px; 
-    margin: 0px auto;
-}
-
 /* -----------------1. 로딩 상태 스타일----------------- */
 .loading-state-container {
     text-align: center;

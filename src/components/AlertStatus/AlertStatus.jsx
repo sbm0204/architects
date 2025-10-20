@@ -49,7 +49,7 @@ const AlertStatus = () => {
     const today = getTodayDate();
 
     return (
-        <div className="alerts-container">
+        <div className="container">
             {reduxLoading && (
 // 1. 로딩 중 UI-----------------------------------------------------------------------------------------
                 <div className="loading-state-container">

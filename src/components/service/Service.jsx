@@ -3,7 +3,7 @@ import teamImageWeb from "/src/assets/teamimageweb.png";
 import misemeonjiImageWeb from "/src/assets/misemeonjiimageweb.png";
 const Service = () => {
   return (
-    <div className="service-container">
+    <div className="container">
       <h1 className="service-title">서비스 소개</h1>
       <div className="service-block">
         <div className="image-box">

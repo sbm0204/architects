@@ -1,13 +1,9 @@
-.service-container {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-}
+
 
 .service-title {
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
-  margin: 85px 20px 0;
+  margin: 85px 20px 22px;
   text-align: left;
 }
 
