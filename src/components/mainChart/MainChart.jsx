@@ -17,6 +17,8 @@ import { getTodayDate } from '../../utils/dateFilter.js';
 import dustJson from '../../configs/guide-data.js';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { getLocation } from '../../store/thunks/locationThunk.js';
+import { setRegion, setDistrict } from '../../store/slices/locationSlice.js';
 
 function MainChart() {
   const dispatch = useDispatch();
@@ -34,6 +36,22 @@ function MainChart() {
   const handleToggleDropdown = (dropdownName) => {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
+
+  // 유저로부터 위치정보 받아오는 코드
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        // 현재 위치 정보를 바탕으로 미세먼지 데이터 불러오기
+        dispatch(getLocation({ lat, lon }));
+      },
+      (error) => {
+        console.error(error);
+        // 위치 권한 거부 시 서울 종로구 데이터 불러오기
+      }
+    );
+  }
 
   // 기본값으로 서울, 종로구 데이터 불러오기
   useEffect(() => {
@@ -54,6 +72,26 @@ function MainChart() {
   }, []);
 
   const mapList = useSelector(state => state.mapAxio.mapList);
+
+  // 받아온 위치기반 측정소데이터 가져오는 코드 (mapList보다 아래에 있어야 함)
+  const { nearbyStations } = useSelector(state => state.location);
+  const [ nearbyFlg, setNearbyFlg ] = useState(true);
+  
+  useEffect(() => {
+    if (nearbyFlg && nearbyStations?.items?.length > 0 && mapList?.items?.length > 0) {
+      const closestStationName = nearbyStations.items[0].Station_name;
+      const match = mapList?.items.find(item => item.stationName === closestStationName);
+      
+      if (match) {
+        dispatch(setRegion(match.sidoName));
+        setSelectedRegion(match.sidoName);
+        dispatch(setDistrict(match.stationName));
+        setSelectedDistrict(match.stationName);
+      }
+      setNearbyFlg(false);
+    }
+  // },[])
+  }, [nearbyStations, mapList, dispatch]);
 
   useEffect(() => {
     if (mapList?.items && selectedRegion && selectedDistrict) {

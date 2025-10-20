@@ -9,9 +9,9 @@ function Main() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMapList())
-  }, [])
-  
+    dispatch(getMapList());
+  }, []);
+
   return (
     <>
       <div className="main-display">

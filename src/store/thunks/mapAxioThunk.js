@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosConfig from "../../configs/axioConfigs";
 import axios from "axios";
 
+
 const getMapList = createAsyncThunk(
   'mapAxio/getMapList',
   async () => {
@@ -22,5 +23,6 @@ const getMapList = createAsyncThunk(
     return response.data.response.body;
   }
 );
+
 
 export { getMapList };
