@@ -1,29 +1,28 @@
-
-
 .service-title {
   width: 200px;
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
-  margin: 85px 20px 22px;
-  text-align: left;
+  margin: 85px 0px 55px;
 }
 
-.service-block {
+.service-container {
+  padding: 0 max(calc((100% - 1100px) / 2) , 30px) 30px;
+}
+
+.service-item {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 40px;
+  flex-direction: column;
   gap: 90px;
-  padding: 30px;
 }
 
-.service-block.reverse {
+.service-card {
+  display: flex;
+  gap: 110px;
+}
+
+.card-reverse {
   flex-direction: row-reverse;
-}
-
-.desktop-text-box {
-  flex: 1;
-  padding-bottom: 150px;
+  justify-content: flex-end;
 }
 
 .underline {
@@ -33,25 +32,20 @@
   margin: 40px 0;
 }
 
-.mobile-text-box {
+.view-mobile {
   display: none;
 }
 
-.desktop-text-box h2 {
+.service-card .card-title {
+  font-weight: var(--fw-bold);
   font-size: var(--fs-cnt-title);
-  margin-bottom: 15px;
+  margin-bottom: 55px;
 }
 
-.desktop-text-box p {
+.content-box > p {
   line-height: 1.6;
   color: var(--clr-bk);
   margin: 5px 0;
-}
-
-.image-box {
-  flex: 1;
-  display: flex;
-  justify-content: center;
 }
 
 .image-box img {
@@ -61,69 +55,34 @@
   object-fit: cover;
 }
 
-/* =========================================
-   :아이폰: 반응형 미디어 쿼리
-========================================= */
-/* 1200px 이하 (태블릿) */
-@media (max-width: 1200px) {
-  .service-block {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .service-block.reverse {
-    flex-direction: column;
-  }
-
-  .desktop-text-box {
-    width: 100%;
-    text-align: left; /* :흰색_확인_표시: 모바일에서는 텍스트 왼쪽 정렬 */
-    padding: 0 10px; /* 여백 살짝 줘서 답답하지 않게 */
-  }
-
-  .image-box img {
-    max-width: 500px;
-  }
-}
-
 /* 700px 이하 (모바일) */
-@media (max-width: 700px) {
-  .desktop-text-box {
+@media (max-width: 800px) {
+  .view-desktop {
     display: none;
   }
 
-  .underline {
-    display: none;
+  .view-mobile {
+    display: flex;
   }
 
-  .mobile-text-box {
+  .service-card {
     display: block;
-    text-align: left;           /* :흰색_확인_표시: 왼쪽 정렬 유지 */
-    width: 85vw;
   }
 
-  .mobile-text-box h2 {
-    padding-bottom: 10px;
+  .service-card .card-title {
     font-weight: var(--fw-bold);
   }
 
-  .mobile-text-box p {
+  .service-card p {
     font-size: var(--fs-cnt-body);
-    line-height: 2;           /* :흰색_확인_표시: 모바일용 가독성 향상 */
+    line-height: 2;
   }
 
   .image-box {
-    justify-content: center;    /* :흰색_확인_표시: 이미지 중앙 */
+    margin-bottom: 55px;
   }
 
   .image-box img {
     max-width: 85vw;
-  }
-
-  /* :전구: 모든 블록을 이미지 → 텍스트 순서로 통일 */
-  .service-block,
-  .service-block.reverse {
-    flex-direction: column;
   }
 }
