@@ -79,14 +79,14 @@
   max-width: 760px;
   border: 1px solid var(--clr-bk);
   border-radius: 20px;
-  padding: 30px;
+  padding: 20px;
   display:flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .main-guide-image {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 
 .main-guide-card {
@@ -99,7 +99,7 @@
 
 .main-guide-card-sensitive, .main-guide-card-public {
   line-height: 30px;
-  padding: 20px;
+  padding: 10px;
 }
 
 .main-guide-card-sub-title {
@@ -108,11 +108,10 @@
 }
 
 .main-guide-sensitive-content-box, .main-guide-public-content-box {
-  padding: 15px;
+  padding: 10px;
 }
 
 .main-guide-sensitive-content, .main-guide-public-content {
-  letter-spacing: -1px;
   line-height: 15px;
   font-size: var(--fs-cnt-body);
   max-width: 300px;
@@ -135,8 +134,10 @@
   border-radius: 20px;
   width: 100px;
   text-align: center;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 20px;
+  letter-spacing: -1px;
+  color: rgba(0, 0, 0, 0.950);
 }
 
 .main-button:hover {
