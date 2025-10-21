@@ -5,7 +5,7 @@ const Service = () => {
   return (
     <div className="container">
       <div className="service-container">
-        <h2 className="service-title">서비스 소개</h2>
+        <h2 className="service-title main-head-title">서비스 소개</h2>
 
         {/* 이하 데스크탑버전 */}
         <div className="service-item view-desktop">

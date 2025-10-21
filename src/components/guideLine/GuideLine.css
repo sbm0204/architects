@@ -1,5 +1,3 @@
-
-
 .main-contents {
   text-align: center;
 }
@@ -7,15 +5,17 @@
 .guide-header {
   width: 150px;
   height: 58px;
-  margin: 85px 20px 22px;
+  margin: 85px 30px 22px;
+  display: flex;
+  align-items: end;
 }
 
 .guide-line-container {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 30px;
+  gap: var(--sp-xs);
+  padding: var(--sp-sm);
 }
 
 .guide-line-box {
@@ -54,8 +54,8 @@
 }
 
 .middle-line {
-  margin: 20px;
-  background-color: #000;
+  margin: var(--sp-xs);
+  background-color: var(--clr-bk);
 }
 
 .guide-line-guide-start {
@@ -77,11 +77,11 @@
 }
 
 .contents-bold {
-  font-weight: 900;
+  font-weight: var(--fw-bold);
 }
 .guide-line-contents {
   line-height: 2;
-  font-size: 15px;
+  font-size: var(--fs-cnt-body);
 }
 .sensitive, .public {
   min-height: 110px;
@@ -91,8 +91,8 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 30px;
+  gap: var(--sp-xs);
+  padding: var(--sp-sm);
 }
 
 .guide-img1 {

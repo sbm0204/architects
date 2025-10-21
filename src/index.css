@@ -13,8 +13,9 @@
   margin: 0px auto;
 }
 .main-head-title {
+  /* 그라데이션 방향을 아래쪽으로 지정 */
   background: linear-gradient(
-    to top, /* 그라데이션 방향을 아래쪽으로 지정 */
+    to top,
     #aee1ffcc 50%, /* 파란색을 50% 지점까지 채움 */
     #ffffff 50% /* 흰색을 50% 지점에서 시작하여 끝까지 채움 */
   );
