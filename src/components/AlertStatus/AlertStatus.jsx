@@ -76,7 +76,7 @@ const AlertStatus = () => {
                     {isListEmpty && (
                         <div className="empty-msg-box">
                             <p className="empty-msg-txt">
-                                최근 한 달간 미세먼지 발령 내역이 없습니다.
+                              📍 최근 한 달간 발령 내역이 없습니다.
                             </p>
                         </div>
                     )}
@@ -98,22 +98,24 @@ const AlertStatus = () => {
                     </div>
 
 {/* 4. 더 보기 / 끝 메세지 UI------------------------------------------------------------------------------- */}
-                    <div className="pagination-area">
-                        {hasMoreDataToShow ? (
-                            <button 
-                                onClick={handleLoadMore} 
-                                className="load-more-btn"
-                                disabled={reduxLoading}
-                            >
-                                {reduxLoading ? '데이터 로딩 중...' : '더 보기'}
-                            </button>
-                        ) : (
-                            isFinishedLoadingAllData  && groupedAlerts.length > 0 &&
-                               <p className="end-msg">
-                                ✅ 최근 미세먼지 발령 내역 불러오기 완료
-                               </p>
-                        )}
-                    </div>
+                    {!isListEmpty && (
+                        <div className="pagination-area">
+                            {hasMoreDataToShow ? (
+                                <button 
+                                    onClick={handleLoadMore} 
+                                    className="load-more-btn"
+                                    disabled={reduxLoading}
+                                >
+                                    {reduxLoading ? '데이터 로딩 중...' : '더 보기'}
+                                </button>
+                            ) : (
+                                isFinishedLoadingAllData  && groupedAlerts.length > 0 &&
+                                <p className="end-message">
+                                    ❌ 더 이상 발령 내역이 없습니다.
+                                </p>
+                            )}
+                        </div>
+                    )}
                 </>
             )}
         </div>
