@@ -91,10 +91,10 @@ function AirLineChart() {
   };
 
   return(
-    <div>
-      <div>
+    <div style={{paddingTop: '70px'}}>
+      <div style={{paddingBottom: '10px'}}>
         <p style={{fontSize:'25px', fontWeight:'600'}}>미세먼지</p>
-        <div style={{position: 'relative', width: '14vw', height: '20vh', marginTop: '10px'}}>
+        <div style={{position: 'relative', width: '14vw', height: '20vh', marginTop: '10px',}}>
           <div style={{ position: 'absolute', top: '-5px', left: '0', fontSize: '12px', color: '#666' }}>µg/m³</div>
           <Line options={options} data={pm10Data} />
         </div>

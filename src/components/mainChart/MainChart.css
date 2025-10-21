@@ -21,7 +21,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--sp-xs);
 }
 
 .dropdown-btn {
@@ -38,8 +38,8 @@
 }
 
 .air-quality-title {
-  font-size: 30px; /* 요청된 폰트 사이즈 */
-  font-weight: 900;
+  font-size: var(--fs-cnt-sub); /* 요청된 폰트 사이즈 */
+  font-weight: var(--fw-bold);
   margin-top: 55px;
   margin-bottom: 20px;
 }
@@ -60,7 +60,7 @@
 
 .chart-placeholder {
   padding: 180px 20px 20px 20px;
-  color: #666;
+  color: var(--clr-dg);
 }
 
 /* 행동요령 */
@@ -68,7 +68,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--sp-xs);
 }
 
 .main-guide-title {
@@ -77,7 +77,7 @@
 
 .main-guide-card-container {
   max-width: 760px;
-  border: 1px solid #000;
+  border: 1px solid var();
   border-radius: 20px;
   padding: 30px;
   display:flex;
@@ -103,8 +103,8 @@
 }
 
 .main-guide-card-sub-title {
-  font-size: 15px;
-  font-weight: 900;
+  font-size: var(--fs-cnt-body);
+  font-weight: var(--fw-bold);
 }
 
 .main-guide-sensitive-content-box, .main-guide-public-content-box {
@@ -114,7 +114,7 @@
 .main-guide-sensitive-content, .main-guide-public-content {
   letter-spacing: -1px;
   line-height: 15px;
-  font-size: 15px;
+  font-size: var(--fs-cnt-body);
   max-width: 300px;
   overflow: hidden;
   text-align: left;

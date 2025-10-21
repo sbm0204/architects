@@ -61,14 +61,14 @@ function AirBarChart() {
       {
         label: '미세먼지 (PM10)',
         data: airQuality.pm10,
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        backgroundColor: '#66c6ff',
         borderColor: '#000',
         borderWidth: 1,
       },
       {
         label: '초미세먼지 (PM2.5)',
         data: airQuality.pm25,
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor: '#FF6384',
         borderColor: '#000',
         borderWidth: 1,
       },
