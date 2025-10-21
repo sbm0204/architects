@@ -33,7 +33,7 @@ function MainChart() {
   const [selectedStationData, setSelectedStationData] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [nearbyFlg, setNearbyFlg] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 800px)').matches);
+  const [isMobile, setIsMobile] = useState(window.matchMedia('(max-width: 850px)').matches);
 
   const mapList = useSelector(state => state.mapAxio.mapList);
   const { nearbyStations } = useSelector(state => state.location);

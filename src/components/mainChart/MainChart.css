@@ -144,8 +144,14 @@
   cursor: pointer;
 }
 
+.chart-placeholder {
+  width: 14vw;
+  height: 57.2vh;
+  padding: 20px;
+}
+
 /* 모바일 반응형 스타일 */
-@media (max-width: 800px) {
+@media (max-width: 850px) {
   .contents-size-main-left {
     margin: 0;
   }
@@ -172,9 +178,4 @@
   }
   
   /* 추후 수정예정 */
-  .chart-placeholder {
-    width: 20vw;
-    height: 57.2vh;
-    padding: 20px;
-  }
 }
