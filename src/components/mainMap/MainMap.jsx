@@ -145,7 +145,7 @@ function MainMap() {
             onCreate={setMap}
             onMouseMove={(_map, mouseEvent) => {
               setMousePosition({
-                lat: mouseEvent.latLng.getLat() + 0.03,
+                lat: mouseEvent.latLng.getLat() + 0.05,
                 lng: mouseEvent.latLng.getLng(),
               })
             }}
