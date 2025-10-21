@@ -171,7 +171,10 @@
     padding-top: 20px;
   }
   
+  /* 추후 수정예정 */
   .chart-placeholder {
+    width: 20vw;
+    height: 57.2vh;
     padding: 20px;
   }
 }

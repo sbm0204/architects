@@ -187,7 +187,7 @@ function MainChart() {
         <div className='main-head-container'>
           <div className="air-quality-section" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <p className='main-head-title'>오늘의 대기질</p>
-            <span style={{ fontSize: '18px', fontWeight: 'bold', flexShrink: 0, marginTop: '5px' }}>
+            <span style={{ fontSize: '18px', fontWeight: 'bold', color: '#666666', marginTop: '5px' }}>
               {todayDate} {currentHour}시
             </span>
           </div>
@@ -225,12 +225,10 @@ function MainChart() {
         <div className='chart-padding'>
           {selectedStationData ? (
             isMobile ? <AirBarChart /> : <AirLineChart />
-          ) : (
+          ) : 
             <div className="chart-placeholder">
-              <p>✅ 상세지역 선택 시</p>
-              <p>대기질 현황 확인</p>
             </div>
-          )}
+          }
         </div>
       </div>
 

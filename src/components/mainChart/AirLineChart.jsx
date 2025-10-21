@@ -53,7 +53,7 @@ function AirLineChart() {
 
   // 로딩 및 에러, 초기 상태 처리
   if (status === 'loading') {
-    return <div>차트 데이터 로딩 중...</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>차트 데이터 로딩 중...📊</div>;
   }
 
   if (status === 'failed') {
