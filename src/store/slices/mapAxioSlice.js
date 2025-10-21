@@ -10,9 +10,6 @@ const mapAxioSlice = createSlice({
     
   extraReducers: builder => {
     builder
-    .addCase(getMapList.pending, (state) => {
-      console.log(state, "대기중") //TODO 지워야 함
-    })
     .addCase(getMapList.fulfilled, (state, action) => {
       state.mapList = action.payload;
     })

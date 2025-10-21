@@ -55,7 +55,14 @@ function MainMap() {
       const grade = getDustLevel(value, 'PM10') // 평균값을 등급별로 나누는 처리(util)
       return grade.label // TODO : 평균값의 등급 출력
     }
-    
+    const averrageVal = (region) => {
+      const regionMungi = region?.map(item => item.pm10Value); // 미세먼지 값 다 가져오기
+      const cnt = regionMungi?.length // 객체 갯수
+      const mungiAverrage = regionMungi?.reduce((sum, current) => sum + current, 0); // 객체들의 합
+      const value = mungiAverrage / cnt // 객체들의 평균
+      return value // TODO : 평균값의 등급 출력
+    }
+
     const utmk =
     "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs";
     const wgs84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
@@ -65,7 +72,6 @@ function MainMap() {
     if (map && geoJsonData && polygonList.length === 0 ) {
       let polygonListTmp = [];
       let opacity = 0.4;
-
       const gwangjuFeature = geoJsonData.features.find(p => p.properties.CTP_KOR_NM === '광주');
       const gwangjuPath = gwangjuFeature.geometry.coordinates[0].map(coord => {
           const [lon, lat] = proj4(utmk, wgs84, coord);
@@ -77,9 +83,8 @@ function MainMap() {
           const regionName = features.properties.CTP_KOR_NM;
           const idx = sidoList.indexOf(regionName);
           const geometry = features.geometry;
-
           const fillColor = gradeColor(averrage(empty[idx]));
-
+          const mungiVal = averrageVal(empty[idx])
           if (geometry.type === 'Polygon') {
               geometry.coordinates.forEach(ring => {
                   const path = ring.map(coord => {
@@ -87,7 +92,7 @@ function MainMap() {
                       const latlng = new window.kakao.maps.LatLng(lat, lon);
                       return { lat: latlng.Ma, lng: latlng.La };
                   });
-                  polygonListTmp.push({ path, fillColor, opacity, name: regionName });
+                  polygonListTmp.push({ path, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal)  });
               });
           } else if (geometry.type === 'MultiPolygon') {
               if (regionName === '전남') {
@@ -99,7 +104,7 @@ function MainMap() {
                       const latlng = new window.kakao.maps.LatLng(lat, lon);
                       return { lat: latlng.Ma, lng: latlng.La };
                   });
-                  polygonListTmp.push({ path: [mainlandPath, gwangjuPath], fillColor, opacity, name: regionName });
+                  polygonListTmp.push({ path: [mainlandPath, gwangjuPath], fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
 
                   islandPolygons.forEach(island => {
                       const islandPath = island[0].map(coord => {
@@ -107,7 +112,7 @@ function MainMap() {
                           const latlng = new window.kakao.maps.LatLng(lat, lon);
                           return { lat: latlng.Ma, lng: latlng.La };
                       });
-                      polygonListTmp.push({ path: islandPath, fillColor, opacity, name: regionName });
+                      polygonListTmp.push({ path: islandPath, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
                   });
 
               } else {
@@ -118,7 +123,7 @@ function MainMap() {
                               const latlng = new window.kakao.maps.LatLng(lat, lon);
                               return { lat: latlng.Ma, lng: latlng.La };
                           });
-                          polygonListTmp.push({ path, fillColor, opacity, name: regionName });
+                          polygonListTmp.push({ path, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
                       });
                   });
               }
@@ -156,7 +161,7 @@ function MainMap() {
                   strokeStyle={"solid"} // 선의 스타일입니다
                   fillColor={item.fillColor || '#FFFFFF'} // 채우기 색깔입니다
                   fillOpacity={item.opacity} // 채우기 불투명도 입니다
-                  onMouseover={() => setHoveredPolygon(item.name)}
+                  onMouseover={() => setHoveredPolygon(`${item.name} : ${item.val}`)}
                   onMouseout={() => setHoveredPolygon(null)}
                 />
               })
