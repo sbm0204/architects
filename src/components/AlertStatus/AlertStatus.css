@@ -1,7 +1,7 @@
 /* -----------------1. 로딩 상태 스타일----------------- */
 .loading-state-container {
-    text-align: center;
-    padding: 30px;
+  text-align: center;
+  padding: 30px;
 }
 
 .loading-spinner {
@@ -19,14 +19,14 @@
     100% { transform: rotate(360deg); }
 }
 
-.loading-text {
+.loading-txt {
     font-size: var(--fs-cnt-sub);
     color: var(--clr-dg);
     margin-top: 10px;
 }
 
 /* -----------------1-1. API 오류 메세지 스타일----------------- */
-.error-message-box {
+.error-msg-box {
     padding: 30px;
     border: 1px solid var(--clr-r);
     border-radius: 20px;
@@ -36,23 +36,23 @@
     max-width: 600px;
 }
 
-.error-message-title {
+.error-msg-title {
     font-size: var(--fs-msg-title);
     font-weight: var(--fw-bold);
     color: var(--clr-r);
     margin-bottom: 15px;
 }
 
-.error-message-text {
+.error-msg-txt {
     color: var(--clr-bk);
     font-size: var(--fs-msg-body);
     line-height: 1.6;
     margin-bottom: 10px;
 }
 
-.error-message-detail {
+.error-msg-detail {
     color: var(--clr-bk);
-    font-size: 15px;
+    font-size: var(--fs-cnt-body);
     width: 180px;
     margin-bottom: 25px;
     padding: 10px;
@@ -74,12 +74,12 @@
     transition: background-color 0.3s ease;
 }
 
-.retry-button:hover {
+.retry-btn:hover {
     background-color: var(--clr-dr); 
 }
 
 /* -----------------2. 불러올 데이터가 없을 때 메세지 스타일----------------- */
-.empty-message-box {
+.empty-msg-box {
     padding: 30px;
     border: 1px solid var(--clr-gy); 
     border-radius: 20px; 
@@ -89,7 +89,7 @@
     max-width: 500px;
 }
 
-.empty-message-text {
+.empty-msg-txt {
     color: var(--clr-bk); 
     line-height: 1.5;
     font-size: var(--fs-msg-body);
@@ -111,7 +111,7 @@
 }
 
 .title-detail {
-  font-size: 15px;
+  font-size: var(--fs-cnt-body);
   color: var(--clr-dg);
   font-weight: normal;
 }
@@ -167,7 +167,7 @@
     background-color: var(--clr-gy); 
 }
 
-.end-message {
+.end-msg {
     color: var(--clr-bk);
     font-size: var(--fs-msg-body);
     padding: 10px;

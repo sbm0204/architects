@@ -1,18 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useMemo } from 'react'; // useMemo를 사용하여 그룹화 로직 최적화
+import { useEffect, useMemo } from 'react';
 import { alertStatusIndex } from '../../store/thunks/alertStatusThunk.js'; 
 import { loadMoreAlerts } from '../../store/slices/alertStatusSlice.js'; 
 import AlertStatusCards from './AlertStatusCards.jsx';
 import './AlertStatus.css';
 import { getTodayDate } from '../../utils/dateFilter.js';
-import { groupAlertsByDateAndDistrict } from '../../utils/dataGroupingLogic.js'; // ⬅️ 그룹화 함수 import 가정
+import { groupAlertsByDateAndDistrict } from '../../utils/dataGroupingLogic.js';
 
 const AlertStatus = () => {
     const dispatch = useDispatch(); 
     
     const { 
         list, 
-        currentView: displayedAlerts, // 원본 API 응답의 개별 항목 리스트
+        currentView: displayedAlerts,
         loading: reduxLoading, 
         noMoreApiData, 
         noMoreViewData, 
@@ -42,7 +42,6 @@ const AlertStatus = () => {
         }
     };
 
-    // 렌더링에 사용되는 데이터는 그룹화된 데이터 (groupedAlerts)
     const isListEmpty = !reduxLoading && groupedAlerts.length === 0 && noMoreApiData; 
     const hasMoreDataToShow = !noMoreViewData || !noMoreApiData; 
 
@@ -54,16 +53,16 @@ const AlertStatus = () => {
 // 1. 로딩 중 UI-----------------------------------------------------------------------------------------
                 <div className="loading-state-container">
                     <div className="loading-spinner"></div>
-                    <p className="loading-text">데이터 로딩 중...</p>
+                    <p className="loading-txt">데이터 로딩 중...</p>
                 </div>
             )}
 
 {/* 1-1. 로딩이 끝나고 오류가 생겼을 때 보여지는 UI----------------------------------------------------------- */}
             {!reduxLoading && error && (
-              <div className="error-message-box">
-                <h1 className="error-message-title">⚠️ 데이터 로드 실패</h1>
-                <p className="error-message-text">오류 발생 - 다시 시도해 주세요. </p>
-                <p className="error-message-detail">오류 상태: {error}</p>
+              <div className="error-msg-box">
+                <h1 className="error-msg-title">⚠️ 데이터 로드 실패</h1>
+                <p className="error-msg-txt">오류 발생 - 다시 시도해 주세요.</p>
+                <p className="error-msg-detail">오류 상태: {error}</p>
                 <button 
                     onClick={() => dispatch(alertStatusIndex())}
                     className="retry-btn">다시 시도</button>
@@ -75,8 +74,8 @@ const AlertStatus = () => {
                 <>
 {/* 2. 데이터 없음 UI-------------------------------------------------------------------------------------- */}
                     {isListEmpty && (
-                        <div className="empty-message-box">
-                            <p className="empty-message-text">
+                        <div className="empty-msg-box">
+                            <p className="empty-msg-txt">
                                 최근 한 달간 미세먼지 발령 내역이 없습니다.
                             </p>
                         </div>
@@ -90,11 +89,10 @@ const AlertStatus = () => {
                     </div>}
                     
                     <div className="cards-wrapper">
-                        {/* 💡 변경: 그룹화된 데이터를 순회하며, groupedAlert props로 전달 */}
                         {groupedAlerts.map(( group ) => (
                             <AlertStatusCards 
                                 key={`${group.dataDate}-${group.districtName}`} 
-                                groupedAlert={group} // ⬅️ 변경: group 객체를 전달
+                                groupedAlert={group}
                             /> 
                         ))}
                     </div>
@@ -110,8 +108,8 @@ const AlertStatus = () => {
                                 {reduxLoading ? '데이터 로딩 중...' : '더 보기'}
                             </button>
                         ) : (
-                            isFinishedLoadingAllData  && groupedAlerts.length > 0 && // ⬅️ length 체크도 groupedAlerts로 변경
-                               <p className="end-message">
+                            isFinishedLoadingAllData  && groupedAlerts.length > 0 &&
+                               <p className="end-msg">
                                 ✅ 최근 미세먼지 발령 내역 불러오기 완료
                                </p>
                         )}

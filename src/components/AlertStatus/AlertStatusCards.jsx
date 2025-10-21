@@ -12,10 +12,9 @@ const AlertDetailItem = ({ alert }) => {
         issueVal, clearVal,
         issueDate, issueTime, 
         clearDate, clearTime, 
-        itemCode, moveName, // moveName을 그룹 내부에서 표시
+        itemCode, moveName,
     } = alert;
 
-    // 날짜는 상위 카드에서 이미 표시되므로, 시간만 추출
     const issueTimeOnly = dayjs(`${issueDate} ${issueTime}`, 'YYYY-MM-DD HH:mm').format('A h시');
 
     const hasClearInfo = clearVal !== undefined && clearVal !== null && clearVal !== '';
@@ -23,29 +22,25 @@ const AlertDetailItem = ({ alert }) => {
         ? dayjs(`${clearDate} ${clearTime}`, 'YYYY-MM-DD HH:mm').format('A h시')
         : null;
     
-    // API에서 받은 단위 사용 (예: µg/m³ 또는 ppm)
     const unit = DUST_UNITS[itemCode] || ''; 
 
     return (
-        <div className="alert-detail-item">
-            {/* 권역 이름 */}
+        <div className="alert-detail-container">
+            {/* 권역 이름 - moveName */}
             <p className="alert-detail-moveName">({moveName})</p> 
-            
-            {/* 발령 정보: (발령: 농도[등급] 시간) 형태 */}
             <div className="alert-detail-info alert-issue"> 
                 <p className="alert-detail-value">
-                    <span className="icon-alert">🚨 발령</span>: 
-                    <span className="value-text">{issueVal}{unit} </span> 
+                    <span>🚨 발령</span>: 
+                    <span>{issueVal}{unit}</span> 
                 <span className="alert-detail-time">{issueTimeOnly}</span> 
                 </p>
             </div>
-            
-            {/* 해제 정보 (있는 경우만 표시) */}
+
             {hasClearInfo && (
                 <div className="alert-detail-info alert-clear"> 
                     <p className="alert-detail-value">
-                        <span className="icon-clear">✅ 해제</span>: 
-                        <span className="value-text">{clearVal}{unit} </span>
+                        <span>✅ 해제</span>: 
+                        <span>{clearVal}{unit}</span>
                     <span className="alert-detail-time">{clearTimeOnly}</span>
                     </p>
                 </div>
@@ -53,7 +48,6 @@ const AlertDetailItem = ({ alert }) => {
         </div>
     );
 }
-
 
 // ----------------------------------------------------------------------
 // 2. AlertStatusCards: 그룹화된 특보 목록을 받아 렌더링하는 메인 컴포넌트
@@ -67,7 +61,7 @@ const AlertStatusCards = ({ groupedAlert }) => {
 
     const formattedDate = dayjs(dataDate, 'YYYY-MM-DD').format('YYYY.MM.DD');
 
-    // 카드의 대표 정보: 가장 최신 또는 중요한 항목의 issueGbn 사용 (경보 > 주의보 우선)
+    // 카드의 뱃지(issueGbn): 가장 최신 또는 중요한 항목의 issueGbn 사용 (경보 > 주의보 우선)
     const representativeAlert = alerts[0]; 
     const representativeIssueGbn = representativeAlert.issueGbn;
 
@@ -84,7 +78,6 @@ const AlertStatusCards = ({ groupedAlert }) => {
         <div className="alert-status-card">
             {/* 1. 카드 헤더: 지역 이름, 날짜, 대표 특보 뱃지 */}
             <div className="alert-status-card-header">
-                {/* 뱃지 (경보/주의보) */}
                 <div className={`alert-status-card-issueGbn ${badgeIssueGbnClass}`}>{representativeIssueGbn}</div>
             </div>
 
@@ -93,9 +86,8 @@ const AlertStatusCards = ({ groupedAlert }) => {
                 <p className="alert-status-card-date">{formattedDate}</p>
             </div>
 
-            {/* 2. 카드 내용: 스크롤 영역 (핵심) */}
+            {/* 2. 카드 내용: 스크롤 영역 */}
             <div className="alert-status-card-scroll-contents"> 
-                {/* alerts 배열을 순회하며 개별 특보 아이템 렌더링 */}
                 {alerts.map((alertItem, index) => (
                     // sn(일련번호)는 고유 키로 적합하지만, 데이터에 없는 경우 index 사용
                     <AlertDetailItem key={alertItem.sn || index} alert={alertItem} /> 
