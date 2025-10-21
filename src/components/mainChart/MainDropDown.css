@@ -13,12 +13,12 @@
   line-height: 1.5rem;
 }
 
-.dropdown-icon {
+.dropdown-icon {  
   margin-left: 10px;
   cursor: pointer;
   border-radius: 4px;
   box-sizing: border-box;
-  border: 1px solid #000;
+  border: 1px solid var(--clr-db);
   width: 20px;
   height: 20px;
 }
@@ -27,23 +27,38 @@
 .dropdown-content {
   position: absolute;
   background-color: var(--clr-db);
-  min-width: 150px; /* 최소 너비 증가 */
+  min-width: 150px;
   z-index: 1;
-  display: block; /* 기본적으로 표시되도록 */
+  display: block;
   max-height: 240px;
   overflow-y: auto;
 }
 
-/* 드롭다운 항목 스타일 */
-.dropdown-content a {
+/* ✅ 드롭다운 버튼 항목 스타일 (a → button 변경) */
+.dropdown-option {
+  background: none; /* 기본 버튼 배경 제거 */
+  border: none; /* 기본 테두리 제거 */
   color: var(--clr-wh);
   padding: 12px 16px;
-  text-decoration: none;
   text-align: center;
   display: block;
-  transition: background-color 0.3s ease; /* 마우스 오버 시 색상 변경 효과 */
-  word-break: keep-all; /* 단어 중간 끊김 방지 */
+  width: 100%; /* 전체 폭 채우기 */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font: inherit; /* 부모 폰트 상속 */
+  word-break: keep-all;
 }
+
+/* hover 효과 동일하게 유지 */
+.dropdown-option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 클릭 시 outline 제거 (선택사항) */
+.dropdown-option:focus {
+  outline: none;
+}
+
 
 /* 드롭다운 항목에 마우스를 올렸을 때 */
 .dropdown-content a:hover {
