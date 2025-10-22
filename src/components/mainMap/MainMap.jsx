@@ -53,14 +53,14 @@ function MainMap() {
       const mungiAverrage = regionMungi?.reduce((sum, current) => sum + current, 0); // 객체들의 합
       const value = mungiAverrage / cnt // 객체들의 평균
       const grade = getDustLevel(value, 'PM10') // 평균값을 등급별로 나누는 처리(util)
-      return grade.label // TODO : 평균값의 등급 출력
+      return grade.label // 평균값의 등급 출력
     }
     const averrageVal = (region) => {
       const regionMungi = region?.map(item => item.pm10Value); // 미세먼지 값 다 가져오기
       const cnt = regionMungi?.length // 객체 갯수
       const mungiAverrage = regionMungi?.reduce((sum, current) => sum + current, 0); // 객체들의 합
       const value = mungiAverrage / cnt // 객체들의 평균
-      return value // TODO : 평균값의 등급 출력
+      return value // 평균값의 등급 출력
     }
 
     const utmk =
