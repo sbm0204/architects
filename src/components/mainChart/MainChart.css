@@ -113,7 +113,7 @@
 }
 
 .main-guide-sensitive-content, .main-guide-public-content {
-  line-height: 15px;
+  line-height: 17px;
   font-size: var(--fs-cnt-body);
   max-width: 300px;
   overflow: hidden;
