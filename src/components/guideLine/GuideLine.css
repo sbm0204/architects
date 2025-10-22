@@ -78,6 +78,7 @@
 
 .contents-bold {
   font-weight: var(--fw-bold);
+  padding-bottom: 10px;
 }
 .guide-line-contents {
   line-height: 2;
@@ -85,6 +86,14 @@
 }
 .sensitive, .public {
   min-height: 110px;
+}
+
+.guide-contents-box {
+  padding-left: 10px;
+}
+
+.guide-content {
+  padding: 10px 0px 0px 10px;
 }
 
 .guide-line-container-img {

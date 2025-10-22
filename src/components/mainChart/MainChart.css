@@ -112,12 +112,11 @@
 }
 
 .main-guide-sensitive-content, .main-guide-public-content {
-  line-height: 17px;
   font-size: var(--fs-cnt-body);
   max-width: 300px;
   overflow: hidden;
   text-align: left;
-  padding-top: 10px;
+  padding: 10px 0 0 10px;
 
   /* 2줄 이상 넘어가면 ...으로 처리 */
   display: -webkit-box;

@@ -89,3 +89,13 @@
 버튼의 그레이색은 #D9D9D9 혹은 #666666
 
 */
+.pseudo {
+  position: relative;
+}
+.pseudo::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 3.3;
+  content: '• ';
+}

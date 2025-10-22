@@ -88,8 +88,6 @@ useEffect(() => {
 
       // 차트용 대기질 데이터 요청 (즉시 반영)
       dispatch(getAirQuality({ stationName: match.stationName }));
-
-      console.log('위치 기반 자동 선택:', match.sidoName, match.stationName);
     }
 
     setNearbyFlg(false);
@@ -250,10 +248,10 @@ useEffect(() => {
             <div className='main-guide-card-sensitive'>
               <p className='main-guide-card-sub-title'>민감군</p>
               <div className='main-guide-sensitive-content-box'>
-                <div className='main-guide-sensitive-content'>
+                <div className={`main-guide-sensitive-content ${textJsondata?.public[0] ? 'pseudo' : ''}`}>
                   {textJsondata && textJsondata.sensitive[0]}
                 </div>
-                <div className='main-guide-sensitive-content'>
+                <div className={`main-guide-sensitive-content ${textJsondata?.public[1] ? 'pseudo' : ''}`}>
                   {textJsondata && textJsondata.sensitive[1]}
                 </div>
               </div>
@@ -262,10 +260,10 @@ useEffect(() => {
             <div className='main-guide-card-public'>
               <p className='main-guide-card-sub-title'>일반군</p>
               <div className='main-guide-public-content-box'>
-                <div className='main-guide-public-content'>
+                <div className={`main-guide-public-content ${textJsondata?.public[0] ? 'pseudo' : ''}`}>
                   {textJsondata && textJsondata.public[0]}
                 </div>
-                <div className='main-guide-public-content'>
+                <div className={`main-guide-public-content ${textJsondata?.public[1] ? 'pseudo' : ''}`}>
                   {textJsondata && textJsondata.public[1]}
                 </div>
               </div>
