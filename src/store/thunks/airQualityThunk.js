@@ -19,10 +19,10 @@ export const getAirQuality = createAsyncThunk(
       params: {
         serviceKey: axiosConfig.SERVICE_KEY,
         returnType: 'json',
-        numOfRows: 24, // 24시간 데이터
-        pageNo: 1,
+        numOfRows: 100, // 24시간 데이터
+        pageNo: 8,
         stationName: stationName,
-        dataTerm: 'DAILY', // 일별 데이터
+        dataTerm: 'MONTH', // 일별 데이터
         ver: '1.0',
       }
     };

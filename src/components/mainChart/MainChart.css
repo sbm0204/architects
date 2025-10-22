@@ -30,6 +30,7 @@
   height: 52px;
   gap: 75px;
   padding-left: 20px;
+  justify-content: space-between;
 }
 
 /* 오늘의 대기질 섹션 */
@@ -164,7 +165,6 @@
   .dropdown-btn {
   gap: 0px;
   padding-left: 0px;
-  justify-content: space-between;
 }
 
   .main-container {
