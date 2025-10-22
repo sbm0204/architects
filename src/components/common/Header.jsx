@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logonew from '../../assets/logonew.png'; //로고 임포트
@@ -12,7 +12,37 @@ function Header() {
  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
  const closeMenu = () => setIsMenuOpen(false);
 
- const seasonalBg = getSeasonBackground();
+
+  // 창 크기 변경 시 메뉴 자동 닫기
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1010) {
+        setIsMenuOpen(false);
+      }
+    };
+    handleResize(); // 초기 1회 실행
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
+  // 메뉴 열릴 때 body 스크롤 막기
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    // 컴포넌트 언마운트 시 복원
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMenuOpen]);
+
+  const seasonalBg = getSeasonBackground();
+
+
  return (
     <>
       {/* PC 헤더 */}
