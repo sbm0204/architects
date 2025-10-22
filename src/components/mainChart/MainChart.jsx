@@ -42,7 +42,7 @@ function MainChart() {
     setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
 
-  // ✅ 위치 허용 시 현재 위치 불러오기
+  // 위치 허용 시 현재 위치 불러오기
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -59,13 +59,13 @@ function MainChart() {
     }
   }, [dispatch]);
 
-  // ✅ 초기 기본값: 서울 종로구 데이터
+  // 초기 기본값: 서울 종로구 데이터
   useEffect(() => {
     dispatch(getMapList('서울'));
     dispatch(getAirQuality({ stationName: '종로구' }));
   }, [dispatch]);
 
-  // ✅ 화면 크기 감지
+  // 화면 크기 감지
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 800px)');
     const handleResize = (e) => setIsMobile(e.matches);
@@ -73,22 +73,30 @@ function MainChart() {
     return () => mediaQuery.removeEventListener('change', handleResize);
   }, []);
 
-  // ✅ 위치 기반 측정소 데이터 적용
-  useEffect(() => {
-    if (nearbyFlg && nearbyStations?.items?.length > 0 && mapList?.items?.length > 0) {
-      const closestStationName = nearbyStations.items[0].Station_name;
-      const match = mapList?.items.find(item => item.stationName === closestStationName);
-      if (match) {
-        dispatch(setRegion(match.sidoName));
-        setSelectedRegion(match.sidoName);
-        dispatch(setDistrict(match.stationName));
-        setSelectedDistrict(match.stationName);
-      }
-      setNearbyFlg(false);
-    }
-  }, [nearbyStations, mapList, dispatch, nearbyFlg]);
+// 위치 기반 측정소 데이터 적용 + 차트 반영
+useEffect(() => {
+  if (nearbyFlg && nearbyStations?.items?.length > 0 && mapList?.items?.length > 0) {
+    const closestStationName = nearbyStations.items[0].Station_name;
+    const match = mapList?.items.find(item => item.stationName === closestStationName);
 
-  // ✅ mapList 변경 시 stationData 동기화
+    if (match) {
+      // 지역, 상세지역 상태 업데이트
+      dispatch(setRegion(match.sidoName));
+      setSelectedRegion(match.sidoName);
+      dispatch(setDistrict(match.stationName));
+      setSelectedDistrict(match.stationName);
+
+      // 차트용 대기질 데이터 요청 (즉시 반영)
+      dispatch(getAirQuality({ stationName: match.stationName }));
+
+      console.log('위치 기반 자동 선택:', match.sidoName, match.stationName);
+    }
+
+    setNearbyFlg(false);
+  }
+}, [nearbyStations, mapList, dispatch, nearbyFlg]);
+
+  // mapList 변경 시 stationData 동기화
   useEffect(() => {
     if (mapList?.items && selectedRegion && selectedDistrict) {
       const stationData = mapList.items.find(
@@ -100,7 +108,7 @@ function MainChart() {
     }
   }, [mapList, selectedRegion, selectedDistrict]);
 
-  // ✅ 지역 변경 시 상세지역 자동 선택 (가나다순 첫 번째)
+  // 지역 변경 시 상세지역 자동 선택 (가나다순 첫 번째)
   useEffect(() => {
     if (mapList?.items && selectedRegion && !selectedDistrict) {
       const selectedItems = mapList.items.filter(item => item.sidoName === selectedRegion);
@@ -118,7 +126,7 @@ function MainChart() {
     }
   }, [mapList, selectedRegion, dispatch, selectedDistrict]);
 
-  // ✅ Dropdown 선택 핸들러
+  // Dropdown 선택 핸들러
   const handleRegionSelect = (region) => {
     setSelectedRegion(region);
     setSelectedDistrict(null); // 상세지역 초기화
@@ -135,13 +143,13 @@ function MainChart() {
     }
   };
 
-  // ✅ 지역/상세지역 리스트
+  // 지역/상세지역 리스트
   const sidoRegions = mapList?.items ? [...new Set(mapList.items.map(item => item.sidoName))] : [];
   const selectedItems = mapList?.items?.filter(val => val.sidoName === selectedRegion);
   const selectedStations = selectedItems?.map(item => item.stationName);
   const sortStations = selectedStations?.sort((a, b) => a.localeCompare(b));
 
-  // ✅ 대기질 카드 데이터
+  // 대기질 카드 데이터
   const airQualityData = selectedStationData ? [
     { title: '미세먼지', subtitle: '(PM-10)', value: selectedStationData.pm10Value || '-', unit: 'µg/m³' },
     { title: '초미세먼지', subtitle: '(PM-2.5)', value: selectedStationData.pm25Value || '-', unit: 'µg/m³' },
@@ -158,7 +166,7 @@ function MainChart() {
     { title: '아황산가스', subtitle: '(SO₂)', value: '-', unit: 'ppm' },
   ];
 
-  // ✅ 대기질 이미지 및 텍스트 처리
+  // 대기질 이미지 및 텍스트 처리
   const statusImages = {
     '좋음': good,
     '보통': moderate,
