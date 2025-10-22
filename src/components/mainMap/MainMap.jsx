@@ -11,7 +11,7 @@ import { getDustLevel } from '../../utils/getDustLevel.js';
 function MainMap() {
   
   useKakaoLoader({
-    appkey: '6dc95f71071f60705fb358e778a523b2',
+    appkey: import.meta.env.VITE_MAP_KEY,
     libraries: ['services'],
   });
 

@@ -57,7 +57,7 @@ function AirLineChart() {
   }
 
   if (status === 'failed') {
-    return <div>데이터를 불러오는데 실패했습니다.</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>데이터를 불러오는데 실패했습니다.</div>;
   }
   
   if (!airQuality || airQuality.labels.length === 0) {

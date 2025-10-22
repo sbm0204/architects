@@ -11,9 +11,9 @@ export default defineConfig({
       srcDir: 'src', // 커스텀 서비스워커 배치되어있는 디렉토리(경로에따라 사용 : 현재 src파일)
       filename: 'sw.js', // 커스텀 서비스워커 파일명
       includeAssets: [
-        '/src/assets/icons/180-logo.png',
-        '/src/assets/icons/192-logo.png',
-        '/src/assets/icons/512-logo.png',
+        '/assets/icons/180-logo.png',
+        '/assets/icons/192-logo.png',
+        '/assets/icons/512-logo.png',
       ],
       manifest: {
         name: 'ArchiTects', // PWA 앱 이름 (설치 배너에 표시)
@@ -28,7 +28,7 @@ export default defineConfig({
         icons: [
           // 편의를 위해서 public 디렉토리에 배치하고 사용할 것
           {
-            src: '/src/assets/icons/icon-192.png', // 로컬 경로 설정
+            src: '/assets/icons/192-logo.png', // 로컬 경로 설정
             sizes: '192x192', // 아이콘 크키
             type: 'image/png', // 해당 파일의 타입
             purpose: 'any',
@@ -37,7 +37,7 @@ export default defineConfig({
             // IOS의 경우, manifest를 무시하고, index.html의 `<link rel="apple-touch-icon">`만 사용
           },
           {
-            src: '/src/assets/icons/icon-512.png',
+            src: '/assets/icons/512-logo.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'maskable'

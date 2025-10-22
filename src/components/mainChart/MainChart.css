@@ -117,6 +117,7 @@
   max-width: 300px;
   overflow: hidden;
   text-align: left;
+  padding-top: 10px;
 
   /* 2줄 이상 넘어가면 ...으로 처리 */
   display: -webkit-box;

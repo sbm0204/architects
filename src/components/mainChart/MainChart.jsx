@@ -245,7 +245,6 @@ function MainChart() {
                 <div className='main-guide-sensitive-content'>
                   {textJsondata && textJsondata.sensitive[0]}
                 </div>
-                <br />
                 <div className='main-guide-sensitive-content'>
                   {textJsondata && textJsondata.sensitive[1]}
                 </div>
@@ -258,7 +257,6 @@ function MainChart() {
                 <div className='main-guide-public-content'>
                   {textJsondata && textJsondata.public[0]}
                 </div>
-                <br />
                 <div className='main-guide-public-content'>
                   {textJsondata && textJsondata.public[1]}
                 </div>
