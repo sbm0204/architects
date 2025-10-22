@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import logonew from '../../assets/logonew.png'; //로고 임포트
 import logomini from '../../assets/logonewmini.png'; //미니 로고 임포트
-import { getSeasonBackground } from '../../utils/getSeasonBackground'; //계절 js 임포트
+import { getSeasonBackground } from '../../utils/getSeasonBackground.js'; //계절 js 임포트
 
 
 function Header() {

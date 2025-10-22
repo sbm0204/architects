@@ -1,6 +1,6 @@
 import './Footer.css';
 import logonew from '../../assets/logonew.png'; //로고 임포트
-import { getSeasonBackground } from '../../utils/getSeasonBackground'; //계절 js 임포트
+import { getSeasonBackground } from '../../utils/getSeasonBackground.js'; //계절 js 임포트
 
 function Footer() {
  const seasonalBg = getSeasonBackground(); 
