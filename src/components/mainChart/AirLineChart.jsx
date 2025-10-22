@@ -57,11 +57,11 @@ function AirLineChart() {
   }
 
   if (status === 'failed') {
-    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>데이터를 불러오는데 실패했습니다.</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>데이터 불러오기 실패⚠️</div>;
   }
   
   if (!airQuality || airQuality.labels.length === 0) {
-    return <div>지역을 선택하면 시간별 농도 차트가 표시됩니다.</div>;
+    return <div>지역을 선택하면 농도 변화를 볼 수 있습니다. 📈</div>;
   }
 
   const labels = airQuality.labels;
