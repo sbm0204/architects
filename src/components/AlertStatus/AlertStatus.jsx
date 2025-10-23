@@ -1,10 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useMemo, useState } from 'react'; // 'useState' 추가
+import { useEffect, useMemo, useState, useCallback } from 'react'; // 'useState' 추가
 import { alertStatusIndex } from '../../store/thunks/alertStatusThunk.js'; 
-import { setFilterMonth } from '../../store/slices/alertStatusSlice.js'; // setFilterMonth 액션 추가
+import { setFilterMonth, setCurrentViewPage } from '../../store/slices/alertStatusSlice.js'; // setFilterMonth 액션 추가
 import AlertStatusCards from './AlertStatusCards.jsx';
 import './AlertStatus.css';
-import { groupAlertsByDateAndDistrict } from '../../utils/dataGroupingLogic.js';
+import { groupAlertsByDateAndDistrict, groupCardsByDate } from '../../utils/dataGroupingLogic.js';
+import dayjs from 'dayjs';
+import Pagination from './pagination.jsx';
+
+const ITEMS_PER_PAGE = 5;
 
 // 드롭다운 항목 정의
 const MONTH_OPTIONS = [
@@ -13,147 +17,223 @@ const MONTH_OPTIONS = [
     { value: 3, label: '3개월' },
 ];
 
+const NoPeriodSelectedMessage = () => (
+    <div className="prompt-msg-box">
+        <p className="prompt-msg-txt">
+            👉<span>기간 선택</span> 후 <br></br>미세먼지 특보를 확인해보세요.
+        </p>
+    </div>
+);
+
+// -------------------------------------------------------------
+// 메인 컴포넌트: AlertStatus
+// -------------------------------------------------------------
 const AlertStatus = () => {
     const dispatch = useDispatch(); 
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     
     const { 
-        list, 
-        currentView: displayedAlerts,
+        list: allAlerts, // API 로딩 로직을 위해 유지
+        filteredList,    // 💡 기간 필터링/정렬된 최종 목록 (카드 데이터 소스)
         loading: reduxLoading, 
         noMoreApiData, 
         error,
         filterMonth,
-    } = useSelector(state => state.alertStatus);
+        isPeriodSelected,
+        currentViewPage, // 💡 새로운 페이지 상태
+    } = useSelector(state => state.alertStatus); 
 
-    // 드롭다운 UI 상태 관리
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const today = dayjs().format('YYYY.MM.DD');
 
-    // 💡 핵심 추가 로직: displayedAlerts(개별 항목)를 그룹화 (dataDate, districtName 기준)
-    const groupedAlerts = useMemo(() => {
-        // Redux 상태가 변경될 때만 그룹화 로직을 다시 실행하여 성능 최적화
-        return groupAlertsByDateAndDistrict(displayedAlerts);
-    }, [displayedAlerts]);
-
-const isFinishedLoadingAllData = !reduxLoading && noMoreApiData; // 💡 noMoreViewData 제거
-
-    // Redux 로드 로직: filterMonth가 변경되거나, 초기 로드시 재요청
-    useEffect(() => {
-        // filterMonth가 변경되면 Redux store의 list와 view를 초기화 후 API 재요청이 필요합니다.
-        // 현재 alertStatusSlice.js에 filterMonth 변경 처리 로직이 없으므로,
-        // filterMonth 상태가 변경될 때마다 alertStatusIndex()를 호출하도록 수정합니다.
-        // AlertStatusSlice에서 list/filteredList/currentView를 초기화해야 합니다.
-        if (!reduxLoading && list.length === 0 && !noMoreApiData) {
-            // 이 로직은 초기 로드 시에만 사용되어야 합니다.
-            dispatch(alertStatusIndex()); 
-        }
-        // filterMonth가 변경되면 무조건 API 재요청 및 상태 초기화를 위해 dispatch(alertStatusIndex())를 호출해야 합니다.
-        // (alertStatusSlice.js에서 filterMonth가 변경될 때 list를 초기화하는 로직이 필요함)
-    }, [list.length, dispatch, reduxLoading, noMoreApiData, filterMonth]); // filterMonth를 종속성 배열에 추가
-    
-    // 드롭다운 핸들러
     const handleMonthChange = (month) => {
-        dispatch(setFilterMonth(month)); // Redux 상태 변경
+        dispatch(setFilterMonth(month));
         setIsDropdownOpen(false);
     };
 
-    const isListEmpty = !reduxLoading && groupedAlerts.length === 0 && noMoreApiData; 
-    const hasMoreDataToShow = !noMoreApiData; // API에서 더 불러올 데이터가 남았는지를 판단 (API가 페이지네이션을 사용한다면)
-    const currentLabel = MONTH_OPTIONS.find(opt => opt.value === filterMonth)?.label || '1개월';
+    // -------------------------------------------------------------
+    // 로직: 데이터 자동 로드 (최초 및 다음 API 페이지 요청)
+    // -------------------------------------------------------------
+    useEffect(() => {
+        const isInitialFetchNeeded = isPeriodSelected && allAlerts.length === 0;
+        const isNextPageFetchNeeded = isPeriodSelected && !reduxLoading && !noMoreApiData;
+
+        if (isInitialFetchNeeded || isNextPageFetchNeeded) {
+            console.log('Dispatching alertStatusIndex...');
+            dispatch(alertStatusIndex());
+        }
+    }, [dispatch, reduxLoading, noMoreApiData, isPeriodSelected, allAlerts.length]);
+    
+    // -------------------------------------------------------------
+    // 로직: 그룹핑 및 뷰 상태 계산
+    // -------------------------------------------------------------
+    const districtGroups = useMemo(() => {
+        // 💡 필터링된 목록(filteredList)을 사용
+        return groupAlertsByDateAndDistrict(filteredList);
+    }, [filteredList]);
+    
+    const dateGroups = useMemo(() => {
+        return groupCardsByDate(districtGroups);
+    }, [districtGroups]);
+
+    // 💡 페이지네이션 계산
+    const totalItems = dateGroups.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    
+    const displayedDateGroups = useMemo(() => {
+        const start = (currentViewPage - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+        return dateGroups.slice(start, end);
+    }, [dateGroups, currentViewPage]); // 💡 currentViewPage가 바뀔 때마다 뷰 갱신
+
+    // -------------------------------------------------------------
+    // UI 상태 계산 (버그 수정 반영)
+    // -------------------------------------------------------------
+    
+    // API 호출이 완전히 끝났고, 현재 그룹 데이터가 0개일 때만 true
+    const isListEmpty = isPeriodSelected 
+                        && !reduxLoading 
+                        && totalItems === 0 
+                        && noMoreApiData; 
+
+    // -------------------------------------------------------------
+    // 핸들러: 페이지네이션
+    // -------------------------------------------------------------
+    const handlePageChange = useCallback((page) => {
+        if (page >= 1 && page <= totalPages) {
+            dispatch(setCurrentViewPage(page));
+            // 페이지 이동 시 스크롤 맨 위로 이동
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
+    }, [dispatch, totalPages]);
+
 
     return (
         <div className="container">
-            {reduxLoading && (
-                <div className="loading-state-container">
-                    <div className="loading-spinner"></div>
-                    <p className="loading-txt">데이터 로딩 중...</p>
-                </div>
-            )}
+            {/* ---------------------------------------------------------------------- */}
+            {/* 💡 헤더 영역 (항상 표시) */}
+            {/* ---------------------------------------------------------------------- */}
+            <div className="title-area">
+                <h2 className="main-head-title">미세먼지 경보</h2>
+                
+                <div className="dropdown-container">
+                    
+                    <p className="dropdown-label">
+                        최근 특보 현황 <br></br>(기준: {today})
+                    </p>
 
-            {!reduxLoading && error && (
-                <div className="error-msg-box">
-                    <h1 className="error-msg-title">⚠️ 데이터 로드 실패</h1>
-                    <p className="error-msg-txt">오류 발생 - 다시 시도해 주세요.</p>
-                    <p className="error-msg-detail">오류 상태: {error}</p>
-                    <button 
-                        onClick={() => dispatch(alertStatusIndex())}
-                        className="retry-btn">다시 시도</button>
+                    <div 
+                        className={`dropdown-select ${isDropdownOpen ? 'open' : ''}`}
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                        <span className="selected-value">
+                            {/* currentButtonLabel 로직을 인라인으로 넣음 */}
+                            {isPeriodSelected 
+                                ? MONTH_OPTIONS.find(opt => opt.value === filterMonth)?.label || `${filterMonth}개월`
+                                : "기간 선택"
+                            }
+                        </span>
+                        <span className="dropdown-arrow">▼</span>
+                        
+                        {isDropdownOpen && (
+                            <ul className="dropdown-menu">
+                                {MONTH_OPTIONS.map((option) => (
+                                    <li 
+                                        key={option.value} 
+                                        className={`dropdown-item ${filterMonth === option.value ? 'selected' : ''}`}
+                                        onClick={(e) => {
+                                            e.stopPropagation(); 
+                                            handleMonthChange(option.value);
+                                        }}
+                                    >
+                                        {option.label}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </div>
-            )}
+            </div>
+
+            {/* ---------------------------------------------------------------------- */}
+            {/* 💡 콘텐츠 영역 조건부 렌더링 */}
+            {/* ---------------------------------------------------------------------- */}
+            <div className="content-wrapper">
+            {/* 1. 기간 미선택 상태 */}
+            {isPeriodSelected === false && <NoPeriodSelectedMessage />}
             
-            {!reduxLoading && !error && (
+            {/* 2. 기간 선택 후 콘텐츠 로직 시작 */}
+            {isPeriodSelected === true && (
                 <>
-                    {isListEmpty && (
-                        <div className="empty-msg-box">
-                            <p className="empty-msg-txt">
-                                📍 최근 {filterMonth}개월간 발령 내역이 없습니다.
+                    {error && (
+                        <div className="error-msg-box">
+                            <h3 className="error-msg-title">⚠️ 데이터 로드 실패</h3>
+                            <p className="error-msg-txt">
+                                오류 발생 - 다시 시도해 주세요.
                             </p>
+                            <p className="error-msg-detail">오류 상태: {error}</p>
+                            <button 
+                                className="retry-btn" 
+                                onClick={() => dispatch(setFilterMonth(filterMonth))} // 현재 필터로 재요청
+                            >
+                                다시 시도
+                            </button>
                         </div>
                     )}
 
-                    {!isListEmpty && 
-                    // 3. 정상 데이터 UI: 이미지에 맞게 제목 및 드롭다운 구조 변경
-                    <div className="title-area">
-                        <h1 className="title main-head-title">미세먼지 경보</h1>
-                        
-                        {/* 💡 드롭다운 UI 구현 */}
-                        <div className="dropdown-container">
-                            <p className="dropdown-label">최근 특보 현황</p>
-                            <div 
-                                className={`dropdown-select ${isDropdownOpen ? 'open' : ''}`}
-                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                            >
-                                <span className="selected-value">{currentLabel}</span>
-                                <span className="dropdown-arrow">▼</span>
-                                
-                                {isDropdownOpen && (
-                                    <ul className="dropdown-menu">
-                                        {MONTH_OPTIONS.map((option) => (
-                                            <li 
-                                                key={option.value} 
-                                                className={`dropdown-item ${filterMonth === option.value ? 'selected' : ''}`}
-                                                onClick={(e) => {
-                                                    e.stopPropagation(); // 부모 클릭 이벤트 방지
-                                                    handleMonthChange(option.value);
-                                                }}
-                                            >
-                                                {option.label}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                        </div>
-                        {/* 💡 이미지에서 날짜는 각 카드에 표시되므로, 여기서는 제거 */}
-                        {/* <div className="title-detail">({today} 기준 최근 1개월 특보 현황)</div> */}
-                    </div>}
-                    
-                    <div className="cards-wrapper">
-                        {groupedAlerts.map(( group ) => (
-                            // 💡 AlertStatusCards에 dataDate를 prop으로 전달하여 카드 상단에 표시하도록 합니다.
-                            <AlertStatusCards 
-                                key={`${group.dataDate}-${group.districtName}`} 
-                                groupedAlert={group}
-                                dataDate={group.dataDate} // 추가
-                            /> 
-                        ))}
+                    {/* 2-1. 로딩 상태 */}
+                    {!error && reduxLoading && totalItems === 0 && (
+                    <div className="loading-state-container">
+                        <div className="loading-spinner"></div>
+                        <p className="loading-txt">데이터 로딩 중...</p>
                     </div>
+                )}
+                
+                    
+                    {/* 2-3. 데이터 없음 상태 */}
+                    {/* 🚨 조건 수정: isListEmpty가 true일 때만 표시 */}
+                {!error & isListEmpty && (
+                    <div className="empty-msg-box">
+                        <p className="empty-msg-txt">
+                            최근 {filterMonth}개월간 발령 내역이 없습니다.
+                        </p>
+                    </div>
+                )}
+            
+                    {/* 2-4. 콘텐츠 렌더링 */}
+                    {!error & displayedDateGroups.length > 0 && (
+                        <>
+                            {displayedDateGroups.map(dateGroup => (
+                                <div key={dateGroup.date} className="date-group-container"> 
+                                    
+                                    {/* 날짜 헤더 표시 (2025.09.26 형식) */}
+                                    <h3 className="date-header">
+                                        {dayjs(dateGroup.date).format('YYYY.MM.DD')}
+                                    </h3>
 
-                    {/* 더 보기 / 끝 메세지 UI는 변경 사항 없음 */}
-                    {!isListEmpty && (
-                        <div className="pagination-area">
-                            {/* 💡 API 로딩이 끝나지 않았는데 데이터가 부족하다면 로딩 메시지만 표시 */}
-                            {!noMoreApiData && !reduxLoading && hasMoreDataToShow ? (
-                                <p className="loading-txt">추가 데이터 로딩 중...</p>
-                            ) : (
-                                isFinishedLoadingAllData && groupedAlerts.length > 0 &&
-                                <p className="end-msg">
-                                    {filterMonth}개월간 모든 발령 내역을 불러왔습니다.
-                                </p>
-                            )}
-                        </div>
+                                    {/* 카드 래퍼와 카드들 표시 */}
+                                    <div className="cards-wrapper">
+                                        {dateGroup.cards.map(cardGroup => (
+                                            <AlertStatusCards 
+                                                key={`${cardGroup.dataDate}-${cardGroup.districtName}`} 
+                                                groupedAlert={cardGroup}
+                                                // dataDate={cardGroup.dataDate}
+                                            /> 
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                            
+                            {/* 💡 페이지네이션 UI */}
+                                <Pagination 
+                                    currentPage={currentViewPage}
+                                    totalPages={totalPages}
+                                    onPageChange={handlePageChange}
+                                />
+                        </>
                     )}
                 </>
             )}
+            </div> {/* 🚨 content-wrapper 끝 */}
         </div>
     );
 };

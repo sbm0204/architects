@@ -11,15 +11,16 @@ dayjs.extend(isSameOrBefore);
  * @param {number} months - 필터링할 개월 수 (기본값: 1)
  * @returns {Array<Object>} 최근 `months`개월 동안의 데이터 항목 배열
  */
-export function getRecentOneMonthData(allData, months = 1) { // months 파라미터 추가
+export function getRecentOneMonthData(allData, months = 1) { 
     const today = dayjs().startOf('day')
-    // 💡 개월 수만큼 과거 시점을 계산하도록 수정
+    
+    // 💡 today(10/24)에서 N개월을 정확히 뺀 시점 (예: 1개월 -> 9/24)
     const monthsAgo = today.subtract(months, 'month').startOf('day'); 
     
     const filteredData = allData.filter(item => {
         const itemDate = dayjs(item.issueDate).startOf('day');
         
-        // monthsAgo 기준으로 비교
+        // 💡 itemDate가 monthsAgo와 같거나 이후(최신)인 데이터만 통과시킴
         const isRecentEnough = itemDate.isSameOrAfter(monthsAgo, 'day'); 
         const isNotFuture = itemDate.isSameOrBefore(today, 'day'); 
         

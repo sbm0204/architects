@@ -1,7 +1,56 @@
+/* -----------------0. 콘텐츠 래퍼 스타일 (Footer 깜빡임 방지 핵심) ----------------- */
+.content-wrapper {
+    /* 💡 뷰포트 높이(100vh)에서 Header, Title Area, Footer의 높이를 뺀 값으로 설정 */
+    /* 정확한 값을 알 수 없다면 임시로 큰 값을 설정하여 Footer가 밀려나지 않게 합니다. */
+    min-height: 60vh; /* 예를 들어, 뷰포트 높이의 60%를 최소 높이로 확보 */
+    width: 100%;
+    /* 필요한 경우 overflow-x: hidden; 추가 */
+}
+
+/* -----------------2-1. 기간 선택 프롬프트 메세지 스타일----------------- */
+.prompt-msg-box {
+padding: 30px;
+    border: 1px dashed var(--clr-dg); /* 점선 테두리 기준 */
+    border-radius: 20px; 
+    text-align: center;
+    background-color: var(--clr-wh); 
+    margin: 120px 30px 40px 30px;
+    max-width: 600px;
+    min-height: 200px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+}
+
+@media (min-width: 600px) {
+    .prompt-msg-box {
+    margin: 100px auto; 
+    }
+}
+
+.prompt-msg-txt {
+    color: var(--clr-bk); 
+    line-height: 1.6;
+    font-size: var(--fs-msg-body);
+}
+
+.prompt-msg-txt span {
+    font-weight: var(--fw-bold);
+}
+
 /* -----------------1. 로딩 상태 스타일----------------- */
 .loading-state-container {
-  text-align: center;
-  padding: 30px;
+/* 💡 prompt-msg-box와 동일하게 수정: 가로 중앙 정렬 및 여백 통일 */
+    margin: 120px 30px 40px 30px;
+    padding: 30px;
+    max-width: 600px; 
+    min-height: 200px; /* 이 값은 이제 Wrapper가 대부분 처리합니다. */
+    border-radius: 20px; /* 로딩 컨테이너에 테두리는 없더라도 곡률은 추가 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
 }
 
 .loading-spinner {
@@ -27,13 +76,20 @@
 
 /* -----------------1-1. API 오류 메세지 스타일----------------- */
 .error-msg-box {
-    padding: 30px;
+    margin: 120px 30px 40px 30px;
+    padding: 30px;    
     border: 1px solid var(--clr-r);
     border-radius: 20px;
     text-align: center;
     background-color: var(--clr-wh);
-    margin: 100px auto; 
     max-width: 600px;
+
+    /* 💡 최소 높이를 설정하여 일관된 크기 확보 */
+    min-height: 200px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; 
 }
 
 .error-msg-title {
@@ -80,19 +136,29 @@
 
 /* -----------------2. 불러올 데이터가 없을 때 메세지 스타일----------------- */
 .empty-msg-box {
-    padding: 30px;
-    border: 1px solid var(--clr-gy); 
+    /* 💡 prompt-msg-box와 동일하게 설정 */
+    padding: 30px; /* 상하 여백을 padding으로 설정하여 높이 확보 */
+    border: 1px dashed var(--clr-dg); /* 🚨 점선 테두리로 변경 */
     border-radius: 20px; 
     text-align: center;
     background-color: var(--clr-wh); 
-    margin: 250px auto;
-    max-width: 500px;
+    
+    margin: 120px 30px 40px 30px;
+    max-width: 600px;
+    
+    min-height: 200px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
 }
 
 .empty-msg-txt {
+    /* 💡 prompt-msg-txt와 동일하게 설정 */
     color: var(--clr-bk); 
-    line-height: 1.5;
-    font-size: var(--fs-msg-body);
+    line-height: 1.6;
+    font-size: var(--fs-msg-body); /* 폰트 크기 통일 */
+    margin: 0; /* 불필요한 마진 제거 */
 }
 
 /* -----------------3. 정상적으로 받아온 데이터로 만든 카드 스타일----------------- */
@@ -101,48 +167,48 @@
     margin-top: 85px;
     margin-bottom: 20px; /* 카드와의 간격 조정 */
     padding: 0 30px;
-    
-    /* 💡 제목과 드롭다운을 한 줄에 배치하고 정렬 */
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end; /* 제목 아래쪽을 기준으로 정렬 */
 }
 
-.main-head-title { /* .title에서 이름 변경 */
-    /* width: 230px; 제거 */
+.main-head-title { 
+    width: 280px; 
     font-size: var(--fs-sub);
     font-weight: var(--fw-bold);
     text-align: left;
-    margin: 0;
 }
 
 /* ============================================================= */
 /* 드롭다운 스타일 추가 */
 /* ============================================================= */
 .dropdown-container {
+    padding-top: 10px;
     display: flex;
     align-items: center;
     position: relative; /* 드롭다운 메뉴 포지셔닝을 위한 기준점 */
-    gap: 10px;
+    gap: 25px;
 }
 
 .dropdown-label {
     font-size: var(--fs-cnt-body);
     color: var(--clr-dg);
     font-weight: normal;
+    margin: 0;
 }
 
 .dropdown-select {
     position: relative;
-    padding: 8px 15px;
+    padding: 8px 15px; /* 💡 패딩 조정 (버튼 크기 조절) */
     border: 1px solid var(--clr-gy);
     border-radius: 15px;
     cursor: pointer;
     background-color: var(--clr-wh);
-    min-width: 80px;
+    min-width: 100px; /* 💡 "기간 선택" 텍스트를 수용할 수 있도록 최소 너비 조정 */
     text-align: center;
-    font-size: var(--fs-cnt-sub);
     font-weight: var(--fw-bold);
+    color: var(--clr-bk); /* 텍스트 색상 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
 }
 
 .dropdown-select.open {
@@ -175,12 +241,13 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     overflow: hidden;
+    min-width: 100%; /* 버튼 너비를 따라가도록 */
 }
 
 .dropdown-item {
     padding: 10px 15px;
     cursor: pointer;
-    font-size: var(--fs-cnt-sub);
+    font-size: 20px;
     font-weight: normal;
 }
 
@@ -190,11 +257,11 @@
 }
 
 .cards-wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-  width: 100%;
-  gap: 20px;
-  padding: 20px 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    width: 100%;
+    gap: 20px;
+    padding: 15px 0; /* 💡 좌우 패딩 제거, 상하 패딩만 남김 */
 }
 
 @media (max-width: 1300px) {
@@ -216,7 +283,7 @@
 }
 
 
-/* -----------------4. 더 보기 / 끝 메세지 스타일----------------- */
+/* -----------------4. 끝 메세지 스타일----------------- */
 
 .pagination-area {
     text-align: center;
@@ -233,8 +300,69 @@
 
 .end-msg {
     color: var(--clr-bk);
-    font-size: var(--fs-cnt-sub); /* 글자 크기 조정 */
+    font-size: 20px; /* 글자 크기 조정 */
     padding: 10px;
     text-align: center;
     margin-bottom: 0; /* padding-bottom을 pagination-area에서 처리 */
+}
+
+/* -----------------5. 날짜별 그룹 헤더 스타일 (새로 추가)----------------- */
+.date-group-container {
+    /* 카드 래퍼의 좌우 패딩(30px)을 대신 담당 */
+    width: 100%;
+    padding: 0 30px;
+}
+
+.date-header {
+    padding-top: 20px;
+    font-size: 25px; /* 미세먼지 경보 제목과 비슷하거나 조금 작게 */
+    font-weight: var(--fw-bold);
+    color: var(--clr-dg);
+    margin-bottom: 5px;
+    position: relative;
+    width: fit-content;
+    padding-right: 20px; /* 선 길이 조절용 여백 */
+}
+
+/* 이미지에서 본 날짜 밑줄 스타일 구현 */
+.date-header::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* 날짜 텍스트 아래에 위치 */
+    left: 0;
+    width: 100%; /* 날짜 텍스트 길이만큼 */
+    height: 2px;
+    background-color: var(--clr-gy); /* 구분선 색상 */
+}
+
+/* 💡 미디어 쿼리도 padding으로 인해 max-width가 660px보다 커질 때 auto margin이 작동하도록 유지합니다. */
+@media (min-width: 660px) { 
+    .prompt-msg-box,
+    .loading-state-container,
+    .empty-msg-box,
+    .error-msg-box {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* -----------------5. 무한 스크롤 로딩 인디케이터 스타일 ----------------- */
+.loading-state-container.small-loading {
+    /* 기본 로딩 컨테이너 스타일 재사용 */
+    margin: 40px 30px; 
+    padding: 20px 30px; /* 패딩을 줄여서 크기를 작게 만듭니다. */
+    min-height: 0; /* 최소 높이 해제 */
+    max-width: none; /* 너비 제한 해제 */
+}
+
+.loading-state-container.small-loading .loading-spinner {
+    /* 스피너 크기 조정 (선택 사항) */
+    width: 25px;
+    height: 25px;
+    border-width: 3px;
+}
+
+.loading-state-container.small-loading .loading-txt {
+    font-size: 0.9em;
+    margin-top: 5px;
 }
