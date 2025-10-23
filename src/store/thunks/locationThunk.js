@@ -11,7 +11,7 @@ const getLocation = createAsyncThunk(
     const config = {
       params: {
         serviceKey: axiosConfig.SERVICE_KEY,
-        ver: 1.0,
+        ver: axiosConfig.VER,
         tmX: lon,
         tmY: lat
       }

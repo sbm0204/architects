@@ -6,13 +6,10 @@ import proj4 from 'proj4';
 import { useSelector } from 'react-redux';
 import { getDustLevel } from '../../utils/getDustLevel.js';
 
-// ※ npm install react-kakao-maps-sdk 을 이용하여 라이브러리 설치하여 사용해야 함!
-
 function MainMap() {
   
   useKakaoLoader({
-    appkey: '6dc95f71071f60705fb358e778a523b2',
-    // appkey: import.meta.env.VITE_MAP_KEY,
+    appkey: import.meta.env.VITE_MAP_KEY,
     libraries: ['services'],
   });
 
@@ -49,7 +46,7 @@ function MainMap() {
     }
 
     const averrage = (region) => {
-      const regionMungi = region?.map(item => item.pm10Value); // 미세먼지 값 다 가져오기
+      const regionMungi = region?.map(item => {if(item.pm10Value !== 0 ) { return item.pm10Value }}); // 미세먼지 값 0인것(장비점검)빼고 다 가져오기
       const cnt = regionMungi?.length // 객체 갯수
       const mungiAverrage = regionMungi?.reduce((sum, current) => sum + current, 0); // 객체들의 합
       const value = mungiAverrage / cnt // 객체들의 평균
@@ -57,7 +54,7 @@ function MainMap() {
       return grade.label // 평균값의 등급 출력
     }
     const averrageVal = (region) => {
-      const regionMungi = region?.map(item => item.pm10Value); // 미세먼지 값 다 가져오기
+      const regionMungi = region?.map(item => {if(item.pm10Value !== 0 ) { return item.pm10Value }}); // 미세먼지 값 0인것(장비점검)빼고 다 가져오기
       const cnt = regionMungi?.length // 객체 갯수
       const mungiAverrage = regionMungi?.reduce((sum, current) => sum + current, 0); // 객체들의 합
       const value = mungiAverrage / cnt // 객체들의 평균

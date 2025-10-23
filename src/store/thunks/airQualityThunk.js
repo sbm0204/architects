@@ -23,7 +23,7 @@ export const getAirQuality = createAsyncThunk(
         pageNo: 8,
         stationName: stationName,
         dataTerm: 'MONTH', // 일별 데이터
-        ver: '1.0',
+        ver: axiosConfig.VER,
       }
     };
 

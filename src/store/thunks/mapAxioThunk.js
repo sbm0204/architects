@@ -11,7 +11,7 @@ const getMapList = createAsyncThunk(
     const config = {
       params: {
         serviceKey: axiosConfig.SERVICE_KEY,
-        ver: 1.0,
+        ver: axiosConfig.VER,
         sidoName: '전국',
         numOfRows: 1000,
 
