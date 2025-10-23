@@ -76,7 +76,7 @@ function AirBarChart() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '80vw', height: '25vh' }}>
+    <div style={{ position: 'relative', width: '80vw', height: '300px' }}>
       <div style={{ position: 'absolute', top: '-5px', left: '0', fontSize: '12px', color: '#666' }}>µg/m³</div>
       <Bar options={options} data={data} />
     </div>

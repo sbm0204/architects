@@ -85,7 +85,7 @@
   font-size: var(--fs-cnt-body);
 }
 .sensitive, .public {
-  min-height: 110px;
+  min-height: 130px;
 }
 
 .guide-contents-box {

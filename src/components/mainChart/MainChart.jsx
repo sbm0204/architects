@@ -13,7 +13,6 @@ import bad from '../../assets/bad.png';
 import veryBad from '../../assets/very-bad.png';
 import caution from '../../assets/Caution.png';
 import { getDustLevel } from '../../utils/getDustLevel.js';
-import { getTodayDate } from '../../utils/dateFilter.js';
 import dustJson from '../../configs/guide-data.js';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -25,7 +24,7 @@ function MainChart() {
   const navigate = useNavigate();
   const moveGuide = () => { navigate('/guideLine'); };
 
-  const todayDate = getTodayDate();
+  const todayDate = dayjs().format('YY.MM.DD');
   const currentHour = dayjs().format('HH');
 
   const [selectedRegion, setSelectedRegion] = useState('서울');
@@ -270,7 +269,7 @@ useEffect(() => {
             </div>
           </div>
           <div className='main-guide-button'>
-            <p className='main-button' onClick={moveGuide}>더 많은 요령</p>
+            <p className='main-button' onClick={moveGuide}>더 보기</p>
           </div>
         </div>
       </div>

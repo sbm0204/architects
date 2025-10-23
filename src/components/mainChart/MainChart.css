@@ -121,7 +121,7 @@
   /* 2줄 이상 넘어가면 ...으로 처리 */
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
 }
 
 .main-guide-button {
@@ -132,11 +132,13 @@
 .main-button {
   background-color: var(--clr-gy);
   border-radius: 20px;
-  width: 100px;
+  width: 70px;
   text-align: center;
   font-size: 13px;
+  font-weight: 800;
   line-height: 20px;
   letter-spacing: -1px;
+  padding: 5px;
   color: rgba(0, 0, 0, 0.950);
 }
 
@@ -175,5 +177,30 @@
     padding-top: 20px;
   }
   
-  /* 추후 수정예정 */
+}
+
+@media (max-height) {
+  .contents-size-main-left {
+    margin: 0;
+  }
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    gap: 10px; /* 모바일 화면에서 카드 간격 조정 */
+  }
+  
+  .dropdown-btn {
+  gap: 0px;
+  }
+  
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chart-padding {
+    padding-left: 0;
+    padding-top: 20px;
+  }
+
 }

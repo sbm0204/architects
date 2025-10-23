@@ -324,3 +324,33 @@
     margin: 0.1px 0;
   }
 }
+
+/* 휴대폰 가로로 돌렸을 때 미디어 쿼리 */
+@media (max-height: 450px) {
+  .mobile-menu {
+    height: 95vh;
+    right: -77.5%;
+    width: 55.5%;
+    padding: 10px 35px;
+  }
+
+  .menu-item {
+    font-size: var(--fs-msg-body);
+    height: 20%;
+    width: 70%;
+  }
+
+  .menu-first-line {
+    margin: 0.5px 0;
+    width: 70%;
+  }
+
+  .menu-line {
+    margin: 0.1px 0;
+    width: 70%;
+  }
+
+  .mobile-menu-header {
+    width: 98%;
+  }
+}
