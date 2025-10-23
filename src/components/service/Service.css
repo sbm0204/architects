@@ -1,0 +1,88 @@
+.service-title {
+  width: 200px;
+  font-size: var(--fs-sub);
+  font-weight: var(--fw-bold);
+  margin: 85px 0px 55px;
+}
+
+.service-container {
+  padding: 0 max(calc((100% - 1100px) / 2) , 30px) 30px;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+}
+
+.service-card {
+  display: flex;
+  gap: 110px;
+}
+
+.card-reverse {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.underline {
+  width: 100px;
+  height: 2px;
+  border: 1px solid var(--clr-gy);
+  margin: 40px 0;
+}
+
+.view-mobile {
+  display: none;
+}
+
+.service-card .card-title {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-cnt-title);
+  margin-bottom: 55px;
+}
+
+.content-box > p {
+  line-height: 1.6;
+  color: var(--clr-bk);
+  margin: 5px 0;
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 700px 이하 (모바일) */
+@media (max-width: 800px) {
+  .view-desktop {
+    display: none;
+  }
+
+  .view-mobile {
+    display: flex;
+  }
+
+  .service-card {
+    display: block;
+  }
+
+  .service-card .card-title {
+    font-weight: var(--fw-bold);
+  }
+
+  .service-card p {
+    font-size: var(--fs-cnt-body);
+    line-height: 2;
+  }
+
+  .image-box {
+    margin-bottom: 55px;
+  }
+
+  .image-box img {
+    max-width: 85vw;
+  }
+}

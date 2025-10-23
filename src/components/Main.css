@@ -1,9 +1,15 @@
-.contents-size {
-  width: 1400px;
+.main-display {
+  display: grid;
+  grid-template-columns: 9fr 5fr;
+  max-width: 1400px;
   margin: 20px auto;
-  background-color: aquamarine;
+  gap: 20px;
 }
 
-.main-contents {
-  text-align: center;
+@media (max-width: 800px) {
+  .main-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

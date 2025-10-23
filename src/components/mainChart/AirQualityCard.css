@@ -1,0 +1,37 @@
+.air-quality-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--clr-bk);
+  border-radius: 10px;
+  padding: 5px 0;
+}
+
+.card-title {
+  font-size: var(--fs-cnt-body);
+  font-weight: var(--fw-bold);
+  margin-bottom: 5px;
+}
+
+.card-subtitle {
+  font-size: 10px;
+  color: var(--clr-dg);
+  margin-bottom: 15px;
+}
+
+.card-image {
+  width: 54px;
+  height: 65px;
+}
+
+.card-value {
+  font-size: var(--fs-cnt-body);
+  font-weight: var(--fw-bold);
+  color: var(--clr-bk);
+  margin-bottom: 5px;
+}
+
+.card-unit {
+  font-size: 10px;
+  color: var(--clr-dg);
+}

@@ -1,15 +1,25 @@
-import './Main.css';
+import { useEffect } from "react";
+import MainChart from "./mainChart/MainChart"
+import MainMap from "./mainMap/MainMap"
+import { useDispatch } from "react-redux";
+import { getMapList } from "../store/thunks/mapAxioThunk";
+import './Main.css'
 
 function Main() {
-  return (
-      <div className='contents-size'>
+  const dispatch = useDispatch();
 
-        <h1 className='main-contents'>이곳에 contents 입력하세요.</h1>
-        <h1 className='main-contents'>이곳에 contents 입력하세요.</h1>
-        <h1 className='main-contents'>이곳에 contents 입력하세요.</h1>
-        
+  useEffect(() => {
+    dispatch(getMapList());
+  }, []);
+
+  return (
+    <>
+      <div className="main-display">
+        <MainChart />
+        <MainMap />
       </div>
+    </>
   )
 }
 
-export default Main;
+export default Main

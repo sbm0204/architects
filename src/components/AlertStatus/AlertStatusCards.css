@@ -1,0 +1,118 @@
+/* ============================================================= */
+/* 스크롤 내부 상세 항목 */
+/* ============================================================= */
+.alert-detail-container {
+  font-size: var(--fs-cnt-body);
+  color: var(--clr-bk);
+}
+
+.alert-detail-moveName {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-cnt-body);
+  color: var(--clr-dg);
+  padding-bottom: 10px;
+  display: block;
+}
+
+.alert-detail-info {
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+.alert-detail-value {
+  font-weight: var(--fw-bold);
+}
+
+.alert-detail-time {
+  padding-left: 10px;
+  font-size: var(--fs-cnt-body);
+  color: var(--clr-dg);
+}
+
+/* ============================================================= */
+/* 메인 카드 및 레이아웃 */
+/* ============================================================= */
+.alert-status-card {
+  height: 280px; 
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-wh);
+  border: 1px solid var(--clr-bk);
+  padding: 20px;
+  overflow: hidden; 
+}
+
+/* ============================================================= */
+/* 카드 헤더 및 제목 영역 (스크롤X) */
+/* ============================================================= */
+.alert-status-card-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 5px;
+  flex-shrink: 0; /* 스크롤 되지 않도록 고정 */
+}
+
+.alert-status-card-issueGbn {
+  display: block;
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  line-height: 40px;
+  font-size: var(--fs-msg-body);
+  font-weight: var(--fw-bold);
+  flex-shrink: 0;
+}
+
+/* 대기 상태에 따른 다른 색깔의 뱃지 설정 */
+.badge-warning {
+  background-color: var(--clr-y); 
+  color: var(--clr-bk); 
+}
+
+.badge-danger {
+  background-color: var(--clr-r);
+  color: var(--clr-wh);
+}
+
+.badge-default {
+  background-color: var(--clr-dg); 
+  color: var(--clr-wh);
+}
+
+.alert-status-card-title-area {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--clr-gy);
+  flex-shrink: 0;
+}
+
+.alert-status-card-districtName {
+  color: var(--clr-bk);
+  font-size: var(--fs-cnt-title); 
+  font-weight: var(--fw-bold);
+  text-align: left;
+  margin: 0;
+}
+
+.alert-status-card-date {
+  color: var(--clr-dg);
+  font-size: var(--fs-cnt-body);
+  text-align: left;
+  margin: 5px 0 0 0;
+}
+
+/* ============================================================= */
+/* 스크롤 영역 */
+/* ============================================================= */
+.alert-status-card-scroll-contents {
+  flex-grow: 1; /* 남은 세로 공간을 모두 차지 */
+  overflow-y: auto; /* 내용이 넘칠 때만 스크롤바 표시 */
+  padding-right: 15px; /* 스크롤바 때문에 내용이 가려지지 않도록 패딩 부여 */
+  display: flex; 
+  flex-direction: column;
+  gap: 15px; 
+  line-height: 1.5;
+  padding-top: 20px;
+}

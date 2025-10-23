@@ -1,0 +1,61 @@
+.footer{
+    max-width: 100vw;
+    width: 100%;
+    height: 150px;
+}
+
+.footer-contents {
+    width: 100%;
+    height: 150px; 
+}
+
+.footer-contents-box {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer-contents-box > img {
+    width: 110px;
+    height: 110px;
+}
+
+.footer-contents-box > p {
+    color: var(--clr-wh);
+    font-size: var(--fs-msg-body);
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+/* 기본 (PC) 스타일은 그대로 유지 (위) */
+
+
+/* ----- 모바일 반응형 미디어 쿼리(아래) ----- */
+
+@media screen and (max-width: 1010px) {
+    .footer {
+        height: 75px;
+    }
+
+    .footer-contents {
+        height: 75px;
+     }
+
+    .footer-contents-box {
+        height: 75px;
+        justify-content: center;
+    }
+
+    .footer-contents-box > img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .footer-contents-box > p {
+        display: none; /* 모바일에서 문구 숨김 */
+    }
+}

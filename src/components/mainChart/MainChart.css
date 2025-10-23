@@ -1,0 +1,179 @@
+.contents-size-main-left {
+  max-width: 800px;
+  width: 100%;
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main-container {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.main-head-container {
+  max-width: 530px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+.dropdown-btn {
+  width: 100%;
+  display: flex;
+  height: 52px;
+  padding-left: 20px;
+  justify-content: space-between;
+}
+
+/* 오늘의 대기질 섹션 */
+.air-quality-section {
+  width: 100%;
+}
+
+.air-quality-title {
+  font-size: var(--fs-cnt-sub); /* 요청된 폰트 사이즈 */
+  font-weight: var(--fw-bold);
+  margin-top: 55px;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  justify-content: center; /* 카드들을 중앙에 정렬 */
+  gap: 10px; /* 카드 사이의 간격 */
+}
+
+.chart-padding {
+  padding-left: 20px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.chart-placeholder {
+  padding: 180px 20px 20px 20px;
+  color: var(--clr-dg);
+}
+
+/* 행동요령 */
+.main-guide-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+.main-guide-title {
+  width: 120px;
+}
+
+.main-guide-card-container {
+  max-width: 760px;
+  border: 1px solid var(--clr-bk);
+  border-radius: 20px;
+  padding: 20px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main-guide-image {
+  padding-left: 10px;
+}
+
+.main-guide-card {
+  display: grid;
+  /* flex-direction: row;
+  justify-content: space-around; */
+  grid-template-columns: 1fr 2px 1fr;
+  gap: 10px;
+}
+
+.main-guide-card-sensitive, .main-guide-card-public {
+  line-height: 30px;
+  padding: 10px;
+}
+
+.main-guide-card-sub-title {
+  font-size: var(--fs-cnt-body);
+  font-weight: var(--fw-bold);
+}
+
+.main-guide-sensitive-content-box, .main-guide-public-content-box {
+  padding: 10px;
+}
+
+.main-guide-sensitive-content, .main-guide-public-content {
+  font-size: var(--fs-cnt-body);
+  max-width: 300px;
+  overflow: hidden;
+  text-align: left;
+  padding: 10px 0 0 10px;
+
+  /* 2줄 이상 넘어가면 ...으로 처리 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.main-guide-button {
+  display: flex;
+  justify-content: end;
+}
+
+.main-button {
+  background-color: var(--clr-gy);
+  border-radius: 20px;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: -1px;
+  color: rgba(0, 0, 0, 0.950);
+}
+
+.main-button:hover {
+  cursor: pointer;
+}
+
+.chart-placeholder {
+  width: 14vw;
+  height: 57.2vh;
+  padding: 20px;
+}
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 850px) {
+  .contents-size-main-left {
+    margin: 0;
+  }
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    gap: 10px; /* 모바일 화면에서 카드 간격 조정 */
+  }
+
+  .dropdown-btn {
+  gap: 0px;
+}
+
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-padding {
+    padding-left: 0;
+    padding-top: 20px;
+  }
+  
+  /* 추후 수정예정 */
+}

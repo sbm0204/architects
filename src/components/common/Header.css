@@ -1,10 +1,326 @@
 .header-box {
+  max-width: 100vw;
   width: 100%;
   height: 150px;
-  background-color: pink;
 }
 
-.header-box-text {
+.header-background {
+  width: 100%;
+  height: 150px;  
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.header-contents {
+  max-width: 1400px;
+  height: 150px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  align-items: start;
+  margin: 0 auto;
+}
+
+.header-logo {
+  width: 135px;
+  height: 150px;
+  padding-top: 7.5px;
+}
+
+.header-contents .header-logo > img {
+  width: 135px;
+  height: 135px;
+
+}
+
+.header-nav {
+  height: 150px;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-items: center; /* 가로 중앙 정렬 */
+  gap: 40px;
+}
+
+.header-nav-contents {
+  font-size: var(--fs-sub);
+  font-weight: 600;
+  color: var(--clr-wh);
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 3px;
+  line-height: 1.1;           /* 나눔스퀘어 폰트 적용 시 행간을 조금 조여서 수직 중심 맞춤 */
+  transform: translateY(2px); /* 폰트가 위로 들리는 특성 보정 */
+}
+
+.nav-line {
+  color: var(--clr-wh);
+  font-size: 60px;
   text-align: center;
-  color: #fff;
+  line-height: 1;
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-items: center; /* 가로 중앙 정렬 */
+  height: 100%; /* 부모 높이와 동일하게 */
+  margin-bottom: 5px;
+  transform: translateY(2px); /* 시각적 보정 (글꼴별 미세 튀는 현상 방지) */
+}
+
+
+/* ------- 모바일 반응형 css -------- */
+
+.header-mobile {
+  width: 100vw;
+  height: 75px;
+}
+
+.header-mobile-box {
+   width: 100vw;
+   height: 75px;
+ }
+
+.header-mobile-background {
+   width: 100%;
+   height: 75px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+ }
+
+
+.header-mobile-contents {
+  height: 75px;  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.header-mobile-logo {
+  max-width: 55px;
+  max-height: 55px;
+  margin-top: 2px;
+}
+
+.header-mobile-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.header-mobile-hamburger span {
+  display: block;
+  height: 3px;
+  background-color: var(--clr-wh);
+  border-radius: 2px;
+}
+
+
+/* --- 햄버거 버튼 클릭 시 모바일 메뉴 --- */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -75%;
+  width: 75%;
+  height: 80vh;
+  background: linear-gradient(to top, var(--clr-db), var(--clr-md-db));
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.3);
+  transition: right 0.4s ease;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  padding: 6%;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu-header {
+  width: 95%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  font-size: var(--fs-sub);
+  margin-bottom: 8px;
+  background: none;
+  border: none;
+  color: var(--clr-wh);
+  cursor: pointer;
+}
+
+.mobile-menu-items {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 20px;
+}
+
+.menu-first-line {
+  width: 75%;
+  height: 2px;
+  background-color: var(--clr-wh);
+  margin: 10px 0;
+}
+
+.itemhome {
+  height: 70px;
+  width: 90%;
+  text-align: right;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mini-homeicon {
+  width: 70px;
+  height: 70px;
+}
+
+.menu-item {
+  display: flex;              /* 글자 중앙정렬을 확실히 */
+  align-items: center;        /* 세로 중앙정렬 */
+  justify-content: flex-end;  /* 오른쪽 정렬 유지 */
+  height: 40px;
+  width: 75%;
+  padding-right: 15px;
+  padding-top : 1px; /* 글자 세로 중앙 정렬 위한 조처 */
+  padding-bottom: 1px; /* 글자 세로 중앙 정렬 위한 조처 */
+  background: var(--clr-wh);
+  color: var(--clr-dp-db);
+  font-size: var(--fs-cnt-sub);
+  font-weight: 600;
+  text-align: right;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transform: translateY(2px); /* 나눔스퀘어의 위쪽 들림 보정 */
+  line-height: 1; /* 나눔스퀘어 글자 정렬 위한 line-height */
+}
+
+.menu-item:hover {
+  background: var(--clr-dp-db);
+  color: var(--clr-wh);
+}
+
+.menu-line {
+  width: 75%;
+  height: 2px;
+  background-color: var(--clr-wh);
+  opacity: 35%;
+  margin: 0.1px 0;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+
+/* --- 반응형 미디어 쿼리 --- */
+
+.header-pc {
+  display: block;
+}
+
+.header-mobile {
+  display: none;
+}
+
+@media (max-width: 1010px) {
+  .header-pc
+  {
+    display: none;
+  }
+
+  .header-mobile {
+    display: flex;
+  }
+}
+
+
+/* 세로 스크롤 발생 시, 네비게이션 메뉴 글자 가려짐 현상 해결(아래)*/
+
+/* 화면 폭 1200px 이하일 때 PC 헤더 네비게이션 간격 조정 */
+@media (max-width: 1200px) {
+  .header-nav {
+    gap: 25px; /* 기존 40px -> 25px로 줄임 */
+  }
+}
+
+/* 화면 폭 1100px 이하일 때 PC 헤더 네비게이션 간격 조정 */
+@media (max-width: 1100px) {
+  .header-nav {
+    gap: 15px; /* 기존 40px -> 15px로 줄임 */
+  }
+}
+
+/* 화면 폭 1050px 이하일 때 더 줄이는 것도 가능 */
+@media (max-width: 1050px) {
+  .header-nav {
+    gap: 8px; /* 기존 40px -> 8px로 줄임 */
+  }
+}
+
+/* iPhome 14 proMax 가로 430px, 세로 932px*/
+@media (max-width: 430px) {
+  .mobile-menu {
+    height: 72vh;
+    padding: 7%;
+  }
+}
+
+/* iPhone SE 가로: 375px, 세로: 667px */
+@media (max-width: 375px) {
+  .mobile-menu {
+    height: 90vh;  
+    padding: 7%;
+  }
+  .menu-item {
+    font-size: var(--fs-msg-body);
+    height: 34px;
+    width: 77%;
+    border-radius: 8px;
+  }
+  .menu-first-line {
+    margin: 0.5px 0;
+  }
+  .menu-line {
+    margin: 0.1px 0;
+  }
+}
+
+/* Samsung Galaxy S8+ 가로 360px, 세로 740px*/
+@media (max-width: 360px) {
+  .mobile-menu {
+    height: 80vh;
+    right: -77.5%;
+    width: 77.5%;
+  }
+
+  .menu-item {
+    font-size: var(--fs-msg-body);
+    height: 34px;
+    width: 77%;
+  }
+
+  .menu-first-line {
+    margin: 0.5px 0;
+  }
+
+  .menu-line {
+    margin: 0.1px 0;
+  }
 }
