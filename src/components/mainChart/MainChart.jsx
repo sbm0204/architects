@@ -24,7 +24,7 @@ function MainChart() {
   const navigate = useNavigate();
   const moveGuide = () => { navigate('/guideLine'); };
 
-  const todayDate = dayjs().format('YY.MM.DD');
+  const todayDate = dayjs().format('YY-MM-DD');
   const currentHour = dayjs().format('HH');
 
   const [selectedRegion, setSelectedRegion] = useState('서울');
@@ -60,7 +60,7 @@ function MainChart() {
 
   // 초기 기본값: 서울 종로구 데이터
   useEffect(() => {
-    dispatch(getMapList('서울'));
+    dispatch(getMapList());
     dispatch(getAirQuality({ stationName: '종로구' }));
   }, [dispatch]);
 
@@ -128,7 +128,7 @@ useEffect(() => {
     setSelectedRegion(region);
     setSelectedDistrict(null); // 상세지역 초기화
     setSelectedStationData(null);
-    dispatch(getMapList(region));
+    dispatch(getMapList());
   };
 
   const handleDistrictSelect = (district) => {
@@ -141,7 +141,15 @@ useEffect(() => {
   };
 
   // 지역/상세지역 리스트
-  const sidoRegions = mapList?.items ? [...new Set(mapList.items.map(item => item.sidoName))] : [];
+  const customSidoOrder = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '세종', '경기', '강원', '충남', '충북', '전남', '전북', '경남', '경북', '제주'];
+  const sidoRegions = mapList?.items ? [...new Set(mapList.items.map(item => item.sidoName))].sort((a, b) => {
+    const indexA = customSidoOrder.indexOf(a);
+    const indexB = customSidoOrder.indexOf(b);
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  }) : [];
   const selectedItems = mapList?.items?.filter(val => val.sidoName === selectedRegion);
   const selectedStations = selectedItems?.map(item => item.stationName);
   const sortStations = selectedStations?.sort((a, b) => a.localeCompare(b));
@@ -269,7 +277,7 @@ useEffect(() => {
             </div>
           </div>
           <div className='main-guide-button'>
-            <p className='main-button' onClick={moveGuide}>더 보기</p>
+            <p className='main-button' onClick={moveGuide}>더 많은 요령</p>
           </div>
         </div>
       </div>
