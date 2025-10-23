@@ -110,7 +110,7 @@ const AlertStatus = () => {
                                 </button>
                             ) : (
                                 isFinishedLoadingAllData  && groupedAlerts.length > 0 &&
-                                <p className="end-message">
+                                <p className="end-msg">
                                     ❌ 더 이상 발령 내역이 없습니다.
                                 </p>
                             )}
