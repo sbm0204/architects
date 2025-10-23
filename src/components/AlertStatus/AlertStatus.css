@@ -98,22 +98,95 @@
 /* -----------------3. 정상적으로 받아온 데이터로 만든 카드 스타일----------------- */
 
 .title-area {
-  margin-top: 85px;
-  margin-bottom: 10px;
-  padding: 0 30px;
+    margin-top: 85px;
+    margin-bottom: 20px; /* 카드와의 간격 조정 */
+    padding: 0 30px;
+    
+    /* 💡 제목과 드롭다운을 한 줄에 배치하고 정렬 */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* 제목 아래쪽을 기준으로 정렬 */
 }
 
-.title {
-  width: 230px;
-  font-size: var(--fs-sub);
-  font-weight: var(--fw-bold);
-  text-align: left;
+.main-head-title { /* .title에서 이름 변경 */
+    /* width: 230px; 제거 */
+    font-size: var(--fs-sub);
+    font-weight: var(--fw-bold);
+    text-align: left;
+    margin: 0;
 }
 
-.title-detail {
-  font-size: var(--fs-cnt-body);
-  color: var(--clr-dg);
-  font-weight: normal;
+/* ============================================================= */
+/* 드롭다운 스타일 추가 */
+/* ============================================================= */
+.dropdown-container {
+    display: flex;
+    align-items: center;
+    position: relative; /* 드롭다운 메뉴 포지셔닝을 위한 기준점 */
+    gap: 10px;
+}
+
+.dropdown-label {
+    font-size: var(--fs-cnt-body);
+    color: var(--clr-dg);
+    font-weight: normal;
+}
+
+.dropdown-select {
+    position: relative;
+    padding: 8px 15px;
+    border: 1px solid var(--clr-gy);
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: var(--clr-wh);
+    min-width: 80px;
+    text-align: center;
+    font-size: var(--fs-cnt-sub);
+    font-weight: var(--fw-bold);
+}
+
+.dropdown-select.open {
+    border-color: var(--clr-bk);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dropdown-arrow {
+    padding-left: 5px;
+    transition: transform 0.2s;
+}
+
+.dropdown-select.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* select 아래에 위치 */
+    left: -1px; /* border 겹침 조정 */
+    right: -1px; /* border 겹침 조정 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid var(--clr-bk);
+    border-top: none;
+    background-color: var(--clr-wh);
+    z-index: 10;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: var(--fs-cnt-sub);
+    font-weight: normal;
+}
+
+.dropdown-item:hover, .dropdown-item.selected {
+    background-color: var(--clr-gy);
+    font-weight: var(--fw-bold);
 }
 
 .cards-wrapper {
@@ -142,35 +215,26 @@
         grid-template-columns: repeat(1, 1fr);}
 }
 
-.pagination-area {
-    text-align: center;
-    margin-top: 40px; 
-    justify-items: center;
-}
 
 /* -----------------4. 더 보기 / 끝 메세지 스타일----------------- */
-.load-more-btn {
-    display: block;
-    margin: 0 0 50px 0 ;
-    padding: 15px 110px;
-    background-color: var(--clr-wh); 
-    color: var(--clr-bk);
-    font-weight: var(--fw-bold);
-    border: 1px solid var(--clr-bk); 
-    border-radius:20px;
-    font-size: var(--fs-cnt-sub);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+.pagination-area {
+    text-align: center;
+    margin-top: 20px; 
+    padding-bottom: 50px; /* 하단 여백 확보 */
 }
 
-.load-more-btn:hover {
-    background-color: var(--clr-gy); 
+/* 💡 API 로딩 중 텍스트가 표시될 수 있도록 기본 로딩 텍스트 재활용 */
+.pagination-area .loading-txt {
+    font-size: var(--fs-cnt-sub);
+    color: var(--clr-dg);
+    margin: 20px 0;
 }
 
 .end-msg {
     color: var(--clr-bk);
-    font-size: var(--fs-msg-body);
+    font-size: var(--fs-cnt-sub); /* 글자 크기 조정 */
     padding: 10px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 0; /* padding-bottom을 pagination-area에서 처리 */
 }

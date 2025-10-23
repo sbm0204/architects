@@ -33,25 +33,46 @@
 /* 메인 카드 및 레이아웃 */
 /* ============================================================= */
 .alert-status-card {
-  height: 280px; 
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--clr-wh);
-  border: 1px solid var(--clr-bk);
-  padding: 20px;
-  overflow: hidden; 
+    height: 280px; 
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr-wh);
+    border: 1px solid var(--clr-bk);
+    padding: 20px;
+    overflow: hidden; 
+    
+    /* 💡 상대적인 요소 배치를 위해 position: relative 추가 */
+    position: relative; 
+    padding-top: 45px; /* 날짜 헤더 공간 확보 */
+}
+
+/* 💡 카드 상단 날짜 헤더 스타일 */
+.card-date-header {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: var(--fs-cnt-body);
+    color: var(--clr-dg);
+    font-weight: var(--fw-bold);
+    margin: 0;
 }
 
 /* ============================================================= */
 /* 카드 헤더 및 제목 영역 (스크롤X) */
 /* ============================================================= */
 .alert-status-card-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-bottom: 5px;
-  flex-shrink: 0; /* 스크롤 되지 않도록 고정 */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 5px;
+    flex-shrink: 0; 
+    
+    /* 💡 뱃지를 카드 우측 상단으로 절대 위치 지정 */
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    padding-bottom: 0;
 }
 
 .alert-status-card-issueGbn {
@@ -94,13 +115,6 @@
   font-weight: var(--fw-bold);
   text-align: left;
   margin: 0;
-}
-
-.alert-status-card-date {
-  color: var(--clr-dg);
-  font-size: var(--fs-cnt-body);
-  text-align: left;
-  margin: 5px 0 0 0;
 }
 
 /* ============================================================= */
