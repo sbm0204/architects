@@ -359,7 +359,7 @@ useEffect(() => {
             </div>
           </div>
           <div className='main-guide-button'>
-            <p className='main-button' onClick={moveGuide}>더 많은 요령</p>
+            <p className='main-button' onClick={moveGuide}>더 보기</p>
           </div>
         </div>
       </div>

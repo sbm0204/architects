@@ -10,7 +10,7 @@ function GuideLine() {
 
       <div>
         <div></div>
-        <p className='guide-line-small-header'>단계별 행동 한눈에 보기</p>
+        <p className='guide-line-small-header'>단계별 행동, 바로 확인해요</p>
       </div>
       <div className="guide-line-container">
 

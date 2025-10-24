@@ -12,7 +12,7 @@ function TopButton() {
 
       const footerRect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const space = 20; // 여백
+      const space = 10; // 여백
 
       if (footerRect.top < windowHeight) {
         // Footer가 보일 때
