@@ -5,9 +5,7 @@
 }
 
 .main-map-title {
-  width: 313px;
-  font-size: 30px;
-  font-weight: 900;
+  max-width: 313px;
 }
 
 .main-contents {
