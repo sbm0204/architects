@@ -334,6 +334,10 @@
     padding: 10px 35px;
   }
 
+  .mobile-menu-items {
+    gap: 10px;
+  }
+
   .menu-item {
     font-size: var(--fs-msg-body);
     height: 20%;
