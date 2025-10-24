@@ -6,6 +6,7 @@ function GuideLine() {
   return (
     <div className='container'>
       <h1 className="guide-header sub-title main-head-title">행동요령</h1>
+      <p className='source'>출처 : 국민재난안전포털 제공</p>
 
       <div>
         <div></div>

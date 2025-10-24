@@ -110,9 +110,6 @@ function MainChart() {
         setSelectedDistrict(stationName);
         dispatch(setRegion('서울'));
         dispatch(setDistrict(stationName));
-      } else {
-        console.warn('모든 대체 지역 시도 실패. 기본값 유지.');
-        // 모든 대체 시도 후에도 실패하면 최종적으로 '종로구'를 기본값으로 유지하거나, 에러 UI 표시
       }
     }
   }, [dispatch, locationFailed, locationSuccess, currentStationIndex]);
@@ -159,17 +156,9 @@ useEffect(() => {
                 if (isDataInvalid(stationData)) {
                     // 데이터가 유효하지 않고, 시도할 다음 지역이 남아 있다면
                     if (currentStationIndex < FALLBACK_STATIONS.length - 1) {
-                        console.log(`${selectedDistrict} 데이터 불량. 다음 지역으로 대체 시도.`);
                         // 다음 지역으로 인덱스 업데이트 -> Effect 3 트리거
                         setCurrentStationIndex(prevIndex => prevIndex + 1); 
-                    } else {
-                        console.error('모든 대체 지역 시도 실패. 최종적으로 불량 데이터 표시.');
-                        // 모든 시도 후에도 실패하면 루프를 멈추기 위해 currentStationIndex를 최대치로 설정하거나, 
-                        // dispatch(setDistrict)를 제거하여 Effect 5의 의존성을 끊어 루프 종료
                     }
-                } else {
-                    // 데이터가 유효하면 성공적으로 멈춤
-                    console.log(`${selectedDistrict} 데이터 로드 성공. (대체 성공)`);
                 }
             } 
             // 📌 else: 위치 성공 시 또는 수동 선택 시에는 이 블록이 실행되지 않음

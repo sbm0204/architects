@@ -61,7 +61,6 @@ const AlertStatus = () => {
     const isNextPageFetchNeeded = isPeriodSelected && !reduxLoading && !noMoreApiData;
 
     if (isInitialFetchNeeded || isNextPageFetchNeeded) {
-        console.log('Dispatching alertStatusIndex...');
         dispatch(alertStatusIndex());
       }
   }, [dispatch, reduxLoading, noMoreApiData, isPeriodSelected, allAlerts.length]);
