@@ -14,8 +14,29 @@
   justify-content: center;
 }
 
-.main-head-container {
+.main-air-quality-container {
   max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.injection {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.injection > img {
+  width: 25px;
+  height: 25px;
+}
+
+.img-none {
+  display: none;
+}
+
+.main-head-container {
   width: 100%;
   padding: 10px;
   display: flex;

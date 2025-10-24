@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useMemo, useState, useCallback } from 'react'; // 'useState' 추가
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react'; // 'useRef' 추가
 import { alertStatusIndex } from '../../store/thunks/alertStatusThunk.js'; 
 import { setFilterMonth, setCurrentViewPage } from '../../store/slices/alertStatusSlice.js'; // setFilterMonth 액션 추가
 import AlertStatusCards from './AlertStatusCards.jsx';
@@ -19,6 +19,7 @@ const MONTH_OPTIONS = [
 const AlertStatus = () => {
   const dispatch = useDispatch(); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null); // ref 생성
     
   const { 
     list: allAlerts, 
@@ -37,6 +38,23 @@ const AlertStatus = () => {
     dispatch(setFilterMonth(month));
     setIsDropdownOpen(false);
   };
+
+  // 외부 클릭 감지 useEffect
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     const isInitialFetchNeeded = isPeriodSelected && allAlerts.length === 0;
@@ -91,8 +109,10 @@ const AlertStatus = () => {
           </p>
 
 {/* 1-1. 드랍다운 영역 ---------------------------------------------------------------------- */}
-        <div className={`dropdown-select ${isDropdownOpen ? 'open' : ''}`}
-             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        <div 
+          className={`dropdown-select ${isDropdownOpen ? 'open' : ''}`}
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          ref={dropdownRef} // ref 할당
         >
           <span className="selected-value">
             {isPeriodSelected 
