@@ -12,22 +12,20 @@ dayjs.extend(isSameOrBefore);
  * @returns {Array<Object>} 최근 `months`개월 동안의 데이터 항목 배열
  */
 export function getRecentOneMonthData(allData, months = 1) { 
-    const today = dayjs().startOf('day')
+  const today = dayjs().startOf('day')
+  
+  const monthsAgo = today.subtract(months, 'month').startOf('day'); 
+  
+  const filteredData = allData.filter(item => {
+    const itemDate = dayjs(item.issueDate).startOf('day');
     
-    // 💡 today(10/24)에서 N개월을 정확히 뺀 시점 (예: 1개월 -> 9/24)
-    const monthsAgo = today.subtract(months, 'month').startOf('day'); 
+    const isRecentEnough = itemDate.isSameOrAfter(monthsAgo, 'day'); 
+    const isNotFuture = itemDate.isSameOrBefore(today, 'day'); 
     
-    const filteredData = allData.filter(item => {
-        const itemDate = dayjs(item.issueDate).startOf('day');
-        
-        // 💡 itemDate가 monthsAgo와 같거나 이후(최신)인 데이터만 통과시킴
-        const isRecentEnough = itemDate.isSameOrAfter(monthsAgo, 'day'); 
-        const isNotFuture = itemDate.isSameOrBefore(today, 'day'); 
-        
-        return isRecentEnough && isNotFuture;
-    });
+    return isRecentEnough && isNotFuture;
+  });
 
-    return filteredData; 
+  return filteredData; 
 }
 
 /**
