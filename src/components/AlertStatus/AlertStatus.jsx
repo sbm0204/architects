@@ -6,7 +6,7 @@ import AlertStatusCards from './AlertStatusCards.jsx';
 import './AlertStatus.css';
 import { groupAlertsByDateAndDistrict, groupCardsByDate } from '../../utils/dataGroupingLogic.js';
 import dayjs from 'dayjs';
-import Pagination from './pagination.jsx';
+import Pagination from './Pagination.jsx';
 
 const ITEMS_PER_PAGE = 5;
 
