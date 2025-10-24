@@ -2,73 +2,82 @@ import { createSlice } from '@reduxjs/toolkit';
 import { alertStatusIndex } from '../thunks/alertStatusThunk.js';
 import { processAlertData } from '../../utils/alertDataProcessor.js';
 
-const ITEMS_PER_PAGE = 10;
-const ITEMS_TO_LOAD = 10;
+const ITEMS_PER_PAGE = 5;
 
 const initialState = {
-    list: [], 
-    filteredList: [], 
-    currentView: [], 
-    localViewPage: 0,
-    loading: false, 
-    error: null,
-    noMoreApiData: false, 
-    noMoreViewData: false, 
+  list: [], 
+  filteredList: [], 
+  currentPage: 1, 
+  loading: false, 
+  error: null,
+  noMoreApiData: false, 
+  currentViewPage: 1, 
+  filterMonth: 1, 
+  isPeriodSelected: false, 
 };
 
 const alertStatusSlice = createSlice({
-    name: 'alertStatus',
-    initialState,
-    reducers: {
-        loadMoreAlerts: (state) => {
-            const start = state.currentView.length;
-            const newData = state.filteredList.slice(start, start + ITEMS_TO_LOAD);
-            if (newData.length > 0) {
-                state.currentView = [...state.currentView, ...newData];
-                state.localViewPage += 1; 
-            }
-            if (state.currentView.length >= state.filteredList.length) {
-                state.noMoreViewData = true;
-            }
-        },
+  name: 'alertStatus',
+  initialState,
+  reducers: {
+    setFilterMonth: (state, action) => {
+      if (state.filterMonth !== action.payload || !state.isPeriodSelected) { 
+          state.filterMonth = action.payload;
+          state.isPeriodSelected = true;
+          state.list = []; 
+          state.filteredList = [];
+          state.currentPage = 1;
+          state.currentViewPage = 1; 
+          state.noMoreApiData = false; 
+          state.loading = true;        
+          state.error = null;
+      }
     },
-    extraReducers: builder => {
-        builder
-            .addCase(alertStatusIndex.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(alertStatusIndex.fulfilled, (state, action) => {
-                const { items: newItems = [], pageNo: fetchedPageNo = 1, totalCount = 0 } = action.payload || {};
-                state.list = [...state.list, ...newItems];
 
-                if (newItems.length > 0) {
-                    state.currentPage = fetchedPageNo + 1;
-                }
+    setCurrentViewPage: (state, action) => {
+      state.currentViewPage = action.payload;
+    },      
+  },
+  extraReducers: (builder) => {
+    builder.addCase(alertStatusIndex.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
 
-                if (newItems.length === 0 || state.list.length >= totalCount) {
-                    state.noMoreApiData = true; 
-                }
+    builder.addCase(alertStatusIndex.fulfilled, (state, action) => {
+      const { items: newItems = [], pageNo: fetchedPageNo = 1, totalCount = 0 } = action.payload || {};
+      
+      if (!Array.isArray(newItems)) {
+        state.error = 'API 데이터 형식 오류';
+        state.loading = false;
+        return;
+      }
+      
+      state.list = [...state.list, ...newItems]; 
+      
+      const { filteredList } = processAlertData(state.list, state.filterMonth);
+      state.filteredList = filteredList; 
 
-                const { filteredList, currentView } = processAlertData(state.list);
+      state.currentPage = fetchedPageNo + 1; 
 
-                state.filteredList = filteredList;
-                state.currentView = currentView;
+      if (newItems.length === 0 || state.list.length >= totalCount) {
+          state.noMoreApiData = true; 
+      }
 
-                if (state.currentView.length === 0 && filteredList.length > 0) {
-                    state.localViewPage = 1;
-                    state.noMoreViewData = filteredList.length <= ITEMS_PER_PAGE;
-                }
+      state.loading = false;
+    });
 
-                state.loading = false;
-            })
-            .addCase(alertStatusIndex.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message || action.payload || '데이터 로드 중 오류 발생';
-                state.noMoreApiData = true;
-            });
-    }
+    builder.addCase(alertStatusIndex.rejected, (state, action) => {
+      state.loading = false;
+        if (action.payload && action.payload.includes('No more API data to fetch.')) {
+            state.error = null;
+            state.noMoreApiData = true;
+        } else {
+            state.error = action.payload || '데이터 로드 중 알 수 없는 오류 발생';
+        }
+    });
+  },
 });
 
-export const { loadMoreAlerts } = alertStatusSlice.actions;
+export const { setFilterMonth, setCurrentViewPage } = alertStatusSlice.actions;
 export default alertStatusSlice.reducer;

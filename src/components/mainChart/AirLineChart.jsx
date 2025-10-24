@@ -73,7 +73,7 @@ function AirLineChart() {
         label: "미세먼지",
         data: airQuality.pm10,
         pointBackgroundColor: "#66c6ff",
-        borderColor: "#000",
+        borderColor: "rgba(102, 102, 102, 0.6)",
       },
     ],
   };
@@ -85,7 +85,7 @@ function AirLineChart() {
         label: "초미세먼지",
         data: airQuality.pm25,
         backgroundColor: "#FF6384",
-        borderColor: "#000",
+        borderColor: "rgba(102, 102, 102, 0.6)",
       },
     ],
   };

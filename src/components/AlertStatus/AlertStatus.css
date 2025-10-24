@@ -1,119 +1,245 @@
-/* -----------------1. 로딩 상태 스타일----------------- */
-.loading-state-container {
-  text-align: center;
-  padding: 30px;
-}
-
-.loading-spinner {
-    width: 30px;
-    height: 30px;
-    margin: 0 auto;
-    border: 4px solid var(--clr-gy); 
-    border-top: 4px solid var(--clr-bl);
-    border-radius: 20px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loading-txt {
-    font-size: var(--fs-cnt-sub);
-    color: var(--clr-dg);
-    margin-top: 10px;
-}
-
-/* -----------------1-1. API 오류 메세지 스타일----------------- */
-.error-msg-box {
-    padding: 30px;
-    border: 1px solid var(--clr-r);
-    border-radius: 20px;
-    text-align: center;
-    background-color: var(--clr-wh);
-    margin: 100px auto; 
-    max-width: 600px;
-}
-
-.error-msg-title {
-    font-size: var(--fs-msg-title);
-    font-weight: var(--fw-bold);
-    color: var(--clr-r);
-    margin-bottom: 15px;
-}
-
-.error-msg-txt {
-    color: var(--clr-bk);
-    font-size: var(--fs-msg-body);
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.error-msg-detail {
-    color: var(--clr-bk);
-    font-size: var(--fs-cnt-body);
-    width: 180px;
-    margin-bottom: 25px;
-    padding: 10px;
-    background-color: var(--clr-gy);
-    border-radius: 20px;
-    justify-self: center;
-}
-
-.retry-btn {
-    display: inline-block;
-    padding: 10px 30px;
-    background-color: var(--clr-r); 
-    color: var(--clr-wh);
-    font-weight: var(--fw-bold);
-    border: none;
-    border-radius: 20px;
-    font-size: var(--fs-cnt-body);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.retry-btn:hover {
-    background-color: var(--clr-dr); 
-}
-
-/* -----------------2. 불러올 데이터가 없을 때 메세지 스타일----------------- */
-.empty-msg-box {
-    padding: 30px;
-    border: 1px solid var(--clr-gy); 
-    border-radius: 20px; 
-    text-align: center;
-    background-color: var(--clr-wh); 
-    margin: 250px auto;
-    max-width: 500px;
-}
-
-.empty-msg-txt {
-    color: var(--clr-bk); 
-    line-height: 1.5;
-    font-size: var(--fs-msg-body);
-}
-
-/* -----------------3. 정상적으로 받아온 데이터로 만든 카드 스타일----------------- */
-
+/* -----------------1. 헤더 영역----------------- */
 .title-area {
   margin-top: 85px;
-  margin-bottom: 10px;
+  margin-bottom: 20px; 
   padding: 0 30px;
 }
 
-.title {
-  width: 230px;
+.main-sub-head-title { 
+  width: 230px; 
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
   text-align: left;
 }
 
-.title-detail {
+/* -----------------1-1. 드롭다운----------------- */
+.dropdown-container {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 25px;
+}
+
+.dropdown-label {
   font-size: var(--fs-cnt-body);
   color: var(--clr-dg);
   font-weight: normal;
+  margin: 0;
+}
+
+.dropdown-select {
+  position: relative;
+  padding: 8px 15px;
+  border: 1px solid var(--clr-gy);
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: var(--clr-wh);
+  min-width: 100px;
+  text-align: center;
+  font-weight: var(--fw-bold);
+  color: var(--clr-bk); 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.dropdown-select.open {
+  border-color: var(--clr-bk);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdown-arrow {
+  padding-left: 5px;
+  transition: transform 0.2s;
+}
+
+.dropdown-select.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; 
+  left: -1px; 
+  right: -1px; 
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--clr-bk);
+  border-top: none;
+  background-color: var(--clr-wh);
+  z-index: 10;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+  min-width: 100%; 
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.dropdown-item:hover, .dropdown-item.selected {
+  background-color: var(--clr-gy);
+  font-weight: var(--fw-bold);
+}
+
+/* -----------------2. 콘텐츠 영역 조건부 렌더링----------------- */
+.content-wrapper {
+  min-height: 60vh;
+  width: 100%;
+}
+
+.prompt-msg-box {
+  padding: 30px;
+  border: 1px dashed var(--clr-dg);
+  border-radius: 20px; 
+  text-align: center;
+  background-color: var(--clr-wh); 
+  margin: 120px 30px 40px 30px;
+  max-width: 600px;
+  min-height: 200px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+
+@media (min-width: 600px) {
+  .prompt-msg-box {
+    margin: 100px auto; 
+  }
+}
+
+.prompt-msg-txt {
+  color: var(--clr-bk); 
+  line-height: 1.6;
+  font-size: var(--fs-msg-body);
+}
+
+.prompt-msg-txt span {
+  font-weight: var(--fw-bold);
+}
+
+/* -----------------2-1. 콘텐츠 영역 (API issue)----------------- */
+.error-msg-box {
+  margin: 120px 30px 40px 30px;
+  padding: 30px;    
+  border: 1px solid var(--clr-r);
+  border-radius: 20px;
+  text-align: center;
+  background-color: var(--clr-wh);
+  max-width: 600px;
+  min-height: 200px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+.error-msg-title {
+  font-size: var(--fs-msg-title);
+  font-weight: var(--fw-bold);
+  color: var(--clr-r);
+  margin-bottom: 15px;
+}
+
+.error-msg-txt {
+  color: var(--clr-bk);
+  font-size: var(--fs-msg-body);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.error-msg-detail {
+  color: var(--clr-bk);
+  font-size: var(--fs-cnt-body);
+  width: 180px;
+  margin-bottom: 25px;
+  padding: 10px;
+  background-color: var(--clr-gy);
+  border-radius: 20px;
+  justify-self: center;
+}
+
+.retry-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: var(--clr-r); 
+  color: var(--clr-wh);
+  font-weight: var(--fw-bold);
+  border: none;
+  border-radius: 20px;
+  font-size: var(--fs-cnt-body);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.retry-btn:hover {
+  background-color: var(--clr-dr); 
+}
+
+/* -----------------2-2. 콘텐츠 영역 (loading message)----------------- */
+.loading-state-container {
+  margin: 120px 30px 40px 30px;
+  padding: 30px;
+  max-width: 600px; 
+  min-height: 200px; /* 이 값은 이제 Wrapper가 대부분 처리합니다. */
+  border-radius: 20px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  border: 4px solid var(--clr-gy); 
+  border-top: 4px solid var(--clr-bl);
+  border-radius: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-txt {
+  font-size: var(--fs-cnt-sub);
+  color: var(--clr-dg);
+  margin-top: 10px;
+}
+
+/* -----------------2-3. 콘텐츠 영역 (if data is empty)----------------- */
+.empty-msg-box {
+  padding: 30px; 
+  border: 1px dashed var(--clr-dg); 
+  border-radius: 20px; 
+  text-align: center;
+  background-color: var(--clr-wh); 
+  margin: 120px 30px 40px 30px;
+  max-width: 600px;
+  min-height: 200px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.empty-msg-txt {
+  color: var(--clr-bk); 
+  line-height: 1.6;
+  font-size: var(--fs-msg-body); 
+  margin: 0; 
 }
 
 .cards-wrapper {
@@ -121,56 +247,81 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
   width: 100%;
   gap: 20px;
-  padding: 20px 30px;
+  padding: 15px 0; 
 }
 
 @media (max-width: 1300px) {
-    .cards-wrapper {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .cards-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 960px) {
-    .cards-wrapper {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .cards-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 700px) {
-    .cards-wrapper {
-        justify-content: center;
-        grid-template-columns: repeat(1, 1fr);}
+  .cards-wrapper {
+    justify-content: center;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* -----------------2-3. 콘텐츠 영역 (if data is not empty)----------------- */
+.date-group-container {
+  width: 100%;
+  padding: 0 30px;
+}
+
+.date-header {
+  padding-top: 20px;
+  font-size: 25px;
+  font-weight: var(--fw-bold);
+  color: var(--clr-dg);
+  margin-bottom: 5px;
+  position: relative;
+  width: fit-content;
+  padding-right: 20px;
+}
+
+.date-header::after {
+  content: '';
+  position: absolute;
+  bottom: -5px; 
+  left: 0;
+  width: 100%; 
+  height: 2px;
+  background-color: var(--clr-gy); 
+}
+
+@media (min-width: 660px) { 
+  .prompt-msg-box,
+  .loading-state-container,
+  .empty-msg-box,
+  .error-msg-box {
+    margin-left: auto;
+    margin-right: auto;
+   }
 }
 
 .pagination-area {
-    text-align: center;
-    margin-top: 40px; 
-    justify-items: center;
+  text-align: center;
+  margin-top: 20px; 
+  padding-bottom: 50px; /* 하단 여백 확보 */
 }
 
-/* -----------------4. 더 보기 / 끝 메세지 스타일----------------- */
-.load-more-btn {
-    display: block;
-    margin: 0 0 50px 0 ;
-    padding: 15px 110px;
-    background-color: var(--clr-wh); 
-    color: var(--clr-bk);
-    font-weight: var(--fw-bold);
-    border: 1px solid var(--clr-bk); 
-    border-radius:20px;
-    font-size: var(--fs-cnt-sub);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.load-more-btn:hover {
-    background-color: var(--clr-gy); 
+.pagination-area .loading-txt {
+  font-size: var(--fs-cnt-sub);
+  color: var(--clr-dg);
+  margin: 20px 0;
 }
 
 .end-msg {
-    color: var(--clr-bk);
-    font-size: var(--fs-msg-body);
-    padding: 10px;
-    text-align: center;
-    margin-bottom: 50px;
+  color: var(--clr-bk);
+  font-size: 20px; 
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 0; 
 }

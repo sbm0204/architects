@@ -2,11 +2,12 @@
   background-image: url(../../assets/topbtn.png);
   background-size: cover;
   background-repeat: no-repeat;
-  position: fixed;
-  bottom: 20px;
-  right: 15px;
   width: 72px;
   height: 72px;
+  right: 15px;
+  position: fixed;
+  transition: bottom 0.2s ease-in-out;
+  z-index: 2;
 }
 
 @media (max-width: 800px) {

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { getDustLevel } from '../../utils/getDustLevel.js';
 
 function MainMap() {
-  
+
   useKakaoLoader({
     appkey: import.meta.env.VITE_MAP_KEY,
     libraries: ['services'],
@@ -166,7 +166,7 @@ function MainMap() {
             }
             {hoveredPolygon && (
               <MapInfoWindow position={mousePosition}>
-                <div style={{ padding: "5px", fontSize: "14px" }}>{hoveredPolygon}</div>
+                <div style={{ padding: "2px 0px 7px 45px", fontSize: "14px" }}>{hoveredPolygon}</div>
               </MapInfoWindow>
             )}
             <div className='main-map-box'>

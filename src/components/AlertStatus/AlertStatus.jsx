@@ -1,125 +1,219 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react'; // 'useRef' 추가
 import { alertStatusIndex } from '../../store/thunks/alertStatusThunk.js'; 
-import { loadMoreAlerts } from '../../store/slices/alertStatusSlice.js'; 
+import { setFilterMonth, setCurrentViewPage } from '../../store/slices/alertStatusSlice.js'; // setFilterMonth 액션 추가
 import AlertStatusCards from './AlertStatusCards.jsx';
 import './AlertStatus.css';
-import { getTodayDate } from '../../utils/dateFilter.js';
-import { groupAlertsByDateAndDistrict } from '../../utils/dataGroupingLogic.js';
+import { groupAlertsByDateAndDistrict, groupCardsByDate } from '../../utils/dataGroupingLogic.js';
+import dayjs from 'dayjs';
+import Pagination from './pagination.jsx';
+
+const ITEMS_PER_PAGE = 5;
+
+const MONTH_OPTIONS = [
+  { value: 1, label: '1개월 ' },
+  { value: 2, label: '2개월' },
+  { value: 3, label: '3개월' },
+];
 
 const AlertStatus = () => {
-    const dispatch = useDispatch(); 
+  const dispatch = useDispatch(); 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null); // ref 생성
     
-    const { 
-        list, 
-        currentView: displayedAlerts,
-        loading: reduxLoading, 
-        noMoreApiData, 
-        noMoreViewData, 
-        error
-    } = useSelector(state => state.alertStatus); 
+  const { 
+    list: allAlerts, 
+    filteredList,    
+    loading: reduxLoading, 
+    noMoreApiData, 
+    error,
+    filterMonth,
+    isPeriodSelected,
+    currentViewPage, 
+  } = useSelector(state => state.alertStatus); 
 
-    // 💡 핵심 추가 로직: displayedAlerts(개별 항목)를 그룹화 (dataDate, districtName 기준)
-    const groupedAlerts = useMemo(() => {
-        // Redux 상태가 변경될 때만 그룹화 로직을 다시 실행하여 성능 최적화
-        return groupAlertsByDateAndDistrict(displayedAlerts);
-    }, [displayedAlerts]);
+  const today = dayjs().format('YYYY.MM.DD');
 
-    const isFinishedLoadingAllData = !reduxLoading && noMoreApiData && noMoreViewData;
+  const handleMonthChange = (month) => {
+    dispatch(setFilterMonth(month));
+    setIsDropdownOpen(false);
+  };
 
-    useEffect(() => {
-        if (!reduxLoading && list.length === 0 && !noMoreApiData) {
-            dispatch(alertStatusIndex()); 
-        }
-    }, [list.length, dispatch, reduxLoading, noMoreApiData]);
-
-    const handleLoadMore = () => {
-        if (!noMoreViewData) {
-            dispatch(loadMoreAlerts()); 
-        } 
-        else if (!noMoreApiData && !reduxLoading) {
-            dispatch(alertStatusIndex()); 
-        }
+  // 외부 클릭 감지 useEffect
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
     };
 
-    const isListEmpty = !reduxLoading && groupedAlerts.length === 0 && noMoreApiData; 
-    const hasMoreDataToShow = !noMoreViewData || !noMoreApiData; 
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
 
-    const today = getTodayDate();
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
-    return (
-        <div className="container">
-            {reduxLoading && (
-// 1. 로딩 중 UI-----------------------------------------------------------------------------------------
-                <div className="loading-state-container">
-                    <div className="loading-spinner"></div>
-                    <p className="loading-txt">데이터 로딩 중...</p>
-                </div>
-            )}
+  useEffect(() => {
+    const isInitialFetchNeeded = isPeriodSelected && allAlerts.length === 0;
+    const isNextPageFetchNeeded = isPeriodSelected && !reduxLoading && !noMoreApiData;
 
-{/* 1-1. 로딩이 끝나고 오류가 생겼을 때 보여지는 UI----------------------------------------------------------- */}
-            {!reduxLoading && error && (
-              <div className="error-msg-box">
-                <h1 className="error-msg-title">⚠️ 데이터 로드 실패</h1>
-                <p className="error-msg-txt">오류 발생 - 다시 시도해 주세요.</p>
-                <p className="error-msg-detail">오류 상태: {error}</p>
-                <button 
-                    onClick={() => dispatch(alertStatusIndex())}
-                    className="retry-btn">다시 시도</button>
-              </div>
-            )}
-            
-{/* 1-2. 로딩이 끝나고 정상 데이터를 렌더링하는 코드 시작------------------------------------------------------- */}
-            {!reduxLoading && !error && (
-                <>
-{/* 2. 데이터 없음 UI-------------------------------------------------------------------------------------- */}
-                    {isListEmpty && (
-                        <div className="empty-msg-box">
-                            <p className="empty-msg-txt">
-                              📍 최근 한 달간 발령 내역이 없습니다.
-                            </p>
-                        </div>
-                    )}
+    if (isInitialFetchNeeded || isNextPageFetchNeeded) {
+        dispatch(alertStatusIndex());
+      }
+  }, [dispatch, reduxLoading, noMoreApiData, isPeriodSelected, allAlerts.length]);
+    
+  const districtGroups = useMemo(() => {
+    return groupAlertsByDateAndDistrict(filteredList);
+  }, [filteredList]);
+    
+  const dateGroups = useMemo(() => {
+    return groupCardsByDate(districtGroups);
+  }, [districtGroups]);
 
-{/* 3. 정상 데이터 UI-------------------------------------------------------------------------------------- */}
-                    {!isListEmpty && 
-                    <div className="title-area">
-                        <h1 className="title main-head-title">미세먼지 경보</h1>
-                        <div className="title-detail">({today} 기준 최근 1개월 특보 현황)</div>
-                    </div>}
-                    
-                    <div className="cards-wrapper">
-                        {groupedAlerts.map(( group ) => (
-                            <AlertStatusCards 
-                                key={`${group.dataDate}-${group.districtName}`} 
-                                groupedAlert={group}
-                            /> 
-                        ))}
-                    </div>
+{/* Pagination ---------------------------------------------------------------------------------- */}
+  const totalItems = dateGroups.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    
+  const displayedDateGroups = useMemo(() => {
+    const start = (currentViewPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
 
-{/* 4. 더 보기 / 끝 메세지 UI------------------------------------------------------------------------------- */}
-                    {!isListEmpty && (
-                        <div className="pagination-area">
-                            {hasMoreDataToShow ? (
-                                <button 
-                                    onClick={handleLoadMore} 
-                                    className="load-more-btn"
-                                    disabled={reduxLoading}
-                                >
-                                    {reduxLoading ? '데이터 로딩 중...' : '더 보기'}
-                                </button>
-                            ) : (
-                                isFinishedLoadingAllData  && groupedAlerts.length > 0 &&
-                                <p className="end-msg">
-                                    ❌ 더 이상 발령 내역이 없습니다.
-                                </p>
-                            )}
-                        </div>
-                    )}
-                </>
+  return dateGroups.slice(start, end);
+  }, [dateGroups, currentViewPage]); 
+
+  const isListEmpty = isPeriodSelected 
+                      && !reduxLoading 
+                      && totalItems === 0 
+                      && noMoreApiData; 
+
+  const handlePageChange = useCallback((page) => {
+    if (page >= 1 && page <= totalPages) {
+        dispatch(setCurrentViewPage(page));
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    }
+  }, [dispatch, totalPages]);
+
+  return (
+    <div className="container">
+
+{/* 1. 헤더 영역 (항상 표시) ---------------------------------------------------------------------- */}
+      <div className="title-area">
+        <h2 className="main-sub-head-title main-head-title">미세먼지 경보</h2>
+        <div className="dropdown-container">
+          <p className="dropdown-label">
+              최근 특보 현황 <br></br>(기준: {today})
+          </p>
+
+{/* 1-1. 드랍다운 영역 ---------------------------------------------------------------------- */}
+        <div 
+          className={`dropdown-select ${isDropdownOpen ? 'open' : ''}`}
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          ref={dropdownRef} // ref 할당
+        >
+          <span className="selected-value">
+            {isPeriodSelected 
+              ? MONTH_OPTIONS.find(opt => opt.value === filterMonth)?.label || `${filterMonth}개월`
+              : "기간 선택"
+            }
+          </span>
+          <span className="dropdown-arrow">▼</span>
+            {isDropdownOpen && (
+              <ul className="dropdown-menu">
+                {MONTH_OPTIONS.map((option) => (
+                  <li 
+                    key={option.value} 
+                    className={`dropdown-item ${filterMonth === option.value ? 'selected' : ''}`}
+                    onClick={(e) => {
+                    e.stopPropagation(); 
+                    handleMonthChange(option.value);}}>
+                    {option.label}
+                  </li>
+                    ))}
+              </ul>
             )}
         </div>
-    );
+      </div>
+    </div>
+
+{/* 2. 콘텐츠 영역 (조건부 렌더링) -------------------------------------------------------------------- */}
+    <div className="content-wrapper">
+      {isPeriodSelected === false && (
+        <div className="prompt-msg-box">
+          <p className="prompt-msg-txt">
+            👉<span>기간 선택</span> 후 <br></br>미세먼지 특보를 확인해보세요.
+          </p>
+        </div>
+      )}
+      
+{/* 2-1. 콘텐츠 영역 (API issue) ---------------------------------------------------------------------- */}
+    {isPeriodSelected === true && (
+        <>
+          {error && (
+            <div className="error-msg-box">
+              <h3 className="error-msg-title">⚠️ 데이터 로드 실패</h3>
+                <p className="error-msg-txt">
+                  오류 발생 - 다시 시도해 주세요.
+                </p>
+                <p className="error-msg-detail">오류 상태: {error}</p>
+                <button 
+                  className="retry-btn" 
+                  onClick={() => dispatch(setFilterMonth(filterMonth))} // 현재 필터로 재요청
+                >
+                  다시 시도
+                </button>
+            </div>
+          )}
+
+{/* 2-2. 콘텐츠 영역 (loading message) ---------------------------------------------------------------------- */}
+          {!error && reduxLoading && totalItems === 0 && (
+            <div className="loading-state-container">
+              <div className="loading-spinner"></div>
+              <p className="loading-txt">데이터 로딩 중...</p>
+            </div>
+          )}
+          
+{/* 2-3. 콘텐츠 영역 (if data is empty) ---------------------------------------------------------------------- */}
+          {!error && isListEmpty && (
+            <div className="empty-msg-box">
+              <p className="empty-msg-txt">
+                  최근 {filterMonth}개월간 발령 내역이 없습니다.
+              </p>
+            </div>
+          )}
+      
+{/* 2-3. 콘텐츠 영역 (if data is not empty)---------------------------------------------------------------------- */}
+          {(!error && displayedDateGroups.length > 0) && (
+            <>
+              {displayedDateGroups.map(dateGroup => (
+                <div key={dateGroup.date} className="date-group-container"> 
+                  <h3 className="date-header">
+                      {dayjs(dateGroup.date).format('YYYY.MM.DD')}
+                  </h3>
+                  <div className="cards-wrapper">
+                    {dateGroup.cards.map(cardGroup => (
+                      <AlertStatusCards 
+                        key={`${cardGroup.dataDate}-${cardGroup.districtName}`} 
+                        groupedAlert={cardGroup}
+                      /> 
+                    ))}
+                  </div>
+                </div>
+              ))}  
+                <Pagination 
+                    currentPage={currentViewPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                />
+            </>
+          )}
+        </>
+    )}
+    </div>
+  </div>
+  );
 };
 
 export default AlertStatus;

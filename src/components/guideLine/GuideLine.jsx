@@ -6,7 +6,12 @@ function GuideLine() {
   return (
     <div className='container'>
       <h1 className="guide-header sub-title main-head-title">행동요령</h1>
+      <p className='source'>출처 : 국민재난안전포털 제공</p>
 
+      <div>
+        <div></div>
+        <p className='guide-line-small-header'>단계별 행동, 바로 확인해요</p>
+      </div>
       <div className="guide-line-container">
 
         <div className="guide-line-box">

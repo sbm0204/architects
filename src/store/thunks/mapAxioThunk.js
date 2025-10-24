@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosConfig from "../../configs/axioConfigs";
 import axios from "axios";
 
-
 const getMapList = createAsyncThunk(
   'mapAxio/getMapList',
   async () => {
@@ -14,7 +13,6 @@ const getMapList = createAsyncThunk(
         ver: axiosConfig.VER,
         sidoName: '전국',
         numOfRows: 1000,
-
       }
     }
 
@@ -23,6 +21,5 @@ const getMapList = createAsyncThunk(
     return response.data.response.body;
   }
 );
-
 
 export { getMapList };
