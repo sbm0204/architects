@@ -7,6 +7,10 @@ function GuideLine() {
     <div className='container'>
       <h1 className="guide-header sub-title main-head-title">행동요령</h1>
 
+      <div>
+        <div></div>
+        <p className='guide-line-small-header'>단계별 행동 한눈에 보기</p>
+      </div>
       <div className="guide-line-container">
 
         <div className="guide-line-box">

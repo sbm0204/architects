@@ -5,10 +5,16 @@
 .guide-header {
   width: 150px;
   height: 58px;
-  margin: 85px 30px 114px;
+  margin: 85px 30px 93px;
   /* 기존 마진 하단 22px */
   display: flex;
   align-items: end;
+}
+
+.guide-line-small-header {
+  padding-left: var(--sp-sm);
+  font-weight: 900;
+  font-size: 25px;
 }
 
 .guide-line-container {
@@ -17,6 +23,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--sp-xs);
   padding: var(--sp-sm);
+  padding-top: 15px;
 }
 
 .guide-line-box {
