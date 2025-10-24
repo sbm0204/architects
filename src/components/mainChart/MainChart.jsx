@@ -41,9 +41,9 @@ function MainChart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const moveGuide = () => { navigate('/guideLine'); };
-
+  
   // **[수정]** dayjs 변수를 state로 관리하여 갱신 가능하도록 변경
-  const [todayDate, setTodayDate] = useState(dayjs().format('YY-MM-DD'));
+  const [todayDate, setTodayDate] = useState(dayjs().format('YY.MM.DD'));
   const [currentHour, setCurrentHour] = useState(dayjs().format('HH'));
 
   // **[추가]** 위치 획득 성공/실패 상태
@@ -68,7 +68,7 @@ function MainChart() {
   // 1. **[추가]** 10분마다 시간 및 날짜 갱신
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTodayDate(dayjs().format('YY-MM-DD'));
+      setTodayDate(dayjs().format('YY.MM.DD'));
       setCurrentHour(dayjs().format('HH'));
     }, 600000); // 10분마다 갱신
 
