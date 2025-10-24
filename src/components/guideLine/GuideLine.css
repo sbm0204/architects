@@ -5,7 +5,8 @@
 .guide-header {
   width: 150px;
   height: 58px;
-  margin: 85px 30px 22px;
+  margin: 85px 30px 114px;
+  /* 기존 마진 하단 22px */
   display: flex;
   align-items: end;
 }

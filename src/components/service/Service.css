@@ -2,7 +2,8 @@
   width: 200px;
   font-size: var(--fs-sub);
   font-weight: var(--fw-bold);
-  margin: 85px 0px 55px;
+  margin: 85px 0px 145px;
+  /* 기존 마진 하단 55px */
 }
 
 .service-container {
