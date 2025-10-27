@@ -1,9 +1,10 @@
-import dayjs from 'dayjs';
+import { createDateTimeDescSorter } from './dateSorter.js'; // ✨ 새로 추가
+
+// 날짜 내림차순 정렬 함수 생성 ('dataDate' 기준)
+const dateDescSorter = createDateTimeDescSorter('dataDate', null, 'YYYY-MM-DD');
+
 /**
  * API 응답으로 받은 개별 특보 목록을 '날짜'와 '지역 이름' 기준으로 그룹화합니다.
- *
- * @param {Array<Object>} items - API 응답의 body.items 배열 (개별 특보 항목)
- * @returns {Array<Object>} 그룹화된 특보 목록. 각 요소는 { dataDate, districtName, alerts: [...] } 구조
  */
 export const groupAlertsByDateAndDistrict = (items) => {
   if (!items || items.length === 0) {
@@ -27,13 +28,14 @@ export const groupAlertsByDateAndDistrict = (items) => {
   }, {});
 
   return Object.values(groupedMap).sort((a, b) => {
-    const dateA = dayjs(a.dataDate);
-    const dateB = dayjs(b.dataDate);
-    // 날짜 내림차순 (최신 날짜가 먼저)
-    if (dateB.isAfter(dateA)) return 1; 
-    if (dateB.isBefore(dateA)) return -1;
-    // 같은 날짜면 지역명 오름차순
-    return a.districtName.localeCompare(b.districtName);
+    const dateCompare = dateDescSorter(a, b); // ✨ 정렬 함수 사용
+
+    if (dateCompare !== 0) {
+      return dateCompare; // 날짜 내림차순
+    }
+
+    // 같은 날짜면 지역명 오름차순 (기존 로직 유지)
+    return a.districtName.localeCompare(b.districtName); 
   });
 }
 
@@ -52,8 +54,7 @@ export function groupCardsByDate(cardGroups) {
 
     // 배열로 변환 후 날짜 내림차순 (최신 날짜가 먼저)으로 정렬합니다.
   return Object.values(groupedByDate).sort((a, b) => {
-    const dateA = dayjs(a.date);
-    const dateB = dayjs(b.date);
-    return dateB.diff(dateA); 
+    // a.date, b.date 필드가 dataDate와 동일하므로 같은 sorter 사용 가능
+    return dateDescSorter(a, b); // ✨ 정렬 함수 사용 (dateB.diff(dateA)와 동일 효과)
   });
 }
