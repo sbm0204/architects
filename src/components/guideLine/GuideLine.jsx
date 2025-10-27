@@ -1,5 +1,5 @@
 import './GuideLine.css';
-import dustJson from '../../configs/guide-data.js';
+import guideContents from '../../configs/guide-data.js';
 
 function GuideLine() {
 
@@ -22,11 +22,11 @@ function GuideLine() {
             <div className="sensitive">
               <p className='contents-bold'>민감군</p>
               <div className='guide-contents-box'>
-                <p className={`guide-content ${dustJson?.good?.sensitive[0] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.good.sensitive[0]}
+                <p className={`guide-content ${guideContents?.good?.sensitive[0] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.good.sensitive[0]}
                 </p>
-                <p className={`guide-content ${dustJson?.good?.sensitive[1] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.good.sensitive[1]}
+                <p className={`guide-content ${guideContents?.good?.sensitive[1] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.good.sensitive[1]}
                 </p>
               </div>
             </div>
@@ -34,8 +34,8 @@ function GuideLine() {
             <div className="public">
               <p className='contents-bold'>일반인</p>
               <div className="guide-contents-box">
-                <p className={`guide-content ${dustJson?.good?.public[0] ? 'pseudo' : ''}`}>{dustJson && dustJson.good.public[0]}</p>
-                <p className={`guide-content ${dustJson?.good?.public[1] ? 'pseudo' : ''}`}>{dustJson && dustJson.good.public[1]}</p>
+                <p className={`guide-content ${guideContents?.good?.public[0] ? 'pseudo' : ''}`}>{guideContents && guideContents.good.public[0]}</p>
+                <p className={`guide-content ${guideContents?.good?.public[1] ? 'pseudo' : ''}`}>{guideContents && guideContents.good.public[1]}</p>
               </div>
             </div>
           </div>
@@ -48,11 +48,11 @@ function GuideLine() {
             <div className="sensitive">
               <p className='contents-bold'>민감군</p>
               <div className='guide-contents-box'>
-                <p className={`guide-content ${dustJson?.moderate?.sensitive[0] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.moderate.sensitive[0]}
+                <p className={`guide-content ${guideContents?.moderate?.sensitive[0] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.moderate.sensitive[0]}
                 </p>
-                <p className={`guide-content ${dustJson?.moderate?.sensitive[1] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.moderate.sensitive[1]}
+                <p className={`guide-content ${guideContents?.moderate?.sensitive[1] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.moderate.sensitive[1]}
                 </p>
               </div>
             </div>
@@ -60,8 +60,8 @@ function GuideLine() {
             <div className="public">
               <p className='contents-bold'>일반인</p>
               <div className="guide-contents-box">
-                <p className={`guide-content ${dustJson?.moderate?.public[0] ? 'pseudo' : ''}`}>{dustJson && dustJson.moderate.public[0]}</p>
-                <p className={`guide-content ${dustJson?.moderate?.public[1] ? 'pseudo' : ''}`}>{dustJson && dustJson.moderate.public[1]}</p>
+                <p className={`guide-content ${guideContents?.moderate?.public[0] ? 'pseudo' : ''}`}>{guideContents && guideContents.moderate.public[0]}</p>
+                <p className={`guide-content ${guideContents?.moderate?.public[1] ? 'pseudo' : ''}`}>{guideContents && guideContents.moderate.public[1]}</p>
               </div>
             </div>
           </div>
@@ -74,11 +74,11 @@ function GuideLine() {
             <div className="sensitive">
               <p className='contents-bold'>민감군</p>
               <div className='guide-contents-box'>
-                <p className={`guide-content ${dustJson?.bad?.sensitive[0] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.bad.sensitive[0]}
+                <p className={`guide-content ${guideContents?.bad?.sensitive[0] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.bad.sensitive[0]}
                 </p>
-                <p className={`guide-content ${dustJson?.bad?.sensitive[1] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.bad.sensitive[1]}
+                <p className={`guide-content ${guideContents?.bad?.sensitive[1] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.bad.sensitive[1]}
                 </p>
               </div>
             </div>
@@ -86,8 +86,8 @@ function GuideLine() {
             <div className="public">
               <p className='contents-bold'>일반인</p>
               <div className='guide-contents-box'>
-                <p className={`guide-content ${dustJson?.bad?.public[0] ? 'pseudo' : ''}`}>{dustJson && dustJson.bad.public[0]}</p>
-                <p className={`guide-content ${dustJson?.bad?.public[1] ? 'pseudo' : ''}`}>{dustJson && dustJson.bad.public[1]}</p>
+                <p className={`guide-content ${guideContents?.bad?.public[0] ? 'pseudo' : ''}`}>{guideContents && guideContents.bad.public[0]}</p>
+                <p className={`guide-content ${guideContents?.bad?.public[1] ? 'pseudo' : ''}`}>{guideContents && guideContents.bad.public[1]}</p>
               </div>
             </div>
           </div>
@@ -100,11 +100,11 @@ function GuideLine() {
             <div className="sensitive">
               <p className='contents-bold'>민감군</p>
               <div className="guide-contents-box">
-                <p className={`guide-content ${dustJson?.veryBad?.sensitive[0] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.veryBad.sensitive[0]}
+                <p className={`guide-content ${guideContents?.veryBad?.sensitive[0] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.veryBad.sensitive[0]}
                 </p>
-                <p className={`guide-content ${dustJson?.veryBad?.sensitive[1] ? 'pseudo' : ''}`}>
-                  {dustJson && dustJson.veryBad.sensitive[1]}
+                <p className={`guide-content ${guideContents?.veryBad?.sensitive[1] ? 'pseudo' : ''}`}>
+                  {guideContents && guideContents.veryBad.sensitive[1]}
                 </p>
               </div>
             </div>
@@ -112,8 +112,8 @@ function GuideLine() {
               <div className="public">
               <p className='contents-bold'>일반인</p>
               <div className='guide-contents-box'>
-                <p className={`guide-content ${dustJson?.veryBad?.public[0] ? 'pseudo' : ''}`}>{dustJson && dustJson.veryBad.public[0]}</p>
-                <p className={`guide-content ${dustJson?.veryBad?.public[1] ? 'pseudo' : ''}`}>{dustJson && dustJson.veryBad.public[1]}</p>
+                <p className={`guide-content ${guideContents?.veryBad?.public[0] ? 'pseudo' : ''}`}>{guideContents && guideContents.veryBad.public[0]}</p>
+                <p className={`guide-content ${guideContents?.veryBad?.public[1] ? 'pseudo' : ''}`}>{guideContents && guideContents.veryBad.public[1]}</p>
               </div>
 
               </div>

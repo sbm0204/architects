@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './MainChart.css';
@@ -6,7 +5,6 @@ import MainDropDown from './MainDropDown.jsx';
 import AirQualityCard from './AirQualityCard.jsx';
 import AirLineChart from './AirLineChart.jsx';
 import AirBarChart from './AirBarChart.jsx';
-import { getMapList } from '../../store/thunks/mapAxioThunk.js';
 import { getAirQuality } from '../../store/thunks/airQualityThunk.js';
 import good from '../../assets/good.png';
 import moderate from '../../assets/moderate.png';
@@ -14,7 +12,7 @@ import bad from '../../assets/bad.png';
 import veryBad from '../../assets/very-bad.png';
 import caution from '../../assets/Caution.png';
 import { getDustLevel } from '../../utils/getDustLevel.js';
-import dustJson from '../../configs/guide-data.js';
+import guideContents from '../../configs/guide-data.js';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { getLocation } from '../../store/thunks/locationThunk.js';
@@ -77,8 +75,6 @@ function MainChart() {
 
   // 2. **[수정]** 위치 허용 시 현재 위치 불러오기
   useEffect(() => {
-    // 맵 리스트는 모든 로직에 필요하므로 여기서 먼저 요청
-    dispatch(getMapList());
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -99,7 +95,7 @@ function MainChart() {
       // Geolocation API 미지원 시에도 실패 처리
       setLocationFailed(true);
     }
-  }, [dispatch]);
+  }, []);
 
 
   // 3. **[추가/수정]** 위치 권한 거부 시 대체 지역 순차 시도
@@ -117,7 +113,7 @@ function MainChart() {
         dispatch(setDistrict(stationName));
       }
     }
-  }, [dispatch, locationFailed, locationSuccess, currentStationIndex]);
+  }, [locationFailed, locationSuccess, currentStationIndex]);
 
 
   // 4. **[수정]** 위치 기반 측정소 데이터 적용 (위치 획득 성공 시에만)
@@ -140,7 +136,7 @@ function MainChart() {
 
       setNearbyFlg(false);
     }
-  }, [nearbyStations, mapList, dispatch, nearbyFlg, locationSuccess]);
+  }, [nearbyStations, mapList, nearbyFlg, locationSuccess]);
 
   // 5. **[수정]** mapList 변경 시 stationData 동기화 및 대체 지역 유효성 검사
 useEffect(() => {
@@ -171,7 +167,7 @@ useEffect(() => {
         }
     }
     // currentStationIndex를 의존성 배열에서 제거하면 루프가 멈추므로 유지해야 합니다.
-}, [mapList, selectedRegion, selectedDistrict, locationFailed, currentStationIndex, dispatch]);
+}, [mapList, selectedRegion, selectedDistrict, locationFailed, currentStationIndex]);
 
 
   // 화면 크기 감지
@@ -188,9 +184,10 @@ useEffect(() => {
       const selectedItems = mapList.items.filter(item => item.sidoName === selectedRegion);
       if (selectedItems.length > 0) {
         const sortStations = selectedItems
-          .map(item => item.stationName)
-          .sort((a, b) => a.localeCompare(b)); // 가나다순
-        const firstDistrict = sortStations[0];
+          // .map(item => item.stationName)
+          // .sort((a, b) => a.localeCompare(b)); // 가나다순
+          .sort((a,b) => a.stationName.localeCompare(b.stationName))
+        const firstDistrict = sortStations[0].stationName;
         setSelectedDistrict(firstDistrict);
         dispatch(getAirQuality({ stationName: firstDistrict }));
 
@@ -198,14 +195,13 @@ useEffect(() => {
         if (stationData) setSelectedStationData(stationData);
       }
     }
-  }, [mapList, selectedRegion, dispatch, selectedDistrict]);
+  }, [mapList, selectedRegion, selectedDistrict]);
 
   // Dropdown 선택 핸들러
   const handleRegionSelect = (region) => {
     setSelectedRegion(region);
     setSelectedDistrict(null); // 상세지역 초기화
     setSelectedStationData(null);
-    dispatch(getMapList());
     
     // 드롭다운 수동 선택 시, 위치 기반 플래그 초기화
     setNearbyFlg(false); 
@@ -265,14 +261,14 @@ useEffect(() => {
   const statusImage = airQualityDataPM10 ? statusImages[levelLabel] : caution;
 
   const textJson = (val) => {
-    if (val === dustJson.good.status) return dustJson.good;
-    else if (val === dustJson.moderate.status) return dustJson.moderate;
-    else if (val === dustJson.bad.status) return dustJson.bad;
-    else if (val === dustJson.veryBad.status) return dustJson.veryBad;
-    else return dustJson.noneData;
+    if (val === guideContents.good.status) return guideContents.good;
+    else if (val === guideContents.moderate.status) return guideContents.moderate;
+    else if (val === guideContents.bad.status) return guideContents.bad;
+    else if (val === guideContents.veryBad.status) return guideContents.veryBad;
+    else return guideContents.noneData;
   };
 
-  const textJsondata = airQualityDataPM10 ? textJson(levelLabel) : dustJson.noneData;
+  const textJsondata = airQualityDataPM10 ? textJson(levelLabel) : guideContents.noneData;
 
   return (
     <div className='contents-size-main-left'>
