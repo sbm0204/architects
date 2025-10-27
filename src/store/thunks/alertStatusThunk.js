@@ -36,9 +36,7 @@ const alertStatusIndex = createAsyncThunk(
     }
 
     try {
-        console.log('🚀 Axios 요청 시작:', url);
         const response = await axios.get(url, config);
-        console.log('✅ Axios 응답 수신:', response.status);
         
         if (
         !response.data ||
@@ -88,7 +86,6 @@ const alertStatusIndex = createAsyncThunk(
         errorMsg += '알 수 없는 오류가 발생했습니다.';
       }
       
-      console.error('❌ Axios 에러:', error);
       return thunkAPI.rejectWithValue(errorMsg);
     }
   }

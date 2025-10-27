@@ -89,8 +89,8 @@ function MainChart() {
           setLocationSuccess(true); // 위치 획득 성공
           setLocationFailed(false);
         },
-        (error) => {
-          console.error("위치 권한 거부 또는 에러:", error);
+        () => {
+          // console.error("위치 권한 거부 또는 에러:", error);
           setLocationFailed(true); // 위치 획득 실패
           setLocationSuccess(false);
         }

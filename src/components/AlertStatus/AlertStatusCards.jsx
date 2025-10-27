@@ -1,6 +1,6 @@
 import './AlertStatusCards.css';
 import dayjs from 'dayjs';
-import { AlertDetailItem } from '../AlertStatus/AlertDetailItem.jsx'
+import AlertDetailItem from './AlertDetailItem.jsx'
 
 // 2. AlertStatusCards: 그룹화된 특보 목록을 받아 렌더링하는 메인 컴포넌트
 /**

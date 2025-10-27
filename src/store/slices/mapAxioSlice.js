@@ -13,10 +13,6 @@ const mapAxioSlice = createSlice({
     .addCase(getMapList.fulfilled, (state, action) => {
       state.mapList = action.payload;
     })
-    
-    .addCase(getMapList.rejected, (state, action) => {
-      console.log(action.payload, "API Axios Error")
-    })
   }
 });
 
