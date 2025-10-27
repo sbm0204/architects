@@ -28,12 +28,3 @@ export function getRecentOneMonthData(allData, months = 1) {
   return filteredData; 
 }
 
-/**
- * 현재 날짜를 'YYYY년 MM월 DD일' 형식의 문자열로 반환합니다.
- * @returns {string} 포맷된 현재 날짜
- */
-export const getTodayDate = () => {
-  // Day.js를 사용하여 현재 날짜를 가져와 원하는 형식으로 포맷합니다.
-  const formattedDate = dayjs().format('YYYY.MM.DD');
-  return formattedDate;
-};

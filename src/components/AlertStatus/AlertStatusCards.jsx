@@ -1,51 +1,6 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-import { DUST_UNITS } from '../../utils/getDustLevel.js';
 import './AlertStatusCards.css';
-
-dayjs.locale('ko');
-
-// 1. AlertDetailItem: 개별 권역 특보 항목을 렌더링하는 작은 컴포넌트 (스크롤 될 내용)
-const AlertDetailItem = ({ alert }) => {
-  const {
-      issueVal, clearVal,
-      issueDate, issueTime, 
-      clearDate, clearTime, 
-      itemCode, moveName,
-  } = alert;
-
-  const issueTimeOnly = dayjs(`${issueDate} ${issueTime}`, 'YYYY-MM-DD HH:mm').format('A h시');
-
-  const hasClearInfo = clearVal !== undefined && clearVal !== null && clearVal !== '';
-  const clearTimeOnly = hasClearInfo 
-    ? dayjs(`${clearDate} ${clearTime}`, 'YYYY-MM-DD HH:mm').format('A h시')
-    : null;
-  
-  const unit = DUST_UNITS[itemCode] || ''; 
-
-  return (
-    <div className="alert-detail-container">
-      <p className="alert-detail-moveName">({moveName})</p> 
-      <div className="alert-detail-info alert-issue"> 
-        <p className="alert-detail-value">
-            <span>🚨 발령</span>: 
-            <span>{issueVal}{unit}</span> 
-        <span className="alert-detail-time">{issueTimeOnly}</span> 
-        </p>
-      </div>
-
-      {hasClearInfo && (
-        <div className="alert-detail-info alert-clear"> 
-          <p className="alert-detail-value">
-            <span>✅ 해제</span>: 
-            <span>{clearVal}{unit}</span>
-          <span className="alert-detail-time">{clearTimeOnly}</span>
-          </p>
-        </div>
-      )}
-    </div>
-  );
-}
+import dayjs from 'dayjs';
+import { AlertDetailItem } from '../AlertStatus/AlertDetailItem.jsx'
 
 // 2. AlertStatusCards: 그룹화된 특보 목록을 받아 렌더링하는 메인 컴포넌트
 /**
