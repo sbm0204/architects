@@ -1,33 +1,3 @@
-/* 1. 카드 디테일 부분 - 스크롤 내부 (AlertDetailItem) -------------------------------------------------------------------- */
-.alert-detail-container {
-  font-size: var(--fs-cnt-body);
-  color: var(--clr-bk);
-}
-
-.alert-detail-moveName {
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-cnt-body);
-  color: var(--clr-dg);
-  padding-bottom: 10px;
-  display: block;
-}
-
-.alert-detail-info {
-  padding-left: 15px;
-  padding-bottom: 10px;
-}
-
-.alert-detail-value {
-  font-weight: var(--fw-bold);
-}
-
-.alert-detail-time {
-  padding-left: 10px;
-  font-size: var(--fs-cnt-body);
-  color: var(--clr-dg);
-}
-
-/* 2. 메인 카드 (AlertStatusCards) -------------------------------------------------------------------- */
 .alert-status-card {
   height: 280px; 
   border-radius: 20px;
@@ -39,7 +9,7 @@
   overflow: hidden; 
 }
 
-/* 2-1. 카드 헤더 및 제목 영역 - 스크롤 외부 -------------------------------------------------------------------- */
+/* 1. 카드 헤더 및 제목 영역 - 스크롤 외부 -------------------------------------------------------------------- */
 .alert-status-card-header {
   display: flex;
   justify-content: flex-end;
@@ -97,7 +67,7 @@
   margin: 5px 0 0 0;
 }
 
-/* 2-2. 스크롤 영역 -------------------------------------------------------------------- */
+/* 1-1. 스크롤 영역 -------------------------------------------------------------------- */
 .alert-status-card-scroll-contents {
   flex-grow: 1; 
   overflow-y: auto; 

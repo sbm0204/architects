@@ -5,16 +5,11 @@ import { setFilterMonth, setCurrentViewPage } from '../../store/slices/alertStat
 import AlertStatusCards from './AlertStatusCards.jsx';
 import './AlertStatus.css';
 import { groupAlertsByDateAndDistrict, groupCardsByDate } from '../../utils/dataGroupingLogic.js';
+import { ITEMS_PER_PAGE, MONTH_OPTIONS } from '../../configs/axioConfigs.js';
 import dayjs from 'dayjs';
 import Pagination from './Pagination.jsx';
 
-const ITEMS_PER_PAGE = 5;
-
-const MONTH_OPTIONS = [
-  { value: 1, label: '1개월 ' },
-  { value: 2, label: '2개월' },
-  { value: 3, label: '3개월' },
-];
+dayjs.locale('ko');
 
 const AlertStatus = () => {
   const dispatch = useDispatch(); 
@@ -168,7 +163,7 @@ const AlertStatus = () => {
           )}
 
 {/* 2-2. 콘텐츠 영역 (loading message) ---------------------------------------------------------------------- */}
-          {!error && reduxLoading && totalItems === 0 && (
+          {!error && reduxLoading && (
             <div className="loading-state-container">
               <div className="loading-spinner"></div>
               <p className="loading-txt">데이터 로딩 중...</p>
@@ -176,7 +171,7 @@ const AlertStatus = () => {
           )}
           
 {/* 2-3. 콘텐츠 영역 (if data is empty) ---------------------------------------------------------------------- */}
-          {!error && isListEmpty && (
+          {!error && !reduxLoading && isListEmpty && (
             <div className="empty-msg-box">
               <p className="empty-msg-txt">
                   최근 {filterMonth}개월간 발령 내역이 없습니다.

@@ -4,7 +4,6 @@ import { DUST_UNITS } from '../../utils/getDustLevel.js';
 
 dayjs.locale('ko');
 
-// 1. AlertDetailItem: 개별 권역 특보 항목을 렌더링하는 작은 컴포넌트 (스크롤 될 내용)
 const AlertDetailItem = ({ alert }) => {
   const {
       issueVal, clearVal,

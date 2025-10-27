@@ -1,4 +1,3 @@
-/* 1. 카드 디테일 부분 - 스크롤 내부 (AlertDetailItem) -------------------------------------------------------------------- */
 .alert-detail-container {
   font-size: var(--fs-cnt-body);
   color: var(--clr-bk);

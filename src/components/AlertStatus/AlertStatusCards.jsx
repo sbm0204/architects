@@ -1,8 +1,9 @@
 import './AlertStatusCards.css';
 import dayjs from 'dayjs';
-import AlertDetailItem from './AlertDetailItem.jsx'
+import AlertDetailItem from '../AlertStatus/AlertDetailItem.jsx'
 
-// 2. AlertStatusCards: 그룹화된 특보 목록을 받아 렌더링하는 메인 컴포넌트
+dayjs.locale('ko');
+
 /**
  * @param {{groupedAlert: { dataDate: string, districtName: string, alerts: Array<Object> }}} props 
  */
@@ -27,7 +28,7 @@ const AlertStatusCards = ({ groupedAlert }) => {
   return (  
     <div className="alert-status-card">
       
-{/* 2-1. 카드 헤더 및 제목 영역 - 스크롤 외부 -------------------------------------------------------------------- */}
+{/* 1. 카드 헤더 및 제목 영역 - 스크롤 외부 -------------------------------------------------------------------- */}
       <div className="alert-status-card-header">
         <div className={`alert-status-card-issueGbn ${badgeIssueGbnClass}`}>
         {representativeIssueGbn}
@@ -38,7 +39,7 @@ const AlertStatusCards = ({ groupedAlert }) => {
         <p className="alert-status-card-date">{formattedDate}</p>
       </div>
 
-{/* 2-2. 스크롤 영역 -------------------------------------------------------------------- */}
+{/* 1-2. 스크롤 영역 -------------------------------------------------------------------- */}
       <div className="alert-status-card-scroll-contents"> 
         {alerts.map((alertItem, index) => (
           <AlertDetailItem key={alertItem.sn || index} alert={alertItem} /> 

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosConfig from "../../configs/axioConfigs.js";
+import { axiosConfig } from "../../configs/axioConfigs.js";
 import axios from "axios";
 
 const alertStatusIndex = createAsyncThunk(
