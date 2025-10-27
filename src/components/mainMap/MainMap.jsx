@@ -72,60 +72,60 @@ function MainMap() {
       let opacity = 0.4;
       const gwangjuFeature = geoJsonData.features.find(p => p.properties.CTP_KOR_NM === '광주');
       const gwangjuPath = gwangjuFeature.geometry.coordinates[0].map(coord => {
-          const [lon, lat] = proj4(utmk, wgs84, coord);
-          const latlng = new window.kakao.maps.LatLng(lat, lon);
-          return { lat: latlng.Ma, lng: latlng.La };
+        const [lon, lat] = proj4(utmk, wgs84, coord);
+        const latlng = new window.kakao.maps.LatLng(lat, lon);
+        return { lat: latlng.Ma, lng: latlng.La };
       });
 
       geoJsonData.features.forEach(features => {
-          const regionName = features.properties.CTP_KOR_NM;
-          const idx = sidoList.indexOf(regionName);
-          const geometry = features.geometry;
-          const fillColor = gradeColor(averrage(empty[idx]));
-          const mungiVal = averrageVal(empty[idx])
-          if (geometry.type === 'Polygon') {
-              geometry.coordinates.forEach(ring => {
-                  const path = ring.map(coord => {
-                      const [lon, lat] = proj4(utmk, wgs84, coord);
-                      const latlng = new window.kakao.maps.LatLng(lat, lon);
-                      return { lat: latlng.Ma, lng: latlng.La };
-                  });
-                  polygonListTmp.push({ path, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal)  });
+        const regionName = features.properties.CTP_KOR_NM;
+        const idx = sidoList.indexOf(regionName);
+        const geometry = features.geometry;
+        const fillColor = gradeColor(averrage(empty[idx]));
+        const mungiVal = averrageVal(empty[idx])
+        if (geometry.type === 'Polygon') {
+          geometry.coordinates.forEach(ring => {
+            const path = ring.map(coord => {
+              const [lon, lat] = proj4(utmk, wgs84, coord);
+              const latlng = new window.kakao.maps.LatLng(lat, lon);
+              return { lat: latlng.Ma, lng: latlng.La };
+            });
+            polygonListTmp.push({ path, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal)  });
+          });
+        } else if (geometry.type === 'MultiPolygon') {
+            if (regionName === '전남') {
+              let mainlandPolygon = geometry.coordinates.reduce((a, b) => a[0].length > b[0].length ? a : b);
+              let islandPolygons = geometry.coordinates.filter(p => p !== mainlandPolygon);
+
+              const mainlandPath = mainlandPolygon[0].map(coord => {
+                const [lon, lat] = proj4(utmk, wgs84, coord);
+                const latlng = new window.kakao.maps.LatLng(lat, lon);
+                return { lat: latlng.Ma, lng: latlng.La };
               });
-          } else if (geometry.type === 'MultiPolygon') {
-              if (regionName === '전남') {
-                  let mainlandPolygon = geometry.coordinates.reduce((a, b) => a[0].length > b[0].length ? a : b);
-                  let islandPolygons = geometry.coordinates.filter(p => p !== mainlandPolygon);
+                polygonListTmp.push({ path: [mainlandPath, gwangjuPath], fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
 
-                  const mainlandPath = mainlandPolygon[0].map(coord => {
+                islandPolygons.forEach(island => {
+                  const islandPath = island[0].map(coord => {
+                    const [lon, lat] = proj4(utmk, wgs84, coord);
+                    const latlng = new window.kakao.maps.LatLng(lat, lon);
+                    return { lat: latlng.Ma, lng: latlng.La };
+                  });
+                  polygonListTmp.push({ path: islandPath, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
+                });
+
+            } else {
+                geometry.coordinates.forEach(polygon => {
+                  polygon.forEach(ring => {
+                    const path = ring.map(coord => {
                       const [lon, lat] = proj4(utmk, wgs84, coord);
                       const latlng = new window.kakao.maps.LatLng(lat, lon);
                       return { lat: latlng.Ma, lng: latlng.La };
+                    });
+                    polygonListTmp.push({ path, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
                   });
-                  polygonListTmp.push({ path: [mainlandPath, gwangjuPath], fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
-
-                  islandPolygons.forEach(island => {
-                      const islandPath = island[0].map(coord => {
-                          const [lon, lat] = proj4(utmk, wgs84, coord);
-                          const latlng = new window.kakao.maps.LatLng(lat, lon);
-                          return { lat: latlng.Ma, lng: latlng.La };
-                      });
-                      polygonListTmp.push({ path: islandPath, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
-                  });
-
-              } else {
-                  geometry.coordinates.forEach(polygon => {
-                      polygon.forEach(ring => {
-                          const path = ring.map(coord => {
-                              const [lon, lat] = proj4(utmk, wgs84, coord);
-                              const latlng = new window.kakao.maps.LatLng(lat, lon);
-                              return { lat: latlng.Ma, lng: latlng.La };
-                          });
-                          polygonListTmp.push({ path, fillColor, opacity, name: regionName, val: Math.ceil(mungiVal) });
-                      });
-                  });
-              }
-          }
+                });
+            }
+        }
       });
 
       setPolygonList(polygonListTmp);

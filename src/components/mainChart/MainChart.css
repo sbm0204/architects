@@ -68,7 +68,7 @@
 .card-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
   justify-content: center; /* 카드들을 중앙에 정렬 */
   gap: 10px; /* 카드 사이의 간격 */
 }
