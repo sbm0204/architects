@@ -1,11 +1,11 @@
 .alert-status-card {
-  height: 280px; 
+  height: 270px; 
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   background-color: var(--clr-wh);
   border: 1px solid var(--clr-bk);
-  padding: 20px;
+  padding: 25px;
   overflow: hidden; 
 }
 
@@ -47,7 +47,7 @@
 }
 
 .alert-status-card-title-area {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   border-bottom: 1px solid var(--clr-gy);
   flex-shrink: 0;
 }
@@ -58,13 +58,6 @@
   font-weight: var(--fw-bold);
   text-align: left;
   margin: 0;
-}
-
-.alert-status-card-date {
-  color: var(--clr-dg);
-  font-size: var(--fs-cnt-body);
-  text-align: left;
-  margin: 5px 0 0 0;
 }
 
 /* 1-1. 스크롤 영역 -------------------------------------------------------------------- */

@@ -1,16 +1,11 @@
 import './AlertStatusCards.css';
-import dayjs from 'dayjs';
 import AlertDetailItem from '../AlertStatus/AlertDetailItem.jsx'
-
-dayjs.locale('ko');
 
 /**
  * @param {{groupedAlert: { dataDate: string, districtName: string, alerts: Array<Object> }}} props 
  */
 const AlertStatusCards = ({ groupedAlert }) => { 
-  const { dataDate, districtName, alerts } = groupedAlert;
-
-  const formattedDate = dayjs(dataDate, 'YYYY-MM-DD').format('YYYY.MM.DD');
+  const { districtName, alerts } = groupedAlert;
 
   // 카드의 뱃지(issueGbn): 가장 최신 또는 중요한 항목의 issueGbn 사용 (경보 > 주의보 우선)
   const representativeAlert = alerts[0]; 
@@ -36,7 +31,6 @@ const AlertStatusCards = ({ groupedAlert }) => {
       </div>
       <div className="alert-status-card-title-area">
         <h2 className="alert-status-card-districtName">{districtName}</h2>
-        <p className="alert-status-card-date">{formattedDate}</p>
       </div>
 
 {/* 1-2. 스크롤 영역 -------------------------------------------------------------------- */}
