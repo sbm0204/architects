@@ -61,7 +61,7 @@ function AirLineChart() {
   }
   
   if (!airQuality || airQuality.labels.length === 0) {
-    return <div>지역을 선택하면 농도 변화를 볼 수 있습니다. 📈</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>위치 정보를 허용해 주세요🙏</div>;
   }
 
   const labels = airQuality.labels;
