@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axiosConfig from "../../configs/axioConfigs";
+import { axiosConfig } from "../../configs/axioConfigs";
 import axios from "axios";
 
 const getMapList = createAsyncThunk(

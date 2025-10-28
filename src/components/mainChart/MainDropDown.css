@@ -61,7 +61,7 @@
 
 
 /* 드롭다운 항목에 마우스를 올렸을 때 */
-.dropdown-content a:hover {
+.dropdown-content :hover {
   background-color: var(--clr-bk); /* 배경 색상 변경 */
 }
 

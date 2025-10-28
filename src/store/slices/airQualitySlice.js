@@ -18,9 +18,8 @@ const airQualitySlice = createSlice({
       state.status = 'succeeded';
       state.airQuality = action.payload;
     })
-    .addCase(getAirQuality.rejected, (state, action) => {
+    .addCase(getAirQuality.rejected, (state) => {
       state.status = 'failed';
-      console.log(action.payload, "AirQuality API Axios Error");
     })
   }
 });
