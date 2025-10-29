@@ -53,15 +53,15 @@ function AirLineChart() {
 
   // 로딩 및 에러, 초기 상태 처리
   if (status === 'loading') {
-    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>차트 데이터 로딩 중...📊</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '27vh', border: 'dashed 1px', borderRadius: '10px' }}>차트 데이터 로딩 중...📊</div>;
   }
 
   if (status === 'failed') {
-    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>데이터 불러오기 실패⚠️</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '27vh', border: 'dashed 1px', borderRadius: '10px' }}>데이터 불러오기 실패⚠️</div>;
   }
   
   if (!airQuality || airQuality.labels.length === 0) {
-    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '30vh' }}>위치 정보를 허용해 주세요🙏</div>;
+    return <div style={{width: '14vw', height: '57.2vh', textAlign: 'center', paddingTop: '27vh', border: 'dashed 1px', borderRadius: '10px' }}>위치 정보를 허용해 주세요🙏</div>;
   }
 
   const labels = airQuality.labels;
