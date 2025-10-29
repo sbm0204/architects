@@ -322,7 +322,7 @@ useEffect(() => {
           ) : 
             <div className="chart-placeholder">
               {/* 위치 획득 실패 및 데이터 부재 시 사용자 안내 문구 추가 */}
-              {locationFailed && <p>위치 정보를 가져올 수 없습니다. 서울 지역의 유효한 측정소 정보를 표시합니다.</p>}
+              {locationFailed && <p style={{width: '14vw', height: '550px', textAlign: 'center', paddingTop: '250px', border: 'dashed 1px', borderRadius: '10px' }}>위치 정보를 가져올 수 없습니다. 서울 지역의 유효한 측정소 정보를 표시합니다.</p>}
             </div>
           }
         </div>
